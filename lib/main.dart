@@ -1,4 +1,7 @@
 import 'package:first_version/features/Splash/presentation/views/SplashView.dart';
+import 'package:first_version/features/adminlogin/presentation/views/widgets/admin_login_reg_body.dart';
+import 'package:first_version/features/getStarted/presentation/views/get_Started.dart';
+import 'package:first_version/features/loginTeacher/presentation/views/login_teacher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -14,6 +17,12 @@ class smartAttendance extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashView(),
+
+      routes: {
+       // '/':(context) => const getStarted(),
+        "/loginTeacher":(context) => const loginTeacher(),
+        "/loginAdmin":(context) => const adminLoginRegstrationBody()
+      },
     );
   }
 }
