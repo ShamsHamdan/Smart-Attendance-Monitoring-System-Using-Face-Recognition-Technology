@@ -28,7 +28,7 @@ class SignUp extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  "Signin",
+                  "Signup",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -91,7 +91,9 @@ class SignUp extends StatelessWidget {
                 ),
                
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/homeadmin");
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(kPrimaryColor),
                     padding: MaterialStateProperty.all(
@@ -100,7 +102,7 @@ class SignUp extends StatelessWidget {
                         borderRadius: BorderRadius.circular(27))),
                   ),
                   child: Text(
-                    "Signin",
+                    "Signup",
                     style: TextStyle(fontSize: 24),
                   ),
                 ),

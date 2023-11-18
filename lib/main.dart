@@ -1,4 +1,5 @@
 import 'package:first_version/features/Splash/presentation/views/SplashView.dart';
+import 'package:first_version/features/adminNav/presentation/views/TabNav.dart';
 import 'package:first_version/features/adminlogin/presentation/views/widgets/admin_login_reg_body.dart';
 import 'package:first_version/features/getStarted/presentation/views/get_Started.dart';
 import 'package:first_version/features/loginTeacher/presentation/views/login_teacher.dart';
@@ -21,7 +22,8 @@ class smartAttendance extends StatelessWidget {
       routes: {
        // '/':(context) => const getStarted(),
         "/loginTeacher":(context) => const loginTeacher(),
-        "/loginAdmin":(context) => const adminLoginRegstrationBody()
+        "/loginAdmin":(context) => const adminLoginRegstrationBody(),
+        "/homeadmin":(context) => TabNavigation()
       },
     );
   }

@@ -75,7 +75,9 @@ class SignIn extends StatelessWidget {
                 ),
                
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/homeadmin");
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(kPrimaryColor),
                     padding: MaterialStateProperty.all(
