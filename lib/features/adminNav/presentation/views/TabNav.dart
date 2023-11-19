@@ -19,15 +19,27 @@ CourseAdmin(),
 SettingsAdmin(),
 ],
 ),
+
+
+
+
+
+
 bottomNavigationBar: Material(
-color: kPrimaryColor,
+
+color:Colors.grey[100],
 child: TabBar(tabs: const <Widget>[
-Tab(icon: Icon(Icons.home)),
-Tab(icon: Icon(Icons.person)),
-Tab(icon: Icon(Icons.school)),
-Tab(icon: Icon(Icons.settings))
-]),
+Tab(icon: Icon(Icons.home,size: 30,)),
+Tab(icon: Icon(Icons.person,size: 30,)),
+Tab(icon: Icon(Icons.school,size: 30,)),
+Tab(icon: Icon(Icons.settings,size: 30,))
+],
+indicator: BoxDecoration(),
+ labelColor: kPrimaryColor, // Change this color to the desired color when pressed
+        unselectedLabelColor: Colors.grey,
 ),
+),
+
 ),
 );
 }

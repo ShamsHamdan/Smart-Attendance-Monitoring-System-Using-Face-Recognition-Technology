@@ -79,7 +79,7 @@ class SettingsAdmin extends StatelessWidget {
                             height: 50,
                           ),
                           Text(
-                            'Hello, Admin',
+                            ' Admin',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 22,
