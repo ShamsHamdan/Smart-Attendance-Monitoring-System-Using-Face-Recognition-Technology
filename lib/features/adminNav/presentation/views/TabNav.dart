@@ -1,7 +1,7 @@
 import 'package:first_version/constants.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdmin.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/settingsAdmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teachersAdmin.dart';
 import 'package:flutter/material.dart';
 

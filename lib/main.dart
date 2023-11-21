@@ -1,5 +1,8 @@
 import 'package:first_version/features/Splash/presentation/views/SplashView.dart';
 import 'package:first_version/features/adminNav/presentation/views/TabNav.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/ChangePasswordAdmin.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/Terms%20_and_Conditions.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/editProfileadmin.dart';
 import 'package:first_version/features/adminlogin/presentation/views/widgets/admin_login_reg_body.dart';
 import 'package:first_version/features/getStarted/presentation/views/get_Started.dart';
 import 'package:first_version/features/loginTeacher/presentation/views/login_teacher.dart';
@@ -23,7 +26,10 @@ class smartAttendance extends StatelessWidget {
        // '/':(context) => const getStarted(),
         "/loginTeacher":(context) => const loginTeacher(),
         "/loginAdmin":(context) => const adminLoginRegstrationBody(),
-        "/homeadmin":(context) => TabNavigation()
+        "/homeadmin":(context) => TabNavigation(),
+        "/changepassowrdadmin":(context) => ChangePasswordAdmin(),
+        "/editProfileadmin":(context) => EditProfileadmin(),
+        "/TermsandConditions":(context) => TermsandConditions(), 
       },
     );
   }
