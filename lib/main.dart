@@ -6,6 +6,7 @@ import 'package:first_version/features/adminNav/presentation/views/widgets/setti
 import 'package:first_version/features/adminlogin/presentation/views/widgets/admin_login_reg_body.dart';
 import 'package:first_version/features/getStarted/presentation/views/get_Started.dart';
 import 'package:first_version/features/loginTeacher/presentation/views/login_teacher.dart';
+import 'package:first_version/features/teacherNav/presentation/views/TabNavTea.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -30,6 +31,7 @@ class smartAttendance extends StatelessWidget {
         "/changepassowrdadmin":(context) => ChangePasswordAdmin(),
         "/editProfileadmin":(context) => EditProfileadmin(),
         "/TermsandConditions":(context) => TermsandConditions(), 
+        "/homeTeacher":(context) => TabNavigationTeacher(),
       },
     );
   }

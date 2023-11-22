@@ -36,6 +36,23 @@ class _adminLoginRegstrationBodyState extends State<adminLoginRegstrationBody>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
+       appBar: 
+       AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text(''), // Empty title
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              size: 25,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+           toolbarHeight: 50, 
+       ),
         body: SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
       child: GestureDetector(
@@ -47,10 +64,11 @@ class _adminLoginRegstrationBodyState extends State<adminLoginRegstrationBody>
           height: MediaQuery.of(context).size.height,
       
           child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start, 
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 75.0),
+                padding: const EdgeInsets.only(top: 5.0),
                 child: Image.asset(AssetsData.logowhitesmall),
                     
                     

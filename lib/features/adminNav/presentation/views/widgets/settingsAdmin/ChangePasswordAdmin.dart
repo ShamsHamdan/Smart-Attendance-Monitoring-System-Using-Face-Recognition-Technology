@@ -12,6 +12,7 @@ class _ChangePasswordAdminState extends State<ChangePasswordAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor: Colors.grey[100],
       appBar: AppBar(
        backgroundColor: Colors.transparent,
         elevation: 0,

@@ -14,29 +14,45 @@ class _LoginTeacherBodyState extends State<LoginTeacherBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text(''), // Empty title
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              size: 25,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          toolbarHeight: 50,
+        ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child:
             Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
                children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(bottom: 2),
             child: Image.asset(AssetsData.logowhitesmall),
           ),
           Padding(
-              padding: const EdgeInsets.only(bottom: 43),
+              padding: const EdgeInsets.only(bottom: 40),
             child: Center(
               
               child: Text("Attendance System",style: TextStyle(
-                      fontSize: 23,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),),
             ),
           ),
           Container(
-            height: 510,
+            height: 480,
             width: double.infinity,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -93,7 +109,9 @@ class _LoginTeacherBodyState extends State<LoginTeacherBody> {
                 ),
                
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                     Navigator.pushNamed(context, "/homeTeacher");
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(kPrimaryColor),
                     padding: MaterialStateProperty.all(
