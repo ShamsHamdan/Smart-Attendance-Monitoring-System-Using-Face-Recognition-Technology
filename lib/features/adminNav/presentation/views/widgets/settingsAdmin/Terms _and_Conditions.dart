@@ -23,7 +23,7 @@ class TermsandConditions extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child:  Align(
-          alignment: Alignment(-1, -.5),
+          alignment: Alignment(-.8, -.5),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child:
@@ -38,7 +38,7 @@ class TermsandConditions extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 40,
             ),
             Text(
                 "Welcome to the Smart Attendance System Using Face Recognition in the University app. By using the App, you agree to comply with and be bound by the following terms and conditions:",style: TextStyle(fontSize: 20),),

@@ -121,6 +121,9 @@ class BodySettningsAdmin extends StatelessWidget {
                 //     children: [
 
                 Expanded(
+                  child: Container(
+                  // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Adjust padding
+                    color: Colors.grey[100],
                   child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
@@ -156,13 +159,14 @@ class BodySettningsAdmin extends StatelessWidget {
                         }
                       }),
                 ),
-
-                SizedBox(
-                  height: 20,
                 ),
+                // SizedBox(
+                //   height: 0,
+                // ),
                 Container(
                   width: MediaQuery.of(context).size.width * .95,
                   height: 60,
+                  margin: EdgeInsets.only(bottom: 55),
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
                       borderRadius: BorderRadius.circular(10)),

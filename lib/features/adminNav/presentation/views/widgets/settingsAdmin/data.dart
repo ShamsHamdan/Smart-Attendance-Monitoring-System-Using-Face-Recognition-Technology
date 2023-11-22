@@ -45,7 +45,7 @@ List<Data> data = [
       label: "Edit Profile",
       trailing: Icon(Icons.arrow_forward_ios, size: 15,),
       iconBgColor: Color.fromRGBO(250, 242, 160, 1),
-      icon:Icons.verified_user,
+      icon:Icons.edit,
      iconColor: Color.fromRGBO(217, 185, 41, 1)
   ),
   Data(
