@@ -111,7 +111,7 @@ class BodySettningsAdmin extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 13,
                 ),
                 // SizedBox(
                 //   height: 300,
@@ -163,21 +163,28 @@ class BodySettningsAdmin extends StatelessWidget {
                 // SizedBox(
                 //   height: 0,
                 // ),
-                Container(
-                  width: MediaQuery.of(context).size.width * .95,
-                  height: 60,
-                  margin: EdgeInsets.only(bottom: 55),
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                    "LOG OUT",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  )),
+                GestureDetector(
+                  onTap: () {
+                     Navigator.pushNamed(
+                                  context, "/backwelcompage");
+                            
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * .95,
+                    height: 60,
+                    margin: EdgeInsets.only(bottom: 85),
+                    decoration: BoxDecoration(
+                        color: kPrimaryColor,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: Text(
+                      "LOG OUT",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    )),
+                  ),
                 )
               ],
             ),

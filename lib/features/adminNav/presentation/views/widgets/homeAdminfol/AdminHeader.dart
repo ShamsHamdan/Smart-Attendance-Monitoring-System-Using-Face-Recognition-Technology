@@ -14,13 +14,13 @@ class HomeAdminHeader extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 310,
-              decoration: BoxDecoration(
+              decoration:const BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(30),
                       bottomLeft: Radius.circular(30))),
             ),
-            Positioned(
+           const Positioned(
               top: 100,
               left: 20,
               child: Text('Hi Admin',
@@ -29,7 +29,7 @@ class HomeAdminHeader extends StatelessWidget {
                       fontSize: 30,
                       color: Colors.white)),
             ),
-            Positioned(
+          const  Positioned(
               top: 95,
               right: 10,
              child: CircleAvatar(
@@ -52,9 +52,9 @@ class HomeAdminHeader extends StatelessWidget {
                           color: Colors.grey.shade300,
                           blurRadius: 5,
                           spreadRadius: 1,
-                          offset: Offset(0, 5.0)),
+                          offset:const Offset(0, 5.0)),
                     ]),
-                child: Row(
+                child:const Row(
                   children: [
                     SizedBox(
                       width: 60,

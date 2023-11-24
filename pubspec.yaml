@@ -28,10 +28,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  percent_indicator:
+    git:
+      url: https://github.com/diegoveloper/flutter_percent_indicator.git
+      ref: master
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
   get: ^4.6.6
+  fl_chart: ^0.41.0
 
 dev_dependencies:
 
