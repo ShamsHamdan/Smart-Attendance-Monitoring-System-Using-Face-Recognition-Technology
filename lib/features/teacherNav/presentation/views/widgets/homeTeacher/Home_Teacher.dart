@@ -1,6 +1,7 @@
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
-import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/chartallstudent.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/RecntlyAccessedCoursesINTeacher.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/chartallstudentTea.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/home_teacher_header.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/listCourses.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -35,8 +36,9 @@ class HomeTeacher extends StatelessWidget {
         child: Column(
           children: [
           HomeTeacherHeader(),
-          ListCourses(),
-          HomePage(),
+          RecntlyAddCourses(),
+         // ListCourses(),
+          TeacherHomeChart(),
       
         ],),
       )

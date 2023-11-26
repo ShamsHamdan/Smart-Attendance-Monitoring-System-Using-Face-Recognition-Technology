@@ -4,10 +4,13 @@ import 'package:first_version/features/adminNav/presentation/views/widgets/homeA
 import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdminfol/QuickActions.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdminfol/RecentlyTeacher.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdminfol/RecntlyAddCourses.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdminfol/adminchart.dart';
 import 'package:flutter/material.dart';
 
 class BodyHomeAdmin extends StatelessWidget {
+  
   const BodyHomeAdmin({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,7 @@ class BodyHomeAdmin extends StatelessWidget {
         height: 30,
       ),
    RecentlyAddTeachers(),
+   AdminChart(),
     ]
     );
   }

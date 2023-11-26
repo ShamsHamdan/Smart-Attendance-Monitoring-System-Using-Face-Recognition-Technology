@@ -67,7 +67,7 @@ class RecentlyAddTeachers extends StatelessWidget {
                                ),
                           SizedBox(
                              width: double.infinity,
-                             height: 90, 
+                             height: 100, 
                             child: Container(
                               padding: EdgeInsets.all(15),
                               child: Column(
@@ -83,7 +83,14 @@ class RecentlyAddTeachers extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 5),
+                                  ), Text(
+                                  'EIT',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold
                                   ),
+                                ),
                                   Text(
                                     '200710000',
                                     style: TextStyle(
@@ -136,7 +143,7 @@ class RecentlyAddTeachers extends StatelessWidget {
                                ),
                           SizedBox(
                              width: double.infinity,
-                             height: 90, 
+                             height: 100, 
                             child: Container(
                               padding: EdgeInsets.all(15),
                               child: Column(
@@ -152,7 +159,14 @@ class RecentlyAddTeachers extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 5),
+                                  ), Text(
+                                  'EIT',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold
                                   ),
+                                ),
                                   Text(
                                     '201010000',
                                     style: TextStyle(

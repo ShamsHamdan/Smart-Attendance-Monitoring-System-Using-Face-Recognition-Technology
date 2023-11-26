@@ -7,12 +7,16 @@ import 'package:first_version/features/adminlogin/presentation/views/widgets/adm
 import 'package:first_version/features/getStarted/presentation/views/get_Started.dart';
 import 'package:first_version/features/loginTeacher/presentation/views/login_teacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/TabNavTea.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/Course_Teacher.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/CourseInTeacherTabNav.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/mainCalendar/mainCalTeacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/ChangePasswordTeacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/PrivacyPolicy.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/editProfileteacher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+
+
 
 void main() {
   runApp(const smartAttendance());
@@ -41,6 +45,8 @@ class smartAttendance extends StatelessWidget {
          "/PrivacyPolicy":(context) => PrivacyPolicy(),
          "/backwelcompage":(context) => getStarted(),
          "/maincalendar":(context) => CalendarMainTeacher(),
+          "/CourseInTeacherTabNav":(contex) => CourseInTeacherTabNav(),
+    "/maintabcoursesinteacher":(context)=> CourseTeacher(),
         
       },
     );

@@ -2,6 +2,7 @@ import 'package:first_version/constants.dart';
 import 'package:flutter/material.dart';
 
 class  QuickActions extends StatelessWidget {
+  
   const  QuickActions({super.key});
 
   @override

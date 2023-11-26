@@ -49,12 +49,12 @@ class HomeTeacherHeader extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        'Arab American University',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        'EIT',
+                        style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Engineering Faculty',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        '200710000',
+                        style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
