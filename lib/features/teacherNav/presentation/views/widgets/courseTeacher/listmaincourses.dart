@@ -17,6 +17,8 @@ class _ListCoursestestState extends State<ListCoursestest> {
   
   @override
   Widget build(BuildContext context) {
+     double attendancePercentage = .75;
+    bool isLowAttendance = attendancePercentage <= 0.5;
    bool showSearchField = false;
 
     return SingleChildScrollView(
@@ -126,7 +128,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
                         ),
                         SizedBox(
                           width: double.infinity,
-                          height: 90,
+                          height: 100,
                           child: Container(
                             padding: EdgeInsets.all(15),
                             child: Stack(
@@ -135,7 +137,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      "INTERNSHIP Section1",
+                                      "Artificial Intelligence Section1",
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Colors.black,
@@ -144,7 +146,13 @@ class _ListCoursestestState extends State<ListCoursestest> {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(top: 5),
-                                    ),
+                                    ), Text(
+                                        'EIT',
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     Text(
                                       '230214990',
                                       style: TextStyle(
@@ -162,9 +170,17 @@ class _ListCoursestestState extends State<ListCoursestest> {
                                     lineWidth: 5.0,
                                     percent:
                                         0.75, // Change this to your actual percentage
-                                    center: Text(
-                                        "75%"), // Change this to your actual text
-                                    progressColor: kPrimaryColor,
+                                     center: Text(
+                                        "${(attendancePercentage * 100).toInt()}%",
+                                        style: TextStyle(
+                                          color: isLowAttendance
+                                              ? Colors.red
+                                              : Colors.green,
+                                        ),
+                                      ), // Change this to your actual text
+                                      progressColor: isLowAttendance
+                                          ? Colors.red
+                                          : Colors.green,
                                   ),
                                 ),
                               ],
@@ -206,7 +222,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        height: 90,
+                        height: 100,
                         child: Container(
                           padding: EdgeInsets.all(15),
                           child: Stack(
@@ -224,7 +240,13 @@ class _ListCoursestestState extends State<ListCoursestest> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 5),
-                                  ),
+                                  ), Text(
+                                        'EIT',
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                   Text(
                                     '230214990',
                                     style: TextStyle(
@@ -241,10 +263,18 @@ class _ListCoursestestState extends State<ListCoursestest> {
                                   radius: 24.0,
                                   lineWidth: 5.0,
                                   percent:
-                                      0.50, // Change this to your actual percentage
-                                  center: Text(
-                                      "70%"), // Change this to your actual text
-                                  progressColor: kPrimaryColor,
+                                      0.75, // Change this to your actual percentage
+                                 center: Text(
+                                        "${(attendancePercentage * 100).toInt()}%",
+                                        style: TextStyle(
+                                          color: isLowAttendance
+                                              ? Colors.red
+                                              : Colors.green,
+                                        ),
+                                      ), // Change this to your actual text
+                                      progressColor: isLowAttendance
+                                          ? Colors.red
+                                          : Colors.green,
                                 ),
                               ),
                             ],
@@ -285,7 +315,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        height: 90,
+                        height: 100,
                         child: Container(
                           padding: EdgeInsets.all(15),
                           child: Stack(
@@ -303,7 +333,13 @@ class _ListCoursestestState extends State<ListCoursestest> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 5),
-                                  ),
+                                  ), Text(
+                                        'EIT',
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                   Text(
                                     '230214990',
                                     style: TextStyle(
@@ -321,9 +357,17 @@ class _ListCoursestestState extends State<ListCoursestest> {
                                   lineWidth: 5.0,
                                   percent:
                                       0.75, // Change this to your actual percentage
-                                  center: const Text(
-                                      "75%"), // Change this to your actual text
-                                  progressColor: kPrimaryColor,
+                                   center: Text(
+                                        "${(attendancePercentage * 100).toInt()}%",
+                                        style: TextStyle(
+                                          color: isLowAttendance
+                                              ? Colors.red
+                                              : Colors.green,
+                                        ),
+                                      ), // Change this to your actual text
+                                      progressColor: isLowAttendance
+                                          ? Colors.red
+                                          : Colors.green,
                                 ),
                               ),
                             ],

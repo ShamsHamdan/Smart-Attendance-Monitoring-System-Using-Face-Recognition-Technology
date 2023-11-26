@@ -13,7 +13,7 @@ class RecntlyAddCourses extends StatelessWidget {
     bool isLowAttendance = attendancePercentage <= 0.5;
     return Column(children: [
       SizedBox(
-        height: 70,
+        height: 60,
       ),
       Row(
         children: [

@@ -14,11 +14,11 @@ class TeacherHomeChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
-            height: 30,
+            height: 18,
           ),
           Text(
             'Weekly Attendance',
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.black),
           ),
           SizedBox(height: 27),
           Container(height: 330, child: BarChartSample2()),
