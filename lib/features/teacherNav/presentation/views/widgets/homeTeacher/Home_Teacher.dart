@@ -1,10 +1,9 @@
-import 'package:first_version/constants.dart';
-import 'package:first_version/core/utils/assets.dart';
+
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/RecntlyAccessedCoursesINTeacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/chartallstudentTea.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/home_teacher_header.dart';
 
-import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeTeacher extends StatelessWidget {
@@ -36,7 +35,7 @@ class HomeTeacher extends StatelessWidget {
         child: Column(
           children: [
           HomeTeacherHeader(),
-          RecntlyAddCourses(),
+         RecntlyAccessedCourses(),
          // ListCourses(),
           TeacherHomeChart(),
       

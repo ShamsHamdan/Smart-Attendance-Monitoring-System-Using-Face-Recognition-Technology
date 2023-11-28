@@ -1,4 +1,4 @@
-import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/student_card.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/StudentCourseTeacher/student_card.dart';
 import 'package:flutter/material.dart';
 
 class TeacherCourseParticipants extends StatefulWidget {
@@ -42,6 +42,6 @@ class _TeacherCourseParticipantsState extends State<TeacherCourseParticipants> {
           ),
         ],
       ),
-    );;
+    );
   }
 }

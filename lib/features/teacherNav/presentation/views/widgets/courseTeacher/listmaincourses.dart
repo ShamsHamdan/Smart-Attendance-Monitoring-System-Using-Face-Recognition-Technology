@@ -1,5 +1,5 @@
 
-import 'package:first_version/constants.dart';
+
 import 'package:first_version/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';

@@ -9,6 +9,7 @@ import 'package:first_version/features/loginTeacher/presentation/views/login_tea
 import 'package:first_version/features/teacherNav/presentation/views/TabNavTea.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/Course_Teacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/CourseInTeacherTabNav.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/ReslutBodyOfAttendans.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/mainCalendar/mainCalTeacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/ChangePasswordTeacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/PrivacyPolicy.dart';
@@ -47,7 +48,7 @@ class smartAttendance extends StatelessWidget {
          "/maincalendar":(context) => CalendarMainTeacher(),
           "/CourseInTeacherTabNav":(contex) => CourseInTeacherTabNav(),
     "/maintabcoursesinteacher":(context)=> CourseTeacher(),
-        
+        "/reslutofattendance":(context) => ReslutOfAttendans(),
       },
     );
   }

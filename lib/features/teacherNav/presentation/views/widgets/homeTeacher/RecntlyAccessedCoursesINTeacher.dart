@@ -1,11 +1,11 @@
-import 'package:first_version/constants.dart';
+
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/Course_Teacher.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class RecntlyAddCourses extends StatelessWidget {
-  const RecntlyAddCourses({super.key});
+class RecntlyAccessedCourses extends StatelessWidget {
+  const RecntlyAccessedCourses({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class RecntlyAddCourses extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          Text("Recently added courses",
+          Text("Recently accessed courses",
               style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 25,
                   fontWeight: FontWeight.bold)),
           SizedBox(
-            width: 60,
+            width: 10,
           ),
           GestureDetector(
             onTap: () {
