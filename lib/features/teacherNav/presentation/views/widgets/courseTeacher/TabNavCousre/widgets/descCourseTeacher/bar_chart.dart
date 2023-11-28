@@ -1,14 +1,14 @@
 //  import 'package:flutter/material.dart';
 // import 'package:fl_chart/fl_chart.dart';
 
-// class ChartPage extends StatefulWidget {
-//   const ChartPage({Key? key}) : super(key: key);
+// class barChartCourse extends StatefulWidget {
+//   const barChartCourse({Key? key}) : super(key: key);
 
 //   @override
-//   State<ChartPage> createState() => _ChartPageState();
+//   State<barChartCourse> createState() => _ChartPageState();
 // }
 
-// class _ChartPageState extends State<ChartPage> {
+// class _ChartPageState extends State<barChartCourse> {
 //   List<double> weeklySummary = [
 //     4.40,
 //     42.42,
@@ -58,28 +58,35 @@
 //         borderData: FlBorderData(show: false),
 //         titlesData: FlTitlesData(
 //           show: true,
-//           topTitles: SideTitles(showTitles: false),
-//           leftTitles: SideTitles(showTitles: false),
-//           rightTitles: SideTitles(showTitles: false),
-//           bottomTitles: SideTitles(
-//             showTitles: true,
-//             showTitles: (value) {
-//               switch (value.toInt()) {
-//                 case 0:
-//                   return 'Sun';
-//                 case 1:
-//                   return 'Mon';
-//                 case 2:
-//                   return 'Tue';
-//                 case 3:
-//                   return 'Wed';
-//                 case 4:
-//                   return 'Thu';
-//                 default:
-//                   return '';
-//               }
-//             },
+//           topTitles:AxisTitles(
+//             sideTitles: SideTitles(showTitles: false),
 //           ),
+//           leftTitles: AxisTitles(
+//             sideTitles: SideTitles(showTitles: false),
+//           ),
+//           rightTitles: AxisTitles(
+//             sideTitles: SideTitles(showTitles: false),
+//           ),
+//           bottomTitles: AxisTitles(
+//             sideTitles:   SideTitles(
+//            showTitles: true,
+//             // showTitles: (value) {
+//             //   switch (value.toInt()) {
+//             //     case 0:
+//             //       return 'Sun';
+//             //     case 1:
+//             //       return 'Mon';
+//             //     case 2:
+//             //       return 'Tue';
+//             //     case 3:
+//             //       return 'Wed';
+//             //     case 4:
+//             //       return 'Thu';
+//             //     default:
+//             //       return '';
+//             //   }
+//             // },
+//           ),)
 //         ),
 //         barGroups: myBarData.barData
 //             .map(

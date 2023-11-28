@@ -77,7 +77,7 @@ class CourseDetails extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Mn-Te",
+                    "Mon-Tue",
                     style: TextStyle(fontSize: 20),
                   ),
                 ],

@@ -3,6 +3,7 @@ import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/AttendanceResSecHome.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/DetailsCourse.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/TakeAttendanceBtn.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/bar_chart.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/nameOfCourse.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/studentNumber.dart';
 import 'package:flutter/material.dart';
@@ -26,25 +27,29 @@ class CourseInfo extends StatelessWidget {
         ),
       ),
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start, // Align at the start
-          crossAxisAlignment: CrossAxisAlignment.start,
-           mainAxisSize: MainAxisSize.min,
-
-          children: [
-            NameOfCourse(),
-            SizedBox(height: 20,),
-            CourseDetails(),
-            SizedBox(height: 40,),
-            TakeAttendanceBtn(),
-            SizedBox(height: 40,),
-            ResAtt(),
-
-
-
-
-            
-          ],
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start, // Align at the start
+            crossAxisAlignment: CrossAxisAlignment.start,
+             mainAxisSize: MainAxisSize.min,
+        
+            children: [
+              NameOfCourse(),
+              SizedBox(height: 20,),
+              CourseDetails(),
+              SizedBox(height: 40,),
+              TakeAttendanceBtn(),
+              SizedBox(height: 40,),
+              ResAtt(),
+              SizedBox(height: 40,),
+          //    barChartCourse(),
+        
+        
+        
+        
+              
+            ],
+          ),
         ),
       ),
     );

@@ -21,7 +21,7 @@ class StudentCard extends StatelessWidget {
       bool isLowAttendance = attendancePercentage <= 0.5;
     return GestureDetector(
       onTap: () {
-        _showAttendanceDialog(context, studentName, Attendance, Absence);
+        _showAttendanceDialog(context);
       },
       child: Card(
         elevation: 5,
@@ -69,41 +69,54 @@ class StudentCard extends StatelessWidget {
     );
   }
 
-  void _showAttendanceDialog(
-      BuildContext context, String studentName, int Attendance, int Absence) {
-    int selectedOption = 0;
-
+ void _showAttendanceDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Attendance Status for $studentName'),
-          content: FractionallySizedBox(
-            widthFactor: 0.8,
-            heightFactor: 0.4,
-            child: Column(
-              children: [
-                _buildAttendanceOption(context, 'Attendance', 1, Attendance),
-                _buildAttendanceOption(context, 'Absent', 2, Absence),
-              ],
-            ),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Attendance Details:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Attendance: 11', style: TextStyle(color: Colors.blue)),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Absence: ', style: TextStyle(color: Colors.red)),
+                  Text('4', style: TextStyle(color: Colors.red)),
+                ],
+              ),
+              SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  onPrimary: Colors.white,
+                ),
+                child: Text('OK'),
+              ),
+            ],
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
         );
       },
-    ).then((value) {
-      if (value != null) {
-        if (value == 1) {
-          print('Selected Attendance for $studentName');
-        } else if (value == 2) {
-          print('Selected Absent for $studentName');
-        }
-      }
-    });
+    );
   }
-
   Widget _buildAttendanceOption(
       BuildContext context, String option, int number, int initialValue) {
     return GestureDetector(
