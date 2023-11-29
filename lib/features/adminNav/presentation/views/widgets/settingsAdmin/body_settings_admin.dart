@@ -1,4 +1,5 @@
 import 'package:first_version/constants.dart';
+import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/card.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/data.dart';
 import 'package:flutter/material.dart';
@@ -87,8 +88,7 @@ class BodySettningsAdmin extends StatelessWidget {
                 // left: 130,
                 top: 0,
                 child: CircleAvatar(
-                  backgroundImage: AssetImage(
-                      'assets/images/blank-profile-picture-973460_1280.png'),
+                  backgroundImage: AssetImage(AssetsData.profilepic),
                   radius: 40,
                 ),
               ),

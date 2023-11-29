@@ -140,7 +140,7 @@ Widget leftTitles(double value, TitleMeta meta) {
 }
 
 Widget bottomTitles(double value, TitleMeta meta) {
-  print('Bottom Title Value: $value');
+  
   final titles = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb'];
  int _lastIndex=-1;
   // Ensure that the value is an integer and within the valid range

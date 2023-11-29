@@ -1,4 +1,5 @@
 import 'package:first_version/core/utils/assets.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_teacher_page.dart';
 import 'package:flutter/material.dart';
 
 class RecentlyAddTeachers extends StatelessWidget {
@@ -20,9 +21,18 @@ class RecentlyAddTeachers extends StatelessWidget {
           SizedBox(
             width: 90,
           ),
-          Text("see all",
-              style: TextStyle(
-                  color: Color.fromARGB(255, 149, 149, 149), fontSize: 19))
+          GestureDetector(
+            onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>ListOfTeacherPageInAdmin()));
+                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
+            },
+            child: Text("see all",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 149, 149, 149), fontSize: 19)),
+          )
+          // Text("see all",
+          //     style: TextStyle(
+          //         color: Color.fromARGB(255, 149, 149, 149), fontSize: 19))
         ],
       ),
       SizedBox(

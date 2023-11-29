@@ -1,4 +1,5 @@
 import 'package:first_version/core/utils/assets.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/list_of_courses_page.dart';
 import 'package:flutter/material.dart';
 
 class RecntlyAddCourses extends StatelessWidget {
@@ -20,9 +21,18 @@ class RecntlyAddCourses extends StatelessWidget {
           SizedBox(
             width: 90,
           ),
-          Text("see all",
-              style: TextStyle(
-                  color: Color.fromARGB(255, 149, 149, 149), fontSize: 19))
+           GestureDetector(
+            onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfCoursesPage()));
+                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
+            },
+            child: Text("see all",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 149, 149, 149), fontSize: 19)),
+          )
+          // Text("see all",
+          //     style: TextStyle(
+          //         color: Color.fromARGB(255, 149, 149, 149), fontSize: 19))
         ],
       ),
       SizedBox(

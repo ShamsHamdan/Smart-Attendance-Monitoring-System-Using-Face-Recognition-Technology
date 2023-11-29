@@ -1,8 +1,8 @@
 import 'package:first_version/constants.dart';
-import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/historyCourseTeacher/TeacherCoursHisstory.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/historyCourseTeacher/TeacherCoursHistory.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/TeacherCourseDiscripition.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/StudentCourseTeacher/TeacherCourseParticipants.dart';
-import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/historyCourseTeacher/history_page.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/historyCourseTeacher/TeacherCoursHistory.dart';
 import 'package:flutter/material.dart';
 
 class CourseInTeacherTabNav extends StatefulWidget {

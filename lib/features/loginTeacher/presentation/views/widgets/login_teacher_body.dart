@@ -45,7 +45,7 @@ class _LoginTeacherBodyState extends State<LoginTeacherBody> {
             child: Center(
               
               child: Text("Attendance System",style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),),

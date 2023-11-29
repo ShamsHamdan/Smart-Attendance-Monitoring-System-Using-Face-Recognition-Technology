@@ -66,7 +66,8 @@ class getStartedBody extends StatelessWidget {
               ),
               child: Text('Continue as a admin',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
                   )),
             ),
             SizedBox(height: 20),
@@ -86,7 +87,8 @@ class getStartedBody extends StatelessWidget {
               ),
               child: Text('Continue as a teacher',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
                   )),
             ),
           ],
