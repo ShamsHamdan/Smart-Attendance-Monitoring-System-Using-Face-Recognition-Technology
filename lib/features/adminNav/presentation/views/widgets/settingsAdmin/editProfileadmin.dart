@@ -1,4 +1,5 @@
 import 'package:first_version/constants.dart';
+import 'package:first_version/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileadmin extends StatefulWidget {
@@ -89,7 +90,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
                                   shape: BoxShape.circle,
                                   image: new DecorationImage(
                                     image: new ExactAssetImage(
-                                        'assets/images/blank-profile-picture-973460_1280.png'),
+                                        AssetsData.profilepic),
                                     fit: BoxFit.cover,
                                   ),
                                 )),

@@ -9,5 +9,5 @@ class AssetsData {
   static const profMoh = 'assets/images/profMohammad.jpg';
   static const drosama = 'assets/images/drosama.jpg';
   static const webcourse='assets/images/webcourse.png';
-  static const takeattendancebtn='assets/images/rsz_1rsz_round-webcam.png';
+  static const takeattendancebtn='assets/images/takeAtteBtn_round-webcam.png';
 }

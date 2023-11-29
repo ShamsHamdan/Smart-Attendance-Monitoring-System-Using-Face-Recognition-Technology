@@ -1,4 +1,6 @@
 import 'package:first_version/constants.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/list_of_courses_page.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_professor_form.dart';
 import 'package:flutter/material.dart';
 
 class  QuickActions extends StatelessWidget {
@@ -33,13 +35,19 @@ class  QuickActions extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 7),
-                const Text(
+                GestureDetector(
+            onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddProfessorForm()));
+                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
+            },
+            child:
+                Text(
                   "Add Teacher",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 17,
                   ),
-                ),
+                ),),
               ],
             ),
             Column(
@@ -63,13 +71,20 @@ class  QuickActions extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 7),
+               
+                GestureDetector(
+            onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfCoursesPage()));
+                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
+            },
+            child:
                 Text(
                   "Add Course ",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 17,
                   ),
-                ),
+                ),),
               ],
             ),
             Column(
