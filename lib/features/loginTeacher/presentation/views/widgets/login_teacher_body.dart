@@ -80,7 +80,7 @@ class _LoginTeacherBodyState extends State<LoginTeacherBody> {
                               color: kPrimaryColor,
                             ),
                             contentPadding: EdgeInsets.only(left: 30),
-                            hintText: 'User Email',
+                            hintText: ' Email',
                             fillColor: Colors.grey[300],
                             filled: true,
                             border: OutlineInputBorder(

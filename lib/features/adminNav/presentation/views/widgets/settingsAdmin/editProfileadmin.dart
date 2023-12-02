@@ -200,7 +200,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Email ID',
+                                    'Email',
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.bold),
@@ -218,7 +218,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
                               new Flexible(
                                 child: new TextField(
                                   decoration: const InputDecoration(
-                                      hintText: "Enter Email ID"),
+                                      hintText: "Enter Your Email"),
                                   enabled: !_status,
                                 ),
                               ),

@@ -12,7 +12,7 @@ class TermsandConditions extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Terms and Conditions',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+        title: const Text('Terms and Conditions',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 25),),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -32,7 +32,7 @@ class TermsandConditions extends StatelessWidget {
             children: [
               Text(
                 "Welcome to the Smart Attendance System",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
               Text(

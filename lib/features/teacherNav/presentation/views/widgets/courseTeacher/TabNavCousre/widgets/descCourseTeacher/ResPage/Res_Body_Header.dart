@@ -27,7 +27,7 @@ class _ResBodyHeaderState extends State<ResBodyHeader> {
                 const Positioned(
                   top: 0,
                   left: 155,
-                  child: Text('Resluts',
+                  child: Text('Results',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,

@@ -199,7 +199,7 @@ class _EditProfileTeacherState extends State<EditProfileTeacher>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Email ID',
+                                    'Email',
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.bold),
@@ -217,7 +217,7 @@ class _EditProfileTeacherState extends State<EditProfileTeacher>
                                Flexible(
                                 child: TextField(
                                   decoration: const InputDecoration(
-                                      hintText: "Enter Email ID"),
+                                      hintText: "Enter Your Email"),
                                   enabled: !_status,
                                 ),
                               ),

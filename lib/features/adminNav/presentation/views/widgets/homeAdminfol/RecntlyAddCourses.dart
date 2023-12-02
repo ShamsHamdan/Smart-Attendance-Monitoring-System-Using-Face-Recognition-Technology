@@ -1,5 +1,5 @@
 import 'package:first_version/core/utils/assets.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/list_of_courses_page.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_added_courses.dart';
 import 'package:flutter/material.dart';
 
 class RecntlyAddCourses extends StatelessWidget {
@@ -23,7 +23,7 @@ class RecntlyAddCourses extends StatelessWidget {
           ),
            GestureDetector(
             onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfCoursesPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ListofAddedCourses()));
                 //Navigator.pushNamed(context, "/maintabcoursesinteacher");
             },
             child: Text("see all",

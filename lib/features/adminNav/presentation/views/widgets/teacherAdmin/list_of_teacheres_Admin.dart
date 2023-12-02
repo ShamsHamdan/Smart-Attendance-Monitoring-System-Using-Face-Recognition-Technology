@@ -8,11 +8,12 @@ import 'add_professor_form.dart';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('List of added Teachers',style: TextStyle(fontSize: 22),),
+        title: Text('List of added Teachers',style: TextStyle(fontSize: 20),),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Container(
-        color: Colors.grey[200],
+        color: Colors.grey[100],
         padding: EdgeInsets.all(10),
         child: Column(
           children: [

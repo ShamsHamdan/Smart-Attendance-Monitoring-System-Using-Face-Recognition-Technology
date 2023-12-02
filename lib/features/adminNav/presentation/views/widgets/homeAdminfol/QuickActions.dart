@@ -1,6 +1,6 @@
 import 'package:first_version/constants.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/list_of_courses_page.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_professor_form.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
 import 'package:flutter/material.dart';
 
 class  QuickActions extends StatelessWidget {
@@ -13,7 +13,12 @@ class  QuickActions extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          children: [   GestureDetector(
+            onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddProfessorForm()));
+                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
+            },
+            child:
             Column(
               children: [
                 Container(
@@ -35,21 +40,22 @@ class  QuickActions extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 7),
-                GestureDetector(
-            onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddProfessorForm()));
-                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
-            },
-            child:
+             
                 Text(
                   "Add Teacher",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 17,
                   ),
-                ),),
+                ),
               ],
-            ),
+            ),  ),
+             GestureDetector(
+            onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>ListOfCoursesInSemester()));
+                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
+            },
+            child:
             Column(
               children: [
                 Container(
@@ -72,21 +78,16 @@ class  QuickActions extends StatelessWidget {
                 ),
                 SizedBox(height: 7),
                
-                GestureDetector(
-            onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfCoursesPage()));
-                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
-            },
-            child:
+             
                 Text(
                   "Add Course ",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 17,
                   ),
-                ),),
+                ),
               ],
-            ),
+            ),),
             Column(
               children: [
                 Container(

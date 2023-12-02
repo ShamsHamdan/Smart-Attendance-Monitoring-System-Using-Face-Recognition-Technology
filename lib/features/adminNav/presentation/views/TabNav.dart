@@ -1,21 +1,20 @@
 import 'package:first_version/constants.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/facultiesCourses.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdminfol/homeAdmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/settingsAdmin.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/facultiesTeacher.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/facultiesAdmin.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         body: TabBarView(
           children: <Widget>[
             HomeAdmin(),
-            TeacherAdmin(),
-            CourseAdmin(),
+           ListOfFacultiesAdmin(),
+           // CourseAdmin(),
             SettingsAdmin(),
           ],
         ),
@@ -30,14 +29,14 @@ class TabNavigation extends StatelessWidget {
               )),
               Tab(
                   icon: Icon(
-                Icons.person,
+                Icons.library_add,
                 size: 30,
               )),
-              Tab(
-                  icon: Icon(
-                Icons.school,
-                size: 30,
-              )),
+              // Tab(
+              //     icon: Icon(
+              //   Icons.school,
+              //   size: 30,
+              // )),
               Tab(
                   icon: Icon(
                 Icons.settings,

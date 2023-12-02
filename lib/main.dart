@@ -7,8 +7,9 @@ import 'package:first_version/features/adminNav/presentation/views/widgets/setti
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/Terms%20_and_Conditions.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/editProfileadmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_professor_form.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_specialties_TeacherAdmin.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_teacher_page.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_added_courses.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_departments.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_teacheres_Admin.dart';
 import 'package:first_version/features/adminlogin/presentation/views/widgets/admin_login_reg_body.dart';
 import 'package:first_version/features/getStarted/presentation/views/get_Started.dart';
 import 'package:first_version/features/loginTeacher/presentation/views/login_teacher.dart';
@@ -55,12 +56,13 @@ class smartAttendance extends StatelessWidget {
           "/CourseInTeacherTabNav":(contex) => CourseInTeacherTabNav(),
     "/maintabcoursesinteacher":(context)=> CourseTeacher(),
         "/reslutofattendance":(context) => ReslutOfAttendans(),
-          '/specialties': (context) => ListOfSpecialtiesTeacher(),
+       //   '/specialties': (context) => ListOfSpecialtiesTeacher(),
         "/Teachers": (context) => ListOfTeacherPageInAdmin(),
         // '/addProfessor': (context) => AddProfessorForm(),
-         '/listOfSpecialties': (context) => ListOfSpecialtiesTeacher(),
+       //  '/listOfSpecialties': (context) => ListOfSpecialtiesTeacher(),
         '/listOfCourses': (context) => ListOfCoursesPage(),
         '/addCourseForm': (context) => const AddCourseFormPage(),
+        '/recnAddCoursesInAdmin':(context) =>  ListofAddedCourses(),
       },
     );
   }

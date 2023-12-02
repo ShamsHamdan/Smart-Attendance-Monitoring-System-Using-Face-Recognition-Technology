@@ -12,7 +12,7 @@ class ResAtt extends StatelessWidget {
               children: [
                 Align(
                     alignment: Alignment.topLeft,
-                  child: Text("Recent Attendance Sessions ",
+                  child: Text("Recent Attendance Session ",
                               style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 25,
@@ -44,7 +44,7 @@ class ResAtt extends StatelessWidget {
                               // Icon(Icons.camera_enhance,color: Colors.white,),
                               // SizedBox(width: 5,),
                               Text(
-                        "Resluts",
+                        "Results",
                         style: TextStyle(
                                 fontSize: 23,
                                 fontWeight: FontWeight.w600,

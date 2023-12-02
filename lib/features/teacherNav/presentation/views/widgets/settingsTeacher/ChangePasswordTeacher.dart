@@ -84,7 +84,18 @@ class _ChangePasswordTeacherState extends State<ChangePasswordTeacher> {
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Password',
+                      labelText: 'Current Password',
+                    ),
+                  ),
+                ),
+              ),
+               Container(
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'New Password',
                     ),
                   ),
                 ),

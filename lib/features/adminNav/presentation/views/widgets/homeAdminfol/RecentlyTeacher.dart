@@ -1,5 +1,5 @@
 import 'package:first_version/core/utils/assets.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_teacher_page.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_teacheres_Admin.dart';
 import 'package:flutter/material.dart';
 
 class RecentlyAddTeachers extends StatelessWidget {

@@ -46,15 +46,20 @@ class _ListCoursestestState extends State<ListCoursestest> {
                             fontSize: 26,
                             fontWeight: FontWeight.bold)),
                   ],
-                ),IconButton(
-                  icon: Icon(Icons.search,color: Colors.black,size: 30,),
-                  onPressed: () {
-                    setState(() {
-                      showSearchField = !showSearchField;
-                    });
-                  },
                 ),
-             if (showSearchField)
+IconButton(
+  icon: Icon(
+    Icons.search,
+    color: Colors.black,
+    size: 30,
+  ),
+  onPressed: () {
+    setState(() {
+      showSearchField = true; // Set showSearchField to true
+    });
+  },
+),
+if (showSearchField)
   Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16),
     child: Row(
@@ -70,7 +75,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
           icon: Icon(Icons.cancel, color: Colors.black),
           onPressed: () {
             setState(() {
-              showSearchField = !showSearchField;
+              showSearchField = false;
             });
           },
         ),

@@ -117,7 +117,7 @@ class HomeTeacherHeader extends StatelessWidget {
                             width: 3,
                           ),
                           Text(
-                            "Student",
+                            "Students",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),

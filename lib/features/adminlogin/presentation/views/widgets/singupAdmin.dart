@@ -28,7 +28,7 @@ class SignUp extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  "Signup",
+                  "Sign Up",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class SignUp extends StatelessWidget {
                               color: kPrimaryColor,
                             ),
                             contentPadding: EdgeInsets.only(left: 30),
-                            hintText: 'User Email',
+                            hintText: 'Email',
                             fillColor: Colors.grey[300],
                             filled: true,
                             border: OutlineInputBorder(
@@ -102,7 +102,7 @@ class SignUp extends StatelessWidget {
                         borderRadius: BorderRadius.circular(27))),
                   ),
                   child: Text(
-                    "Signup",
+                    "Sign Up",
                     style: TextStyle(fontSize: 24),
                   ),
                 ),

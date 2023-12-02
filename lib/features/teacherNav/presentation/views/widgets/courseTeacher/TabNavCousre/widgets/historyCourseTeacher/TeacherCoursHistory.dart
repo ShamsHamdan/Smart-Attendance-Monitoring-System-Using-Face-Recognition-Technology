@@ -97,7 +97,7 @@ class _HistoryPageState extends State<TeacherCoursHisstory> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Attendance", style: TextStyle(fontWeight: FontWeight.bold,color:kPrimaryColor )),
+                            Text("Attending", style: TextStyle(fontWeight: FontWeight.bold,color:kPrimaryColor )),
                             Text("10", style: TextStyle(fontWeight: FontWeight.bold, color: kPrimaryColor)),
                           ],
                         ),
