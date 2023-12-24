@@ -37,13 +37,23 @@ class AddProfessorForm extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: const Text('Add Teacher',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+        title: const Text('Add Teacher',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),),
         centerTitle: true,
+        leading:  IconButton(
+                        icon: Icon(
+                          Icons.arrow_back,
+                          size: 25,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
       ),
       resizeToAvoidBottomInset: false, // Disable resizing to avoid bottom inset
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(7.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -109,7 +119,7 @@ class AddProfessorForm extends StatelessWidget {
                   ),
                   child: Text(
                     "Submit",
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24,color: Colors.white),
                   ),
                 ),
             ],

@@ -18,7 +18,7 @@ class _HistoryPageState extends State<TeacherCoursHisstory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Calendar", style: TextStyle(color: Colors.white)),
+        title: const Text("Calendar", style: TextStyle(color: Colors.white,fontSize: 24,fontWeight: FontWeight.bold)),
         backgroundColor: kPrimaryColor,
         centerTitle: true,
         iconTheme: IconThemeData(opacity: 0),

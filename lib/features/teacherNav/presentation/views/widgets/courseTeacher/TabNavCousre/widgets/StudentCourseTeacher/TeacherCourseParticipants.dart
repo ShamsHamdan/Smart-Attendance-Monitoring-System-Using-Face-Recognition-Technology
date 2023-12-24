@@ -12,6 +12,7 @@ class _TeacherCourseParticipantsState extends State<TeacherCourseParticipants> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       body: Column(
         children: [
         

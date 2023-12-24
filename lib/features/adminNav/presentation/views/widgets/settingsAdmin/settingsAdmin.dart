@@ -21,13 +21,14 @@ class SettingsAdmin extends StatelessWidget {
                 fontSize: 25,
                 color: Colors.white)),
         centerTitle: true,
-        leading: Icon(Icons.arrow_back),
+      //  leading: Icon(Icons.home),
+      automaticallyImplyLeading: false,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Stack(
               children: [
-                Icon(Icons.notifications),
+                Icon(Icons.notifications,color: Colors.white,),
                 Positioned(
                   top: 0,
                   right: 0,

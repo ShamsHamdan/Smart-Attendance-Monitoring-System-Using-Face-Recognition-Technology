@@ -22,8 +22,8 @@ List<Data> data = [
   Data(
       label: "Language Setup",
       trailing: Switch(
-        thumbColor: MaterialStatePropertyAll(kPrimaryColor),
-        activeTrackColor:kPrimaryColor,
+       thumbColor:const MaterialStatePropertyAll(kPrimaryColor),
+        activeTrackColor:Colors.grey[100],
         inactiveTrackColor: Color(0xffadf7c4),
         onChanged: (e) {
 

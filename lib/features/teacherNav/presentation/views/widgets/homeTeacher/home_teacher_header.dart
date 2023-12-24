@@ -104,7 +104,7 @@ class HomeTeacherHeader extends StatelessWidget {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Row(
                         children: [
@@ -119,7 +119,7 @@ class HomeTeacherHeader extends StatelessWidget {
                           Text(
                             "Students",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       )
@@ -142,7 +142,7 @@ class HomeTeacherHeader extends StatelessWidget {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Row(
                         children: [
@@ -157,7 +157,7 @@ class HomeTeacherHeader extends StatelessWidget {
                           Text(
                             "Attending",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       )
@@ -180,14 +180,14 @@ class HomeTeacherHeader extends StatelessWidget {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Row(
                         children: [
                           Text(
                             'X',
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold, // Make the text bold
                               color: Colors.red,
                             ),
@@ -198,7 +198,7 @@ class HomeTeacherHeader extends StatelessWidget {
                           Text(
                             "Absent",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       )

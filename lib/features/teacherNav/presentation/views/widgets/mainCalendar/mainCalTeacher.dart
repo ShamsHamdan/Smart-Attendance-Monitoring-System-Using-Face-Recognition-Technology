@@ -21,7 +21,7 @@ class _HistoryPageState extends State<CalendarMainTeacher> {
       appBar: AppBar(
         title: const Text(
           "Calendar",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 24),
         ),
         backgroundColor: kPrimaryColor,
         centerTitle: true,

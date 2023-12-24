@@ -24,17 +24,20 @@ class StudentCard extends StatelessWidget {
         _showAttendanceDialog(context);
       },
       child: Card(
+        color:Color.fromRGBO(255, 255, 255, 1),
         elevation: 5,
         margin: const EdgeInsets.only(bottom: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: Padding(
+          
           padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                
                 children: [
                   CircleAvatar(
                     radius: 30,
@@ -80,21 +83,21 @@ class StudentCard extends StatelessWidget {
             children: [
               Text(
                 'Attendance Details:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Attendance: 11', style: TextStyle(color: Colors.blue)),
+                  Text('Attendance: 11', style: TextStyle(color: Colors.green,fontSize: 20)),
                 ],
               ),
               SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Absence: ', style: TextStyle(color: Colors.red)),
-                  Text('4', style: TextStyle(color: Colors.red)),
+                  Text('Absence: ', style: TextStyle(color: Colors.red,fontSize: 20)),
+                  Text('4', style: TextStyle(color: Colors.red,fontSize: 20)),
                 ],
               ),
               SizedBox(height: 8),
@@ -103,10 +106,10 @@ class StudentCard extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  primary: kPrimaryColor,
                   onPrimary: Colors.white,
                 ),
-                child: Text('OK'),
+                child: Text('OK',style: TextStyle(fontSize: 16),),
               ),
             ],
           ),

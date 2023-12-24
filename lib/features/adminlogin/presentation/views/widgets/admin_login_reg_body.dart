@@ -99,11 +99,11 @@ class _adminLoginRegstrationBodyState extends State<adminLoginRegstrationBody>
                   children: <Widget>[
                     ConstrainedBox(
                       constraints: const BoxConstraints.expand(),
-                      child: const SignIn(),
+                      child:  SignIn(),
                     ),
                     ConstrainedBox(
                       constraints: const BoxConstraints.expand(),
-                      child: const SignUp(),
+                      child:  SignUp(),
                     ),
                   ],
                 ),

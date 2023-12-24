@@ -131,6 +131,7 @@ class _ChangePasswordAdminState extends State<ChangePasswordAdmin> {
                         'Confirm',
                         style: TextStyle(
                           fontSize: 20,
+                          color: Colors.white
                         ),
                       ),
                     ),

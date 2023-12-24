@@ -77,7 +77,7 @@ class RecentlyAddTeachers extends StatelessWidget {
                                ),
                           SizedBox(
                              width: double.infinity,
-                             height: 100, 
+                             height: 107, 
                             child: Container(
                               padding: EdgeInsets.all(15),
                               child: Column(
@@ -91,9 +91,7 @@ class RecentlyAddTeachers extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 5),
-                                  ), Text(
+                                  Text(
                                   'EIT',
                                   style: TextStyle(
                                     fontSize: 17,
@@ -153,7 +151,7 @@ class RecentlyAddTeachers extends StatelessWidget {
                                ),
                           SizedBox(
                              width: double.infinity,
-                             height: 100, 
+                             height: 107, 
                             child: Container(
                               padding: EdgeInsets.all(15),
                               child: Column(
@@ -167,9 +165,8 @@ class RecentlyAddTeachers extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 5),
-                                  ), Text(
+                                  // 
+                                   Text(
                                   'EIT',
                                   style: TextStyle(
                                     fontSize: 17,

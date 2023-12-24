@@ -74,7 +74,7 @@ class RecntlyAddCourses extends StatelessWidget {
                           ),),
                          SizedBox(
                              width: double.infinity,
-                             height: 100, 
+                             height: 107, 
                         child:  Container(
                             padding: EdgeInsets.all(15),
                             child: Column(
@@ -88,9 +88,10 @@ class RecntlyAddCourses extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                ), Text(
+                                // Padding(
+                                //   padding: EdgeInsets.only(top: 5),
+                                // ), 
+                                Text(
                                   'EIT',
                                   style: TextStyle(
                                     fontSize: 17,
@@ -146,7 +147,7 @@ class RecntlyAddCourses extends StatelessWidget {
                           ),),
                          SizedBox(
                              width: double.infinity,
-                             height: 100, 
+                             height: 107, 
                         child:  Container(
                             padding: EdgeInsets.all(15),
                             child: Column(
@@ -160,9 +161,10 @@ class RecntlyAddCourses extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                ), Text(
+                                // Padding(
+                                //   padding: EdgeInsets.only(top: 5),
+                                // ), 
+                                Text(
                                   'EIT',
                                   style: TextStyle(
                                     fontSize: 17,

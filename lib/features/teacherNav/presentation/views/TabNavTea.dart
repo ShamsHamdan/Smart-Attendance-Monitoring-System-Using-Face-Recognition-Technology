@@ -42,12 +42,12 @@ class _TabNavigationTeacherState extends State<TabNavigationTeacher>
           // Switch to the Calendar tab when the camera button is pressed
           _tabController.animateTo(1);
         },
-        child: Icon(Icons.camera_alt),
+        child: Icon(Icons.camera_alt,color: Colors.white,),
         backgroundColor: kPrimaryColor,
          heroTag: null, // Add this line to remove the tag
   elevation: 0.0, // Add this line to remove the shadow
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(15.0), // Adjust the border radius
+    borderRadius: BorderRadius.circular(20.0), // Adjust the border radius
   ),
   // Adjust the size using size and padding
   mini: false,
@@ -62,11 +62,13 @@ class _TabNavigationTeacherState extends State<TabNavigationTeacher>
               Tab(icon: Icon(Icons.school, size: 30)),
               Tab(icon: Icon(Icons.settings, size: 30)),
             ],
-            indicator: BoxDecoration(
+           indicator: BoxDecoration(
              
-            ),
+           ),
             labelColor: kPrimaryColor,
             unselectedLabelColor: Colors.grey,
+            //  indicatorPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            //  indicatorWeight: 2,
           ),
         ),
     

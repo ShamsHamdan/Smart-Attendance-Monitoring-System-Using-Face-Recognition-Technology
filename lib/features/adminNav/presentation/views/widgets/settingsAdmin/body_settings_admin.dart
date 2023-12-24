@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/card.dart';
@@ -66,9 +67,7 @@ class BodySettningsAdmin extends StatelessWidget {
                         //       fontSize: 16,
                         //       color: Color(0xff065e54)),
                         // ),
-                        SizedBox(
-                          height: 10,
-                        ),
+
                         Text(
                           "Electroinc Attendance Department",
                           style: TextStyle(
@@ -122,52 +121,52 @@ class BodySettningsAdmin extends StatelessWidget {
 
                 Expanded(
                   child: Container(
-                  // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Adjust padding
+                    // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Adjust padding
                     color: Colors.grey[100],
-                  child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        if (data[index].label == "Change Password") {
-                          return GestureDetector(
-                            onTap: () {
-                              // Navigate to the new page here
-                              Navigator.pushNamed(
-                                  context, "/changepassowrdadmin");
-                            },
-                            child: cards(context, index),
-                          );
-                        } else if (data[index].label == "Edit Profile") {
-                          return GestureDetector(
-                            onTap: () {
-                              // Navigate to the new page here
-                              Navigator.pushNamed(context, "/editProfileadmin");
-                            },
-                            child: cards(context, index),
-                          );
-                        } else if (data[index].label ==
-                            "Terms and Conditions") {
-                          return GestureDetector(
-                            onTap: () {
-                              // Navigate to the new page here
-                              Navigator.pushNamed(
-                                  context, "/TermsandConditions");
-                            },
-                            child: cards(context, index),
-                          );
-                        } else {
-                          return cards(context, index);
-                        }
-                      }),
-                ),
+                    child: ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          if (data[index].label == "Change Password") {
+                            return GestureDetector(
+                              onTap: () {
+                                // Navigate to the new page here
+                                Navigator.pushNamed(
+                                    context, "/changepassowrdadmin");
+                              },
+                              child: cards(context, index),
+                            );
+                          } else if (data[index].label == "Edit Profile") {
+                            return GestureDetector(
+                              onTap: () {
+                                // Navigate to the new page here
+                                Navigator.pushNamed(
+                                    context, "/editProfileadmin");
+                              },
+                              child: cards(context, index),
+                            );
+                          } else if (data[index].label ==
+                              "Terms and Conditions") {
+                            return GestureDetector(
+                              onTap: () {
+                                // Navigate to the new page here
+                                Navigator.pushNamed(
+                                    context, "/TermsandConditions");
+                              },
+                              child: cards(context, index),
+                            );
+                          } else {
+                            return cards(context, index);
+                          }
+                        }),
+                  ),
                 ),
                 // SizedBox(
                 //   height: 0,
                 // ),
                 GestureDetector(
-                  onTap: () {
-                     Navigator.pushNamed(
-                                  context, "/backwelcompage");
-                            
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushNamed(context, "/backwelcompage");
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * .95,

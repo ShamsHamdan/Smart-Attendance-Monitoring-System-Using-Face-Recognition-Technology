@@ -8,7 +8,7 @@ import 'add_professor_form.dart';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('List of added Teachers',style: TextStyle(fontSize: 20),),
+        title: Text('List of added Teachers',style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -44,14 +44,14 @@ import 'add_professor_form.dart';
             MaterialPageRoute(builder: (context) => AddProfessorForm()),
           );
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,color: Colors.white,),
       ),
     );
   }
 
   Widget buildStudentContainer(String name, String subtitle, Color containerColor, Color textColor, IconData icon, Color iconColor) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -60,8 +60,8 @@ import 'add_professor_form.dart';
         color: containerColor,
       ),
       child: ListTile(
-        title: Text(name, style: TextStyle(color: textColor,fontSize: 20)),
-        subtitle: Text(subtitle, style: TextStyle(color: textColor,fontSize: 20)),
+        title: Text(name, style: TextStyle(color: textColor,fontSize: 20,fontWeight: FontWeight.bold)),
+        subtitle: Text(subtitle, style: TextStyle(color: textColor,fontSize: 19)),
         trailing: Icon(Icons.arrow_forward_ios, color: iconColor),
          leading: CircleAvatar(
                     radius: 30,

@@ -1,5 +1,7 @@
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_course_form.dart';
+
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,7 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('List of added Courses',style: TextStyle(fontSize: 20),),
+        title: Text('List of added Courses',style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -45,16 +47,16 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
            
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ListOfCoursesInSemester()),
+            MaterialPageRoute(builder: (context) => MyApp()),
           );
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,color: Colors.white,),
       ),
     );
   }
  Widget buildCourseContainer(String name, String subtitle, Color containerColor, Color textColor, String imagePath, Color iconColor, BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -63,8 +65,8 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
         color: containerColor,
       ),
       child: ListTile(
-        title: Text(name, style: TextStyle(color: textColor,fontSize: 20)),
-        subtitle: Text(subtitle, style: TextStyle(color: textColor,fontSize: 20)),
+        title: Text(name, style: TextStyle(color: textColor,fontSize: 18,fontWeight: FontWeight.bold)),
+        subtitle: Text(subtitle, style: TextStyle(color: textColor,fontSize: 17)),
         trailing: GestureDetector(
           onTap: () {
             // Show dialog here

@@ -6,6 +6,7 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/cou
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/bar_chart.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/nameOfCourse.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/studentNumber.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/studentStatistics.dart';
 import 'package:flutter/material.dart';
 
 class CourseInfo extends StatelessWidget {
@@ -39,10 +40,11 @@ class CourseInfo extends StatelessWidget {
               CourseDetails(),
               SizedBox(height: 40,),
               TakeAttendanceBtn(),
-              SizedBox(height: 40,),
+              SizedBox(height: 60,),
               ResAtt(),
-              SizedBox(height: 40,),
-          //    barChartCourse(),
+              SizedBox(height: 0,),
+              studentStatistics(),
+               SizedBox(height: 20,)
         
         
         

@@ -37,12 +37,14 @@ class _CourseInTeacherTabNavState extends State<AddTeacherandCourseInAdminTabNav
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          
            iconTheme: IconThemeData(color: Colors.black),
           centerTitle: true,
           backgroundColor: Colors.grey[100],
+          
           title: Text(
             'Computer systems Engineering',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 20),
           ),
           bottom: TabBar(
             controller: _tabController,

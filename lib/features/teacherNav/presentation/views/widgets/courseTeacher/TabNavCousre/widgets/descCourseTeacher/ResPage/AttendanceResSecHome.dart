@@ -32,7 +32,7 @@ class ResAtt extends StatelessWidget {
                     Container(
                       width: MediaQuery.of(context).size.width * .95,
                       height: 60,
-                      margin:const EdgeInsets.only(bottom: 55),
+                      margin:const EdgeInsets.only(bottom: 45),
                       decoration: BoxDecoration(
                           color: kPrimaryColor,
                           borderRadius: BorderRadius.circular(20)),

@@ -88,9 +88,15 @@ class _HomeScreenState extends State<ListOfDepartments> {
                       hintText: 'Search of department',
                       hintStyle: const TextStyle(color: Colors.white),
                       prefixIcon: const Icon(Icons.search, color: Colors.white),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                     
+                     focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: const Color.fromRGBO(245, 245, 245, .8)), // Set the border color to white
+        borderRadius: BorderRadius.circular(20),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: const Color.fromRGBO(245, 245, 245, .8)), // Set the border color to white
+        borderRadius: BorderRadius.circular(20),
+      ),
                     ),
                   ),
                 ),
@@ -177,7 +183,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
           ),
           const SizedBox(height: 12),
           SizedBox(
-            height: 62,
+            height: 69,
             child: Container(
               child: Text(
                 title,

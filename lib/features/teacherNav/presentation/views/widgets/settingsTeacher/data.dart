@@ -23,8 +23,8 @@ List<Data> data = [
       label: "Language Setup",
       trailing: Switch(
         thumbColor:const MaterialStatePropertyAll(kPrimaryColor),
-        activeTrackColor:kPrimaryColor,
-        inactiveTrackColor:const Color.fromARGB(255, 189, 220, 199),
+        activeTrackColor:Colors.grey[100],
+       // inactiveTrackColor:Color.fromARGB(255, 30, 131, 62),
         onChanged: (e) {
 
         },

@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:first_version/features/Splash/presentation/views/SplashView.dart';
 import 'package:first_version/features/adminNav/presentation/views/TabNav.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/add_course_form_page.dart';
@@ -24,45 +26,63 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/set
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   runApp(const smartAttendance());
 }
 
-class smartAttendance extends StatelessWidget {
+class smartAttendance extends StatefulWidget {
   const smartAttendance({super.key});
+
+  @override
+  State<smartAttendance> createState() => _smartAttendanceState();
+}
+
+class _smartAttendanceState extends State<smartAttendance> {
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('--------User is currently signed out!');
+      } else {
+        print('--------User is signed in!');
+      }
+    });
+   // super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashView(),
-
       routes: {
-       // '/':(context) => const getStarted(),
-        "/loginTeacher":(context) => const loginTeacher(),
-        "/loginAdmin":(context) => const adminLoginRegstrationBody(),
-        "/homeadmin":(context) => TabNavigation(),
-        "/changepassowrdadmin":(context) => ChangePasswordAdmin(),
-        "/editProfileadmin":(context) => EditProfileadmin(),
-        "/TermsandConditions":(context) => TermsandConditions(), 
-        "/homeTeacher":(context) => TabNavigationTeacher(),
-        "/editProfileteacher":(context) => EditProfileTeacher(),
-         "/changepassowrdteacher":(context) => ChangePasswordTeacher(),
-         "/PrivacyPolicy":(context) => PrivacyPolicy(),
-         "/backwelcompage":(context) => getStarted(),
-         "/maincalendar":(context) => CalendarMainTeacher(),
-          "/CourseInTeacherTabNav":(contex) => CourseInTeacherTabNav(),
-    "/maintabcoursesinteacher":(context)=> CourseTeacher(),
-        "/reslutofattendance":(context) => ReslutOfAttendans(),
-       //   '/specialties': (context) => ListOfSpecialtiesTeacher(),
+        // '/':(context) => const getStarted(),
+        "/loginTeacher": (context) => const loginTeacher(),
+        "/loginAdmin": (context) => const adminLoginRegstrationBody(),
+        "/homeadmin": (context) => TabNavigation(),
+        "/changepassowrdadmin": (context) => ChangePasswordAdmin(),
+        "/editProfileadmin": (context) => EditProfileadmin(),
+        "/TermsandConditions": (context) => TermsandConditions(),
+        "/homeTeacher": (context) => TabNavigationTeacher(),
+        "/editProfileteacher": (context) => EditProfileTeacher(),
+        "/changepassowrdteacher": (context) => ChangePasswordTeacher(),
+        "/PrivacyPolicy": (context) => PrivacyPolicy(),
+        "/backwelcompage": (context) => getStarted(),
+        "/maincalendar": (context) => CalendarMainTeacher(),
+        "/CourseInTeacherTabNav": (contex) => CourseInTeacherTabNav(),
+        "/maintabcoursesinteacher": (context) => CourseTeacher(),
+        "/reslutofattendance": (context) => ReslutOfAttendans(),
+        //   '/specialties': (context) => ListOfSpecialtiesTeacher(),
         "/Teachers": (context) => ListOfTeacherPageInAdmin(),
         // '/addProfessor': (context) => AddProfessorForm(),
-       //  '/listOfSpecialties': (context) => ListOfSpecialtiesTeacher(),
+        //  '/listOfSpecialties': (context) => ListOfSpecialtiesTeacher(),
         '/listOfCourses': (context) => ListOfCoursesPage(),
         '/addCourseForm': (context) => const AddCourseFormPage(),
-        '/recnAddCoursesInAdmin':(context) =>  ListofAddedCourses(),
+        '/recnAddCoursesInAdmin': (context) => ListofAddedCourses(),
       },
     );
   }

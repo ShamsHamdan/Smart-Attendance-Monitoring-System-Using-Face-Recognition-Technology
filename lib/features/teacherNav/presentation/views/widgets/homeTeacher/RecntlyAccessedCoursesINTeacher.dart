@@ -78,7 +78,7 @@ class RecntlyAccessedCourses extends StatelessWidget {
                           ),
                           SizedBox(
                             width: double.infinity,
-                            height: 100,
+                            height: 110,
                             child: Container(
                               padding: EdgeInsets.all(15),
                               child: Stack(
@@ -90,7 +90,7 @@ class RecntlyAccessedCourses extends StatelessWidget {
                                       Text(
                                         "INTERNSHIP Section1",
                                         style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 19,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -173,7 +173,7 @@ class RecntlyAccessedCourses extends StatelessWidget {
                           ),
                           SizedBox(
                             width: double.infinity,
-                            height: 100,
+                            height: 110,
                             child: Container(
                               padding: EdgeInsets.all(15),
                               child: Stack(
@@ -185,7 +185,7 @@ class RecntlyAccessedCourses extends StatelessWidget {
                                       Text(
                                         "INTERNSHIP Section1",
                                         style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 19,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                         ),
