@@ -13,10 +13,21 @@ class SignUp extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
   GlobalKey<FormState> formState = GlobalKey<FormState>();
-  // CollectionReference admins = FirebaseFirestore.instance.collection('Admins');
+ // CollectionReference admins = FirebaseFirestore.instance.collection('Admins');
   // var userCredential;
   // Retrieve the UID of the created user
   // String uid = userCredential.user!.uid;
+
+  Future<void> addAdmin() async {
+    // Call the user's CollectionReference to add a new user
+ await FirebaseFirestore.instance.collection('Admins').add({
+          "name": username.text,
+          "email": email.text,
+          "id":FirebaseAuth.instance.currentUser!.uid,
+        })
+        .then((value) => print("===================================admin Added"))
+        .catchError((error) => print("=============================Failed to add admin: $error"));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +79,9 @@ class SignUp extends StatelessWidget {
                                   hintText: 'Full Name',
                                   fillColor: Colors.grey[300],
                                   filled: true,
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
@@ -92,6 +106,9 @@ class SignUp extends StatelessWidget {
                                   hintText: 'Email',
                                   fillColor: Colors.grey[300],
                                   filled: true,
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
@@ -106,6 +123,7 @@ class SignUp extends StatelessWidget {
                                   return "Empty filed";
                                 }
                               },
+                              obscureText: true,
                               controller: pass,
                               decoration: InputDecoration(
                                   prefixIcon: Icon(
@@ -116,6 +134,9 @@ class SignUp extends StatelessWidget {
                                   hintText: ' Password',
                                   fillColor: Colors.grey[300],
                                   filled: true,
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
@@ -134,6 +155,7 @@ class SignUp extends StatelessWidget {
                               email: email.text,
                               password: pass.text,
                             );
+                            addAdmin();
                             // FirebaseFirestore.instance
                             //     .collection('Admins')
                             //     .add({'name': username.text,

@@ -3,6 +3,8 @@ import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/card.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/data.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/nameadmin.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/picAdminHeader.dart';
 import 'package:flutter/material.dart';
 
 class BodySettningsAdmin extends StatelessWidget {
@@ -50,13 +52,7 @@ class BodySettningsAdmin extends StatelessWidget {
                         SizedBox(
                           height: 50,
                         ),
-                        Text(
-                          ' Admin',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                              color: Color.fromRGBO(51, 110, 131, 1)),
-                        ),
+                        nameAdmin(),
                         SizedBox(
                           height: 10,
                         ),
@@ -86,10 +82,12 @@ class BodySettningsAdmin extends StatelessWidget {
                 // right: 130,
                 // left: 130,
                 top: 0,
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(AssetsData.profilepic),
-                  radius: 40,
-                ),
+              child: PicAdminSettening(),
+              // CircleAvatar(
+    //   backgroundImage:AssetImage(AssetsData.profilepic),
+    //   radius: 40,
+    // )
+               
               ),
             ],
           ),

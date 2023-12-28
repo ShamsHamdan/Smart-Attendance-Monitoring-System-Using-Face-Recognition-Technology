@@ -64,7 +64,7 @@ class getStartedBody extends StatelessWidget {
                       BorderRadius.circular(10), // Set the border radius
                 ), // Border color and width
               ),
-              child: Text('Continue as a admin',
+              child: Text('Continue as an admin',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold

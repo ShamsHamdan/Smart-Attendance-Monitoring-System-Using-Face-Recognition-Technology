@@ -59,6 +59,9 @@ class SignIn extends StatelessWidget {
                                   hintText: 'Email',
                                   fillColor: Colors.grey[300],
                                   filled: true,
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
@@ -68,6 +71,7 @@ class SignIn extends StatelessWidget {
                               height: 20,
                             ),
                             TextFormField(
+                              
                               validator: (val) {
                                 if (val == "") {
                                   return "Empty filed";
@@ -84,6 +88,9 @@ class SignIn extends StatelessWidget {
                                   hintText: ' Password',
                                   fillColor: Colors.grey[300],
                                   filled: true,
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
