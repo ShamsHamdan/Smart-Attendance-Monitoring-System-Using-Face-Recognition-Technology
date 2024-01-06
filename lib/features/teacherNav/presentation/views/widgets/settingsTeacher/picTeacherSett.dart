@@ -3,21 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 
-class PicAdminHome extends StatefulWidget {
-  const PicAdminHome({super.key});
+class PicTeacherSettening extends StatefulWidget {
+  const PicTeacherSettening({super.key});
 
   @override
-  State<PicAdminHome> createState() => _PicAdminHomeState();
+  State<PicTeacherSettening> createState() => _PicAdminSetteningState();
 }
 
-class _PicAdminHomeState extends State<PicAdminHome> {
+class _PicAdminSetteningState extends State<PicTeacherSettening> {
   String? url;
   DocumentSnapshot? data1;
 
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('Admins')
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .collection('Teachers')
+        .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
 
     DocumentSnapshot data1 = querySnapshot.docs[0];
@@ -32,7 +32,10 @@ class _PicAdminHomeState extends State<PicAdminHome> {
       setState(() {
         url = null;
       });
-      
+      // Handle the case when 'url' field is not found
+      // setState(() {
+      //   // Set the fallback image from the assets
+      //   url = 'assets/images/blank-profile-picture.png';
       print("----------------------$url");
       // });
     }
@@ -54,7 +57,7 @@ class _PicAdminHomeState extends State<PicAdminHome> {
       backgroundImage: url != null && url!.isNotEmpty
           ? NetworkImage(Uri.parse(url!).toString())
           : AssetImage(AssetsData.profilepic) as ImageProvider<Object>,
-      radius: 30,
+      radius: 60,
     );
   }
 }

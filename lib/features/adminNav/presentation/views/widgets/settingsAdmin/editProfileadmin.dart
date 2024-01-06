@@ -87,7 +87,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
                                           fontWeight: FontWeight.bold,
                                           fontSize: 22),
                                       desc:
-                                          'Password changed successfully.',
+                                          'Updated successfully.',
                                       descTextStyle: TextStyle(fontSize: 17))
                                   .show();
 
@@ -101,6 +101,18 @@ class _EditProfileadminState extends State<EditProfileadmin>
           "email": email.text,
           "url": urlAdmin ?? '',
         }).then((value) {
+            AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.success,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Success',
+                                      titleTextStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
+                                      desc:
+                                          'Updated successfully.',
+                                      descTextStyle: TextStyle(fontSize: 17))
+                                  .show();
           print("===================================admin update$urlAdmin");
         }).catchError((error) => print(
             "=============================Failed to update admin: $error"));
@@ -158,27 +170,16 @@ class _EditProfileadminState extends State<EditProfileadmin>
                                   showImagePickerOption(context);
                                 },
                                 child: CircleAvatar(
-                                  backgroundImage:
+                                  backgroundImage:urlAdmin !=null && urlAdmin!.isNotEmpty? 
+                                  NetworkImage(
+                                              Uri.parse(urlAdmin!).toString()) :
                                       oldUrl != null && oldUrl!.isNotEmpty
                                           ? NetworkImage(
                                               Uri.parse(oldUrl!).toString())
                                           : AssetImage(AssetsData.profilepic)
-                                              as ImageProvider<Object>,
+                                              as ImageProvider<Object>  ,
                                   radius: 70,
                                 ),
-
-                                // Container(
-                                //     width: 140.0,
-                                //     height: 140.0,
-                                //     decoration: BoxDecoration(
-                                //       shape: BoxShape.circle,
-                                //       image: DecorationImage(
-                                //         image:
-                                //         ExactAssetImage(
-                                //             AssetsData.profilepic),
-                                //         fit: BoxFit.cover,
-                                //       ),
-                                //     )),
                               ),
                             ],
                           ),

@@ -10,4 +10,5 @@ class AssetsData {
   static const drosama = 'assets/images/drosama.jpg';
   static const webcourse='assets/images/webcourse.png';
   static const takeattendancebtn='assets/images/takeAtteBtn_round-webcam.png';
+ static const imageAddCourseDef='assets/images/camAddcourse.jpg';
 }

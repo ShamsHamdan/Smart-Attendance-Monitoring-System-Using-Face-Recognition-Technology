@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/card.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/curved_header.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/data.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/nameTeacher.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/picTeacherSett.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTeacherBody extends StatelessWidget {
@@ -43,10 +46,7 @@ class SettingsTeacherBody extends StatelessWidget {
                       Center(
                           child: Column(children: [
                         SizedBox(height: 20),
-                        CircleAvatar(
-                          radius: 60,
-                          backgroundImage: AssetImage(AssetsData.profilepic),
-                        ),
+                       PicTeacherSettening(),
                       ])),
                     ],
                   ),
@@ -55,14 +55,12 @@ class SettingsTeacherBody extends StatelessWidget {
                     height: 10,
                   ),
                   Center(
-                    child: Text(
-                      "Mohammad Awad",
-                      style: TextStyle(
-                      fontSize: 35,
-                     // fontFamily: "Verdana",
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                    ),
+                    child: nameTeach(),
+                    
+                    
+                    
+                    
+                    
                   ),
                   SizedBox(height: 10),
                   Center(
@@ -78,7 +76,7 @@ class SettingsTeacherBody extends StatelessWidget {
                 ]),
               ),
             const  SizedBox(
-                height: 40,
+                height: 20,
               ),
               SizedBox(
                 height: 430,
@@ -131,7 +129,8 @@ class SettingsTeacherBody extends StatelessWidget {
                   ),
                  
                   GestureDetector(
-                    onTap: () {
+                    onTap: ()async {
+                       await FirebaseAuth.instance.signOut();
                        Navigator.pushNamed(
                                     context, "/backwelcompage");
                               

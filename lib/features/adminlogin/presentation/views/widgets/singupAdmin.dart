@@ -13,20 +13,25 @@ class SignUp extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
   GlobalKey<FormState> formState = GlobalKey<FormState>();
- // CollectionReference admins = FirebaseFirestore.instance.collection('Admins');
+  // CollectionReference admins = FirebaseFirestore.instance.collection('Admins');
   // var userCredential;
   // Retrieve the UID of the created user
   // String uid = userCredential.user!.uid;
 
   Future<void> addAdmin() async {
     // Call the user's CollectionReference to add a new user
- await FirebaseFirestore.instance.collection('Admins').add({
+    await FirebaseFirestore.instance
+        .collection('Admins')
+        .add({
           "name": username.text,
           "email": email.text,
-          "id":FirebaseAuth.instance.currentUser!.uid,
+          "id": FirebaseAuth.instance.currentUser!.uid,
+          "password": pass.text,
         })
-        .then((value) => print("===================================admin Added"))
-        .catchError((error) => print("=============================Failed to add admin: $error"));
+        .then(
+            (value) => print("===================================admin Added"))
+        .catchError((error) =>
+            print("=============================Failed to add admin: $error"));
   }
 
   @override
@@ -71,7 +76,7 @@ class SignUp extends StatelessWidget {
                               },
                               controller: username,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.person,
                                     color: kPrimaryColor,
                                   ),
@@ -79,7 +84,7 @@ class SignUp extends StatelessWidget {
                                   hintText: 'Full Name',
                                   fillColor: Colors.grey[300],
                                   filled: true,
-                                  errorBorder: OutlineInputBorder(
+                                  errorBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.red),
                                   ),
                                   border: OutlineInputBorder(
@@ -87,7 +92,7 @@ class SignUp extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             TextFormField(
@@ -98,15 +103,16 @@ class SignUp extends StatelessWidget {
                               },
                               controller: email,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.email,
                                     color: kPrimaryColor,
                                   ),
-                                  contentPadding: EdgeInsets.only(left: 30),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 30),
                                   hintText: 'Email',
                                   fillColor: Colors.grey[300],
                                   filled: true,
-                                  errorBorder: OutlineInputBorder(
+                                  errorBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.red),
                                   ),
                                   border: OutlineInputBorder(
@@ -114,7 +120,7 @@ class SignUp extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             TextFormField(
@@ -126,15 +132,16 @@ class SignUp extends StatelessWidget {
                               obscureText: true,
                               controller: pass,
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.vpn_key,
                                     color: kPrimaryColor,
                                   ),
-                                  contentPadding: EdgeInsets.only(left: 30),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 30),
                                   hintText: ' Password',
                                   fillColor: Colors.grey[300],
                                   filled: true,
-                                  errorBorder: OutlineInputBorder(
+                                  errorBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.red),
                                   ),
                                   border: OutlineInputBorder(
@@ -155,19 +162,41 @@ class SignUp extends StatelessWidget {
                               email: email.text,
                               password: pass.text,
                             );
-                            addAdmin();
-                            // FirebaseFirestore.instance
-                            //     .collection('Admins')
-                            //     .add({'name': username.text,
-                            //   'email': email.text,});
-                            //  String uid = userCredential.user.uid;
-                            // await admins.add({
-                            //   'name': username,
-                            //   'email': email,
-                            // });
-                            Navigator.pushNamed(context, "/homeadmin");
+                             addAdmin();
+                            FirebaseAuth.instance.currentUser!
+                                .sendEmailVerification();
+                            if (credential.user!.emailVerified) {
+                             
+
+                              Navigator.pushNamed(context, "/homeadmin");
+                            } else {
+                              
+                              AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.warning,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Warning',
+                                      titleTextStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
+                                      desc: 'Please verify your email.',
+                                      descTextStyle: TextStyle(fontSize: 17))
+                                  .show();
+                            }
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
+                              AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Error',
+                                      titleTextStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
+                                      desc:
+                                          'The password provided is too weak.',
+                                      descTextStyle: TextStyle(fontSize: 17))
+                                  .show();
                               print('The password provided is too weak.');
                             } else if (e.code == 'email-already-in-use') {
                               print(
@@ -190,18 +219,6 @@ class SignUp extends StatelessWidget {
                           }
                         } else {
                           print("========err");
-                          // AwesomeDialog(
-                          //         context: context,
-                          //         dialogType: DialogType.error,
-                          //         animType: AnimType.rightSlide,
-                          //         title: 'Error',
-                          //         titleTextStyle: TextStyle(
-                          //             fontWeight: FontWeight.bold,
-                          //             fontSize: 22),
-                          //         desc:
-                          //             'The account already exists for that email.',
-                          //         descTextStyle: TextStyle(fontSize: 17))
-                          //     .show();
                         }
 
                         // Navigator.pushNamed(context, "/homeadmin");

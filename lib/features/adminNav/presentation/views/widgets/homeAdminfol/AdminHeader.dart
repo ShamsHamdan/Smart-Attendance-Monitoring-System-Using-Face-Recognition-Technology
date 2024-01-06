@@ -14,29 +14,82 @@ class HomeAdminHeader extends StatefulWidget {
 
 class _HomeAdminHeaderState extends State<HomeAdminHeader> {
   DocumentSnapshot? data2;
-String ? name;
+  String? name;
+  int? numberOfTeachers;
+  List<QueryDocumentSnapshot> dataNumberTeacher = [];
+
+  int? numberOfCourses;
+  List<QueryDocumentSnapshot> dataNumberCourses = [];
+
+  int? numberOfStudents;
+  List<QueryDocumentSnapshot> dataNumberStudents = [];
+
+  Future getDataTeacher() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    dataNumberTeacher.addAll(querySnapshot.docs);
+    numberOfTeachers = dataNumberTeacher.length;
+    // Map<String, dynamic>? data = data1.data() as Map<String, dynamic>?;
+    setState(() {
+      // print("${data[0]['name']}");
+      // Adminemail = data['email'];
+      // Adminpass = data['password'];
+    });
+  }
+
+  Future getDataStudent() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Students')
+        .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    dataNumberStudents.addAll(querySnapshot.docs);
+    numberOfStudents = dataNumberStudents.length;
+    // Map<String, dynamic>? data = data1.data() as Map<String, dynamic>?;
+    setState(() {
+      // print("${data[0]['name']}");
+      // Adminemail = data['email'];
+      // Adminpass = data['password'];
+    });
+  }
+
+  Future getDataCourses() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Courses')
+        .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    dataNumberCourses.addAll(querySnapshot.docs);
+    numberOfCourses = dataNumberCourses.length;
+    // Map<String, dynamic>? data = data1.data() as Map<String, dynamic>?;
+    setState(() {});
+  }
+
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Admins')
         .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
 
-          if (querySnapshot.size > 0) {
-    DocumentSnapshot data2 = querySnapshot.docs[0];
-    name = data2['name'];
-  } else {
-    // Handle the case when no documents are found
-    print('No documents found for the current user.');
-    // You can set a default name or handle it in another way.
-  }
-  //  DocumentSnapshot data2 = querySnapshot.docs[0];
-  // name = data2['name'];
+    if (querySnapshot.size > 0) {
+      DocumentSnapshot data2 = querySnapshot.docs[0];
+      name = data2['name'];
+    } else {
+      // Handle the case when no documents are found
+      print('No documents found for the current user.');
+      // You can set a default name or handle it in another way.
+    }
+    //  DocumentSnapshot data2 = querySnapshot.docs[0];
+    // name = data2['name'];
     setState(() {});
   }
 
   @override
   void initState() {
     getData();
+    getDataCourses();
+    getDataTeacher();
+    getDataStudent();
     super.initState();
   }
 
@@ -58,7 +111,7 @@ String ? name;
           Positioned(
             top: 100,
             left: 20,
-            child: Text("Hi ${name ?? ''}",
+            child: Text("Hi ${name ?? 'Admin'}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
@@ -67,7 +120,7 @@ String ? name;
           const Positioned(
             top: 95,
             right: 10,
-            child:  PicAdminHome(),
+            child: PicAdminHome(),
           ),
           Positioned(
             top: 180,
@@ -85,7 +138,7 @@ String ? name;
                         spreadRadius: 1,
                         offset: const Offset(0, 5.0)),
                   ]),
-              child: const Row(
+              child: Row(
                 children: [
                   SizedBox(
                     width: 60,
@@ -104,7 +157,7 @@ String ? name;
                         height: 10,
                       ),
                       Text(
-                        "200",
+                        "${numberOfCourses ?? ''}",
                         style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(
@@ -133,7 +186,7 @@ String ? name;
                         height: 10,
                       ),
                       Text(
-                        "200",
+                        "${numberOfTeachers ?? ''}",
                         style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(
@@ -162,7 +215,7 @@ String ? name;
                         height: 10,
                       ),
                       Text(
-                        "200",
+                         "${numberOfStudents ?? ''}",
                         style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(

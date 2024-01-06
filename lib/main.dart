@@ -9,6 +9,7 @@ import 'package:first_version/features/adminNav/presentation/views/widgets/cours
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/ChangePasswordAdmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/Terms%20_and_Conditions.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/editProfileadmin.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/TabNavAddTeacherandCourse.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_professor_form.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_added_courses.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_departments.dart';
@@ -84,6 +85,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         '/listOfCourses': (context) => ListOfCoursesPage(),
         '/addCourseForm': (context) => const AddCourseFormPage(),
         '/recnAddCoursesInAdmin': (context) => ListofAddedCourses(),
+        '/addNavInAdmin': (context) => AddTeacherandCourseInAdminTabNav(),
       },
     );
   }

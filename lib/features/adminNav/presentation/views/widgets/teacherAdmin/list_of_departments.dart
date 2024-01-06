@@ -125,11 +125,9 @@ class _HomeScreenState extends State<ListOfDepartments> {
                     children: filteredList
                         .map((faculty) => GestureDetector(
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushNamed(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AddTeacherandCourseInAdminTabNav(),
-                                  ),
+                                  "/addNavInAdmin"
                                 );
                               },
                               child: itemDashboard(

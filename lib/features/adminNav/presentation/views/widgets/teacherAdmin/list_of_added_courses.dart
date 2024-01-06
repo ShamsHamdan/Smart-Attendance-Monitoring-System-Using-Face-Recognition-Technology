@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_course_form.dart';
 
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/student-course-main.dart';
 import 'package:flutter/material.dart';
 
 class ListofAddedCourses extends StatefulWidget {
@@ -13,6 +16,37 @@ class ListofAddedCourses extends StatefulWidget {
 }
 
 class _ListofAddedCoursesState extends State<ListofAddedCourses> {
+
+ List<QueryDocumentSnapshot> data = [];
+
+  Future getData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Courses')
+        .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    data.addAll(querySnapshot.docs);
+  
+    setState(() {
+     
+    });
+  }
+
+
+
+ @override
+  void initState() {
+    getData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,29 +63,39 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
           children: [
           
             Expanded(
-              child: ListView(
-                children: [
-                  buildCourseContainer('ARTIFICIAL INTELLIGENCE', ' 1955211512', Colors.white, kPrimaryColor, 'assets/images/graduation.jpeg',kPrimaryColor, context),
-            buildCourseContainer('MACHINE LEARNING', ' 1225276512', Colors.white, kPrimaryColor, 'assets/images/graduation.jpeg', kPrimaryColor, context),
-            buildCourseContainer('EMBEDDED SYSTEMS', ' 1955888222', Colors.white, kPrimaryColor, 'assets/images/graduation.jpeg', kPrimaryColor, context),
-            buildCourseContainer('TECHNICAL WRITING', ' 3395245612', Colors.white, kPrimaryColor, 'assets/images/graduation.jpeg', kPrimaryColor, context),
-                ],
-              ),
-            ),
+                child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, i) {
+                   return   InkWell(
+                    onTap: () {
+                       Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ListofAddedStudentForCourseMain(categoryId:data[i].id)),
+          );
+                    },
+                     child: buildCourseContainer(
+                            data[i]["name"],
+                            data[i]["idCourse"],
+                            Colors.white,
+                            kPrimaryColor,
+                            data[i]["url"],
+                            kPrimaryColor,context),
+                   );
+                    })),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kPrimaryColor,
-        onPressed: () {
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: kPrimaryColor,
+      //   onPressed: () {
            
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MyApp()),
-          );
-        },
-        child: Icon(Icons.add,color: Colors.white,),
-      ),
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => MyApp()),
+      //     );
+      //   },
+      //   child: Icon(Icons.add,color: Colors.white,),
+      // ),
     );
   }
  Widget buildCourseContainer(String name, String subtitle, Color containerColor, Color textColor, String imagePath, Color iconColor, BuildContext context) {
@@ -134,7 +178,9 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
         leading: CircleAvatar(
           radius: 20,
           backgroundColor: Colors.white,
-          backgroundImage: AssetImage(imagePath),
+          backgroundImage:imagePath != null && imagePath!.isNotEmpty
+              ? NetworkImage(Uri.parse(imagePath!).toString())
+              : AssetImage(AssetsData.imageAddCourseDef) as ImageProvider<Object>,
         ),
         // onTap: () {
         //   print('onTap Pressed');

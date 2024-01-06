@@ -1,9 +1,44 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 
-class HomeTeacherHeader extends StatelessWidget {
-  const HomeTeacherHeader({super.key});
+class HomeTeacherHeader extends StatefulWidget {
+  const HomeTeacherHeader({Key? key}) : super(key: key);
+
+  @override
+  State<HomeTeacherHeader> createState() => _HomeTeacherHeaderState();
+}
+
+class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
+  String? url;
+  DocumentSnapshot? data1;
+  String? name;
+  String? id;
+
+  Future getData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    DocumentSnapshot data1 = querySnapshot.docs[0];
+    url = data1['url'];
+    name = data1['name'];
+    id = data1['id'];
+
+    setState(() {
+      print("****************************************$url");
+    });
+  }
+
+  @override
+  void initState() {
+    print("hi");
+    getData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +56,17 @@ class HomeTeacherHeader extends StatelessWidget {
               ], // Change these colors
             ),
           ),
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.only(top: 80.0, left: 20, right: 20),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage(AssetsData.profMoh),
+                  backgroundImage: url != null && url!.isNotEmpty
+                      ? NetworkImage(Uri.parse(url!).toString())
+                      : AssetImage(AssetsData.profilepic)
+                          as ImageProvider<Object>,
                   // Replace with actual image path
                 ),
                 SizedBox(width: 20),
@@ -38,7 +76,7 @@ class HomeTeacherHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Mohammad Awad',
+                        '${name}',
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
@@ -50,11 +88,17 @@ class HomeTeacherHeader extends StatelessWidget {
                       ),
                       Text(
                         'EIT',
-                        style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '200710000',
-                        style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.bold),
+                        '${id}',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

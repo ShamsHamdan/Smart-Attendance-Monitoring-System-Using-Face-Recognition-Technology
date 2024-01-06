@@ -87,6 +87,3 @@ class _CourseInTeacherTabNavState extends State<AddTeacherandCourseInAdminTabNav
     );
   }
 }
-
-
-

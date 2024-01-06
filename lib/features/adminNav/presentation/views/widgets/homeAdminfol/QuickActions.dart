@@ -1,4 +1,5 @@
 import 'package:first_version/constants.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/add_course_form_page.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_professor_form.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class  QuickActions extends StatelessWidget {
             ),  ),
              GestureDetector(
             onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>ListOfCoursesInSemester()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>AddCourseFormPage()));
                 //Navigator.pushNamed(context, "/maintabcoursesinteacher");
             },
             child:
