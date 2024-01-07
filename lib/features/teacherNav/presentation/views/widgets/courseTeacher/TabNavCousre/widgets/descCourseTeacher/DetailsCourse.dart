@@ -1,8 +1,56 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:flutter/material.dart';
 
-class CourseDetails extends StatelessWidget {
-  const CourseDetails({super.key});
+class CourseDetails extends StatefulWidget {
+  final String courseId;
+  const CourseDetails({super.key, required this.courseId});
+
+  @override
+  State<CourseDetails> createState() => _CourseDetailsState();
+}
+
+class _CourseDetailsState extends State<CourseDetails> {
+  List<QueryDocumentSnapshot> data = [];
+  String? time;
+  String? days;
+  String? room;
+  //List<QueryDocumentSnapshot> dataOfCourses = [];
+  Future getData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    data.addAll(querySnapshot.docs);
+    String docId = data[0].id;
+
+    DocumentSnapshot querySnapshott = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(docId)
+        .collection('courses')
+        .doc(widget.courseId)
+        .get();
+
+    DocumentSnapshot dataofcourse = querySnapshott;
+    time = dataofcourse["time"];
+    days=dataofcourse["date"];
+     room=dataofcourse["room"];
+
+    setState(() {
+      // print("${data[0]['name']}");
+      // Adminemail = data['email'];
+      // Adminpass = data['password'];
+    });
+  }
+
+  @override
+  void initState() {
+    getData();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +87,7 @@ class CourseDetails extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "EIT-008",
+                   room ?? '',
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
@@ -58,7 +106,7 @@ class CourseDetails extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "8:30 AM",
+                    time ?? '',
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
@@ -77,7 +125,7 @@ class CourseDetails extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Mon-Tue",
+                    days ?? '',
                     style: TextStyle(fontSize: 20),
                   ),
                 ],

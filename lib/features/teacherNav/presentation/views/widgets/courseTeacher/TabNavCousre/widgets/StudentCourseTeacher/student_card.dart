@@ -8,40 +8,42 @@ class StudentCard extends StatelessWidget {
   final double attendancePercentage;
   final int Attendance;
   final int Absence;
+  final String url;
 
   StudentCard({
     required this.studentName,
     required this.attendancePercentage,
     required this.Attendance,
-    required this.Absence,
+    required this.Absence, required this.url,
   });
 
   @override
   Widget build(BuildContext context) {
-      bool isLowAttendance = attendancePercentage <= 0.5;
+    bool isLowAttendance = attendancePercentage <= 0.5;
     return GestureDetector(
       onTap: () {
         _showAttendanceDialog(context);
       },
       child: Card(
-        color:Color.fromRGBO(255, 255, 255, 1),
+        color: Color.fromRGBO(255, 255, 255, 1),
         elevation: 5,
         margin: const EdgeInsets.only(bottom: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: Padding(
-          
           padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    backgroundImage: AssetImage(AssetsData.profilepic),
+                    backgroundImage:  url != null && url!.isNotEmpty
+            ? NetworkImage(Uri.parse(url!).toString())
+            : AssetImage(AssetsData.profilepic) as ImageProvider<Object>,
+    
                     // Replace with actual image path
                   ),
                   SizedBox(
@@ -56,14 +58,15 @@ class StudentCard extends StatelessWidget {
               CircularPercentIndicator(
                 radius: 24.0,
                 lineWidth: 5.0,
-                percent: attendancePercentage, // Change this to your actual percentage
-                center:  Text(
-                      "${(attendancePercentage * 100).toInt()}%",
-                      style: TextStyle(
-                        color: isLowAttendance ? Colors.red : Colors.green,
-                      ),
-                    ),// Change this to your actual text
-                progressColor:isLowAttendance ? Colors.red : Colors.green,
+                percent:
+                    attendancePercentage, // Change this to your actual percentage
+                center: Text(
+                  "${(attendancePercentage * 100).toInt()}%",
+                  style: TextStyle(
+                    color: isLowAttendance ? Colors.red : Colors.green,
+                  ),
+                ), // Change this to your actual text
+                progressColor: isLowAttendance ? Colors.red : Colors.green,
               ),
             ],
           ),
@@ -72,7 +75,7 @@ class StudentCard extends StatelessWidget {
     );
   }
 
- void _showAttendanceDialog(BuildContext context) {
+  void _showAttendanceDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -89,15 +92,17 @@ class StudentCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Attendance: 11', style: TextStyle(color: Colors.green,fontSize: 20)),
+                  Text('Attendance: 11',
+                      style: TextStyle(color: Colors.green, fontSize: 20)),
                 ],
               ),
               SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Absence: ', style: TextStyle(color: Colors.red,fontSize: 20)),
-                  Text('4', style: TextStyle(color: Colors.red,fontSize: 20)),
+                  Text('Absence: ',
+                      style: TextStyle(color: Colors.red, fontSize: 20)),
+                  Text('4', style: TextStyle(color: Colors.red, fontSize: 20)),
                 ],
               ),
               SizedBox(height: 8),
@@ -109,7 +114,10 @@ class StudentCard extends StatelessWidget {
                   primary: kPrimaryColor,
                   onPrimary: Colors.white,
                 ),
-                child: Text('OK',style: TextStyle(fontSize: 16),),
+                child: Text(
+                  'OK',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
             ],
           ),
@@ -120,6 +128,7 @@ class StudentCard extends StatelessWidget {
       },
     );
   }
+
   Widget _buildAttendanceOption(
       BuildContext context, String option, int number, int initialValue) {
     return GestureDetector(

@@ -6,7 +6,8 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/cou
 import 'package:flutter/material.dart';
 
 class CourseInTeacherTabNav extends StatefulWidget {
-  const CourseInTeacherTabNav({super.key});
+ final String courseId;
+   CourseInTeacherTabNav({super.key, required this.courseId});
 
   @override
   State<CourseInTeacherTabNav> createState() => _CourseInTeacherTabNavState();
@@ -83,8 +84,8 @@ class _CourseInTeacherTabNavState extends State<CourseInTeacherTabNav>  with Sin
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            TeacherCourseDiscripition(),
-            TeacherCourseParticipants(),
+            TeacherCourseDiscripition(courseId: widget.courseId,),
+            TeacherCourseParticipants(courseId: widget.courseId,),
             TeacherCoursHisstory(),
           ],
         ),

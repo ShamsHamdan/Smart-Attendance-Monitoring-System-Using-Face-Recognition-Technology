@@ -9,16 +9,22 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/cou
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/studentStatistics.dart';
 import 'package:flutter/material.dart';
 
-class CourseInfo extends StatelessWidget {
+class CourseInfo extends StatefulWidget {
+  final String courseId;
   const CourseInfo({
-    Key? key,
+    Key? key, required this.courseId,
   }) : super(key: key);
 
+  @override
+  State<CourseInfo> createState() => _CourseInfoState();
+}
+
+class _CourseInfoState extends State<CourseInfo> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.fromLTRB(20,20,20,0),
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
@@ -32,24 +38,29 @@ class CourseInfo extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start, // Align at the start
             crossAxisAlignment: CrossAxisAlignment.start,
-             mainAxisSize: MainAxisSize.min,
-        
+            mainAxisSize: MainAxisSize.min,
+
             children: [
-              NameOfCourse(),
-              SizedBox(height: 20,),
-              CourseDetails(),
-              SizedBox(height: 40,),
+              NameOfCourse(courseId: widget.courseId,),
+              SizedBox(
+                height: 20,
+              ),
+              CourseDetails(courseId: widget.courseId,),
+              SizedBox(
+                height: 40,
+              ),
               TakeAttendanceBtn(),
-              SizedBox(height: 60,),
+              SizedBox(
+                height: 60,
+              ),
               ResAtt(),
-              SizedBox(height: 0,),
+              SizedBox(
+                height: 0,
+              ),
               studentStatistics(),
-               SizedBox(height: 20,)
-        
-        
-        
-        
-              
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

@@ -75,7 +75,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         "/PrivacyPolicy": (context) => PrivacyPolicy(),
         "/backwelcompage": (context) => getStarted(),
         "/maincalendar": (context) => CalendarMainTeacher(),
-        "/CourseInTeacherTabNav": (contex) => CourseInTeacherTabNav(),
+      //  "/CourseInTeacherTabNav": (contex) => CourseInTeacherTabNav(courseId: null,),
         "/maintabcoursesinteacher": (context) => CourseTeacher(),
         "/reslutofattendance": (context) => ReslutOfAttendans(),
         //   '/specialties': (context) => ListOfSpecialtiesTeacher(),
