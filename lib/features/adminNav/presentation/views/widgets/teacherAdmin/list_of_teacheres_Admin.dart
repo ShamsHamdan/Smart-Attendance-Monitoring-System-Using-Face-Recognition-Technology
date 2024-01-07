@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
@@ -67,6 +68,19 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
             MaterialPageRoute(builder: (context) => ListofAddedCoursesForTeacher(categoryId:data[i].id)),
           );
                     },
+                    onLongPress: () {
+                     AwesomeDialog(
+              context: context,
+              dialogType: DialogType.question,
+              animType: AnimType.rightSlide,
+              title: 'Choose Action',
+              titleTextStyle:
+                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                
+                  
+         )
+          .show();
+                    },
                      child: buildStudentContainer(
                             data[i]["name"],
                             data[i]["id"],
@@ -119,20 +133,8 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
               ? NetworkImage(Uri.parse(url!).toString())
               : AssetImage(AssetsData.profilepic) as ImageProvider<Object>,
 
-          // AssetImage(AssetsData.profilepic),
-          // Replace with actual image path
         ),
-        // Icon(
-        //   icon,
-        //   size: 40,
-        //   color: iconColor,
-
-        // onTap: () {
-        //   print('onTap Pressed');
-        // },
-        // onLongPress: () {
-        //   print('onLong Pressed!');
-        // },
+        
         iconColor: iconColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

@@ -4,7 +4,7 @@ import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add-student-form.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_course_form.dart';
 
-import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
+//import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
 import 'package:flutter/material.dart';
 
 class ListofAddedStudentForCourse extends StatefulWidget {

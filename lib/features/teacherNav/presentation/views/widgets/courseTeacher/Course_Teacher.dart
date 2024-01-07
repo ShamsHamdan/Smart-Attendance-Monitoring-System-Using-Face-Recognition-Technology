@@ -3,25 +3,22 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/cou
 import 'package:flutter/material.dart';
 
 class CourseTeacher extends StatelessWidget {
-  const CourseTeacher({super.key});
-
+  // const CourseTeacher({super.key});
+const CourseTeacher({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-     
       body: SingleChildScrollView(
         child: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-             
-              ListCoursestest(),
-             
-                
-            ],),
-          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            
+            ListCoursestest(),
+            
+              
+          ],),
         ),
       )
     );
