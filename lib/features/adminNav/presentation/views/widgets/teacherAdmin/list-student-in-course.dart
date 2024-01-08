@@ -1,8 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add-student-form.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_course_form.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/editStudent.dart';
 
 //import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
 import 'package:flutter/material.dart';
@@ -70,11 +72,29 @@ class _ListofAddedStudentForCourseState
                     itemBuilder: (context, i) {
                       return InkWell(
                         onTap: () {
-                          //              Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => ListofAddedCoursesForTeacher(categoryId:data[i].id)),
-                          // );
+                           
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.question,
+                            animType: AnimType.rightSlide,
+                            btnCancelOnPress: () {
+                            //  EditCourseFormPage
+                            },
+                            btnOkOnPress: () {
+                                Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  EditStudentForm(courseDocId:widget.categoryId,teacherDocId: widget.teacherDocId,studentDocId: data[i].id,)),
+          );
+                            },
+                            btnOkText: "Update",
+                            buttonsTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
+                            btnCancelText: "Delete",
+                            title: 'Choose Action',
+                            titleTextStyle: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          ).show();
                         },
+                        
                         child: buildCourseContainer(
                             data[i]["name"],
                             data[i]["idStudent"],

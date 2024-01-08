@@ -1,7 +1,9 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_course_form.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/editCourse.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list-student-in-course.dart';
 
 //import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
@@ -19,16 +21,19 @@ class ListofAddedCoursesForTeacher extends StatefulWidget {
 class _ListofAddedCoursesForTeacherState
     extends State<ListofAddedCoursesForTeacher> {
   List<QueryDocumentSnapshot> data = [];
-  
-   Future getData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('Teachers').doc(widget.categoryId).collection('courses').get();
+
+  Future getData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.categoryId)
+        .collection('courses')
+        .get();
     data.addAll(querySnapshot.docs);
-    
-    setState(() {
-     
-    });
+
+    setState(() {});
   }
-   @override
+
+  @override
   void initState() {
     getData();
     // TODO: implement initState
@@ -67,21 +72,48 @@ class _ListofAddedCoursesForTeacherState
                 child: ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, i) {
-                   return   InkWell(
-                    onTap: () {
-                       Navigator.push(
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ListofAddedStudentForCourse(
+                                        categoryId: data[i].id,
+                                        teacherDocId: widget.categoryId)),
+                          );
+                        },
+                        onLongPress: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.question,
+                            animType: AnimType.rightSlide,
+                            btnCancelOnPress: () {
+                            //  EditCourseFormPage
+                            },
+                            btnOkOnPress: () {
+                                Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ListofAddedStudentForCourse (categoryId:data[i].id, teacherDocId:widget.categoryId)),
+            MaterialPageRoute(builder: (context) =>  EditCourseFormPage(courseId:data[i].id,docId: widget.categoryId,)),
           );
-                    },
-                     child: buildCourseContainer(
+                            },
+                            btnOkText: "Update",
+                            buttonsTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
+                            btnCancelText: "Delete",
+                            title: 'Choose Action',
+                            titleTextStyle: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          ).show();
+                        },
+                        child: buildCourseContainer(
                             data[i]["name"],
                             data[i]["idCourse"],
                             Colors.white,
                             kPrimaryColor,
                             data[i]["url"],
-                            kPrimaryColor,context),
-                   );
+                            kPrimaryColor,
+                            context),
+                      );
                     })),
           ],
         ),
@@ -128,8 +160,8 @@ class _ListofAddedCoursesForTeacherState
         subtitle:
             Text(subtitle, style: TextStyle(color: textColor, fontSize: 17)),
         trailing: GestureDetector(
-         // onTap: () {
-            // Show dialog here
+          // onTap: () {
+          // Show dialog here
           //   showDialog(
           //     context: context,
           //     builder: (BuildContext context) {
@@ -201,15 +233,16 @@ class _ListofAddedCoursesForTeacherState
           //     },
           //   );
           // },
-          
+
           child: Icon(Icons.arrow_forward_ios, color: iconColor),
         ),
         leading: CircleAvatar(
           radius: 20,
           backgroundColor: Colors.white,
-          backgroundImage:imagePath != null && imagePath!.isNotEmpty
+          backgroundImage: imagePath != null && imagePath!.isNotEmpty
               ? NetworkImage(Uri.parse(imagePath!).toString())
-              : AssetImage(AssetsData.imageAddCourseDef) as ImageProvider<Object>,
+              : AssetImage(AssetsData.imageAddCourseDef)
+                  as ImageProvider<Object>,
         ),
         // onTap: () {
         //   print('onTap Pressed');
