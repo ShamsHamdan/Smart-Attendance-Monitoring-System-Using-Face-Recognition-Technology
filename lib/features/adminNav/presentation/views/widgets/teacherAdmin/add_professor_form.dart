@@ -40,7 +40,7 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
   String? idTeacher;
   String? WhichAdmin;
   int NumOfTeacher = 0;
-
+  User? userTeacher;
 
   final List<String> faculties = [
     'Faculty of Engineering and Information Technology',
@@ -88,6 +88,7 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
       "faculty": _selectedFaculty,
       "department": _selectedSpecialty,
       "Admin": WhichAdmin ?? '',
+      
     }).then((value) {
       AwesomeDialog(
               context: context,
@@ -359,6 +360,7 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
                               password: _passwordController.text,
                             );
                             idTeacher = FirebaseAuth.instance.currentUser!.uid;
+                           // userTeacher = FirebaseAuth.instance.currentUser;
                             await FirebaseAuth.instance.signOut();
                             final credentiall = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(

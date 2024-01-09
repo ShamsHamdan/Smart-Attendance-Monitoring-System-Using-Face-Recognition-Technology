@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/editTeacher.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/listCoursesOfEachTeacher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,20 +69,29 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
             MaterialPageRoute(builder: (context) => ListofAddedCoursesForTeacher(categoryId:data[i].id)),
           );
                     },
-                    onLongPress: () {
-                     AwesomeDialog(
-              context: context,
-              dialogType: DialogType.question,
-              animType: AnimType.rightSlide,
-              title: 'Choose Action',
-              titleTextStyle:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                
-                  
-         )
-          .show();
-                    },
-                     child: buildStudentContainer(
+                     onLongPress: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.question,
+                            animType: AnimType.rightSlide,
+                            btnCancelOnPress: () {
+                            
+                            },
+                            btnOkOnPress: () {
+                                Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  EditProfessorForm(teacherDocId: data[i].id,)),
+          );
+                            },
+                            btnOkText: "Update",
+                            buttonsTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
+                            btnCancelText: "Delete",
+                            title: 'Choose Action',
+                            titleTextStyle: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          ).show();
+                        },
+                     child: buildTeacherContainer(
                             data[i]["name"],
                             data[i]["id"],
                             Colors.white,
@@ -109,7 +119,7 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
     );
   }
 
-  Widget buildStudentContainer(String name, String subtitle,
+  Widget buildTeacherContainer(String name, String subtitle,
       Color containerColor, Color textColor, String url, Color iconColor) {
     return Container(
       margin: EdgeInsets.only(bottom: 15),

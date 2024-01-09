@@ -16,7 +16,10 @@ class EditStudentForm extends StatefulWidget {
   final String teacherDocId;
   final String studentDocId;
   EditStudentForm(
-      {super.key, required this.courseDocId, required this.teacherDocId, required this.studentDocId});
+      {super.key,
+      required this.courseDocId,
+      required this.teacherDocId,
+      required this.studentDocId});
 
   @override
   State<EditStudentForm> createState() => _EditStudentFormState();
@@ -79,7 +82,8 @@ class _EditStudentFormState extends State<EditStudentForm> {
   Future getDataFromMain() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Students')
-        .where("idCourse", isEqualTo: oldcourseId ).where( "name" ,isEqualTo: oldname )
+        .where("idCourse", isEqualTo: oldcourseId)
+        .where("name", isEqualTo: oldname)
         .get();
     docmainStudent.addAll(querySnapshot.docs);
     numOfDocMainStudent = docmainStudent[0].id as String?;
@@ -112,13 +116,16 @@ class _EditStudentFormState extends State<EditStudentForm> {
 
   Future<void> UpdateStudentToCourseInTeacher(BuildContext context) async {
     // Call the user's CollectionReference to add a new user
-    await FirebaseFirestore.instance.collection('Teachers').doc(widget.teacherDocId)
+    await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.teacherDocId)
         .collection('courses')
         .doc(widget.courseDocId)
-        .collection('students').doc(widget.studentDocId)
+        .collection('students')
+        .doc(widget.studentDocId)
         .update({
       "name": _nameController.text,
-      "idStudent":_idController.text,
+      "idStudent": _idController.text,
       "idCourse": _courseController.text,
       "url": urlStudent ?? oldurl,
       "faculty": _selectedFaculty,
@@ -136,16 +143,31 @@ class _EditStudentFormState extends State<EditStudentForm> {
           .show();
 
       print("=================================== student updated to teacher");
-    }).catchError((error) => print(
-            "=============================Failed to update student teachher: $error"));
+    }).catchError((error) {
+      print(
+          "=============================Failed to update student teachher: $error");
+           AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.rightSlide,
+              title: 'Error',
+              titleTextStyle:
+                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+              desc: 'Failed to update the student.',
+              descTextStyle: TextStyle(fontSize: 17))
+          .show();
+    });
   }
 
   Future<void> UpdateStudentToMain(BuildContext context) async {
     // Call the user's CollectionReference to add a new user
-    await FirebaseFirestore.instance.collection('Students').doc(numOfDocMainStudent).update({
+    await FirebaseFirestore.instance
+        .collection('Students')
+        .doc(numOfDocMainStudent)
+        .update({
       "name": _nameController.text,
       "idCourse": _courseController.text,
-      "idStudent":_idController.text,
+      "idStudent": _idController.text,
       "url": urlStudent ?? oldurl,
       "faculty": _selectedFaculty,
       "department": _selectedSpecialty,
@@ -153,8 +175,9 @@ class _EditStudentFormState extends State<EditStudentForm> {
     }).then((value) {
       print("=================================== student updated to main");
     }).catchError((error) => print(
-        "=============================Failed to update student to main: $error"));
+            "=============================Failed to update student to main: $error"));
   }
+
   TextEditingController dateTimeController = TextEditingController();
 
   @override
@@ -177,7 +200,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: const Text(
-          'Add Student',
+          'Edit Student',
           style: TextStyle(
               fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
         ),
@@ -265,7 +288,8 @@ class _EditStudentFormState extends State<EditStudentForm> {
                       },
                       controller: _nameController,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 20),
                           labelText: 'Full Name',
                           labelStyle: const TextStyle(
                               fontSize: 18,
@@ -277,7 +301,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
                             borderSide: BorderSide(color: Colors.red),
                           ),
                           border: OutlineInputBorder(
-                              borderSide:BorderSide(width: 1),
+                              borderSide: BorderSide(width: .5),
                               borderRadius: BorderRadius.circular(10.0))),
                     ),
                     const SizedBox(height: 30),
@@ -290,7 +314,8 @@ class _EditStudentFormState extends State<EditStudentForm> {
                       controller: _idController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 20),
                           labelText: 'ID',
                           labelStyle: const TextStyle(
                               fontSize: 18,
@@ -302,7 +327,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
                             borderSide: BorderSide(color: Colors.red),
                           ),
                           border: OutlineInputBorder(
-                           borderSide:BorderSide(width: 1),
+                              borderSide: BorderSide(width: .5),
                               borderRadius: BorderRadius.circular(10.0))),
                     ),
                     const SizedBox(height: 30),
@@ -314,7 +339,8 @@ class _EditStudentFormState extends State<EditStudentForm> {
                       },
                       controller: _courseController,
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 20),
                           labelText: 'Course Id',
                           labelStyle: const TextStyle(
                               fontSize: 18,
@@ -326,7 +352,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
                             borderSide: BorderSide(color: Colors.red),
                           ),
                           border: OutlineInputBorder(
-                              borderSide:BorderSide(width: 1),
+                              borderSide: BorderSide(width: .5),
                               borderRadius: BorderRadius.circular(10.0))),
                     ),
                     const SizedBox(height: 30),
@@ -346,9 +372,10 @@ class _EditStudentFormState extends State<EditStudentForm> {
                         _selectedFaculty = value!;
                       },
                       decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 5),
                           labelText: 'Faculty',
-                            labelStyle: const TextStyle(
+                          labelStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.black),
@@ -359,7 +386,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
                             borderSide: BorderSide(color: Colors.red),
                           ),
                           border: OutlineInputBorder(
-                            borderSide:BorderSide(width: 1),
+                              borderSide: BorderSide(width: .5),
                               borderRadius: BorderRadius.circular(10.0))),
                     ),
                     const SizedBox(height: 30),
@@ -379,9 +406,10 @@ class _EditStudentFormState extends State<EditStudentForm> {
                         _selectedSpecialty = value!;
                       },
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 5),
                           labelText: 'Specialty',
-                            labelStyle: const TextStyle(
+                          labelStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.black),
@@ -391,37 +419,40 @@ class _EditStudentFormState extends State<EditStudentForm> {
                             borderSide: BorderSide(color: Colors.red),
                           ),
                           border: OutlineInputBorder(
-                             borderSide:BorderSide(width: 1),
+                              borderSide: BorderSide(width: 1),
                               borderRadius: BorderRadius.circular(10.0))),
                     ),
-                    const SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (formState.currentState!.validate()) {
-                          try {
-                            UpdateStudentToCourseInTeacher(context);
-                            UpdateStudentToMain(context);
-                          } catch (e) {
-                          } catch (e) {
-                            print(e);
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (formState.currentState!.validate()) {
+                            try {
+                              UpdateStudentToCourseInTeacher(context);
+                              UpdateStudentToMain(context);
+                            } catch (e) {
+                            } catch (e) {
+                              print(e);
+                            }
+                          } else {
+                            print("========err");
                           }
-                        } else {
-                          print("========err");
-                        }
-
-                        // Navigator.pushNamed(context, "/homeadmin");
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(kPrimaryColor),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 80, vertical: 10)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
-                      ),
-                      child: const Text(
-                        "Update",
-                        style: TextStyle(fontSize: 24, color: Colors.white),
+                      
+                          // Navigator.pushNamed(context, "/homeadmin");
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(kPrimaryColor),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(horizontal: 80, vertical: 10)),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(27))),
+                        ),
+                        child: const Text(
+                          "Update",
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
                       ),
                     ),
                   ],

@@ -188,14 +188,26 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
       //     .show();
 
       print("=================================== course Added to main");
-    }).catchError((error) => print(
-            "=============================Failed to add course to main: $error"));
+    }).catchError((error) {
+      print(
+          "=============================Failed to add course to main: $error");
+
+           AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.rightSlide,
+              title: 'Error',
+              titleTextStyle:
+                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+              desc: 'Failed to update the course.',
+              descTextStyle: TextStyle(fontSize: 17))
+          .show();
+    });
   }
   //TextEditingController dateTimeController = TextEditingController();
 
   @override
   void initState() {
-   
     getData().then((_) {
       _name.text = oldname ?? '';
       _courseId.text = oldcourseId ?? '';
@@ -207,7 +219,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
       _sec.text = oldsec ?? '';
       _selectedFaculty = oldfaculty ?? '';
       _selectedSpecialty = olddepartment ?? '';
-       getDataFromMain();
+      getDataFromMain();
     });
 
     super.initState();
@@ -219,7 +231,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
           title: const Text(
-            'Add Course',
+            'Edit Course',
             style: TextStyle(
                 fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
           ),
@@ -304,7 +316,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     controller: _name,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Course Name',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -316,7 +329,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: .5,color: Colors.amber),
+                            borderSide:
+                                BorderSide(width: .5, ),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -328,7 +342,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     controller: _courseId,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Course ID',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -353,7 +368,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     controller: _teacherName,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Teacher Name',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -365,7 +381,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -378,7 +394,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     controller: _teacherId,
                     decoration: InputDecoration(
-                         contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Teacher ID',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -390,7 +407,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -402,7 +419,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     controller: _time,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Time',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -414,7 +432,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -426,7 +444,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     controller: _date,
                     decoration: InputDecoration(
-                         contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Date',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -438,7 +457,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -450,7 +469,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     controller: _room,
                     decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Room',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -462,7 +482,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -474,7 +494,8 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     controller: _sec,
                     decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Section Number',
                         labelStyle: const TextStyle(
                             fontSize: 18,
@@ -486,7 +507,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -506,16 +527,18 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                       _selectedFaculty = value!;
                     },
                     decoration: InputDecoration(
-                         contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 5),
                         labelText: 'Faculty',
-                         labelStyle: TextStyle(fontSize: 18,color: Colors.black),
+                        labelStyle:
+                            TextStyle(fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold),
                         fillColor: Colors.grey[250],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -535,16 +558,18 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                       _selectedSpecialty = value!;
                     },
                     decoration: InputDecoration(
-                       contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 5),
                         labelText: 'Specialty',
-                        labelStyle: TextStyle(fontSize: 18,color: Colors.black),
+                        labelStyle:
+                            TextStyle(fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold),
                         fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1),
+                            borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 26),
