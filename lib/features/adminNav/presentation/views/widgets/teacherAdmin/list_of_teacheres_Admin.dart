@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'add_professor_form.dart';
 
 class ListOfTeacherPageInAdmin extends StatefulWidget {
- late final String categoryId;
+
   @override
   State<ListOfTeacherPageInAdmin> createState() =>
       _ListOfTeacherPageInAdminState();
@@ -75,7 +75,99 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
                             dialogType: DialogType.question,
                             animType: AnimType.rightSlide,
                             btnCancelOnPress: () {
-                            
+                                
+
+
+
+                                  AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () async {
+                                  try {
+                                    await FirebaseFirestore.instance
+                                        .collection('Teachers')
+                                        .doc(data[i].id) 
+                                        .delete();
+
+                                      
+                                
+
+
+
+                                    AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.success,
+                                            animType: AnimType.rightSlide,
+                                            title: 'Success',
+                                            titleTextStyle: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22),
+                                            desc:
+                                                'Teacher deleted successfully.',
+                                            descTextStyle:
+                                                TextStyle(fontSize: 17))
+                                        .show();
+                                  } catch (error) {
+                                    AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.error,
+                                            animType: AnimType.rightSlide,
+                                            title: 'Failed',
+                                            titleTextStyle: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22),
+                                            desc: 'Failed to delete teacher.',
+                                            descTextStyle:
+                                                TextStyle(fontSize: 17))
+                                        .show();
+                                  }
+                                },
+                                btnOkText: "Delete",
+                                buttonsTextStyle: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                                btnCancelText: "Cancel",
+                                title: 'Are you sure of deleting process?',
+                                titleTextStyle: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 22),
+                              ).show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             },
                             btnOkOnPress: () {
                                 Navigator.push(

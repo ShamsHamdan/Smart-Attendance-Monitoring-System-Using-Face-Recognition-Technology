@@ -218,7 +218,7 @@ void initState() {
           backgroundColor: Colors.white,
           backgroundImage: imagePath != null && imagePath!.isNotEmpty
               ? NetworkImage(Uri.parse(imagePath!).toString())
-              : AssetImage(AssetsData.imageAddCourseDef)
+              : AssetImage(AssetsData.profilepic)
                   as ImageProvider<Object>,
         ),
         // onTap: () {

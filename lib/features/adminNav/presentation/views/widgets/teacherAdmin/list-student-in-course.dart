@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 class ListofAddedStudentForCourse extends StatefulWidget {
   final String categoryId;
   final String teacherDocId;
-  const ListofAddedStudentForCourse({super.key, required this.categoryId, required this.teacherDocId});
+  const ListofAddedStudentForCourse(
+      {super.key, required this.categoryId, required this.teacherDocId});
 
   @override
   State<ListofAddedStudentForCourse> createState() =>
@@ -22,18 +23,64 @@ class ListofAddedStudentForCourse extends StatefulWidget {
 class _ListofAddedStudentForCourseState
     extends State<ListofAddedStudentForCourse> {
   List<QueryDocumentSnapshot> data = [];
+  String? courseId;
 
-   Future getData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('Teachers').doc(widget.teacherDocId).collection('courses').doc(widget.categoryId).collection('students').get();
+  Future getData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.teacherDocId)
+        .collection('courses')
+        .doc(widget.categoryId)
+        .collection('students')
+        .get();
     data.addAll(querySnapshot.docs);
 
-    setState(() {
-
-    });
+    setState(() {});
   }
-   @override
+
+  Future getDataOfCourseId() async {
+    DocumentSnapshot querySnapshott = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.teacherDocId)
+        .collection('courses')
+        .doc(widget.categoryId)
+        .get();
+
+    DocumentSnapshot dataofcourse = querySnapshott;
+    courseId = dataofcourse["idCourse"];
+    setState(() {});
+  }
+
+ 
+
+  // Future deletefromTeacher() async{
+  //       await FirebaseFirestore.instance
+  //                                     .collection('Teachers')
+  //                                     .doc(widget.teacherDocId)
+  //                                     .collection('courses')
+  //                                     .doc(widget.categoryId)
+  //                                     .collection('students')
+  //                                     .doc(data[i].id)
+  //                                     .delete();
+  //                                 AwesomeDialog(
+  //                                         context: context,
+  //                                         dialogType: DialogType.success,
+  //                                         animType: AnimType.rightSlide,
+  //                                         title: 'Success',
+  //                                         titleTextStyle: TextStyle(
+  //                                             fontWeight: FontWeight.bold,
+  //                                             fontSize: 22),
+  //                                         desc:
+  //                                             'Student deleted successfully.',
+  //                                         descTextStyle:
+  //                                             TextStyle(fontSize: 17))
+  //                                     .show();
+  // }
+
+  @override
   void initState() {
     getData();
+    getDataOfCourseId();
     // TODO: implement initState
     super.initState();
   }
@@ -72,29 +119,101 @@ class _ListofAddedStudentForCourseState
                     itemBuilder: (context, i) {
                       return InkWell(
                         onTap: () {
-                           
                           AwesomeDialog(
                             context: context,
                             dialogType: DialogType.question,
                             animType: AnimType.rightSlide,
                             btnCancelOnPress: () {
-                            //  EditCourseFormPage
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () async {
+                                  try {
+                                    await FirebaseFirestore.instance
+                                        .collection('Teachers')
+                                        .doc(widget.teacherDocId)
+                                        .collection('courses')
+                                        .doc(widget.categoryId)
+                                        .collection('students')
+                                        .doc(data[i].id)
+                                        .delete();
+
+                                         CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('Students');
+
+    // Query the documents based on specific criteria using the 'where' clause
+    QuerySnapshot querySnapshot =
+        await collectionRef.where('idCourse', isEqualTo: courseId).where("idStudent",isEqualTo: data[i]['idStudent']).get();
+
+for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
+    await docSnapshot.reference.delete();
+  }
+
+
+
+                                    AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.success,
+                                            animType: AnimType.rightSlide,
+                                            title: 'Success',
+                                            titleTextStyle: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22),
+                                            desc:
+                                                'Student deleted successfully.',
+                                            descTextStyle:
+                                                TextStyle(fontSize: 17))
+                                        .show();
+                                  } catch (error) {
+                                    AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.error,
+                                            animType: AnimType.rightSlide,
+                                            title: 'Failed',
+                                            titleTextStyle: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22),
+                                            desc: 'Failed to delete student.',
+                                            descTextStyle:
+                                                TextStyle(fontSize: 17))
+                                        .show();
+                                  }
+                                },
+                                btnOkText: "Delete",
+                                buttonsTextStyle: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                                btnCancelText: "Cancel",
+                                title: 'Are you sure of deleting process?',
+                                titleTextStyle: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 22),
+                              ).show();
                             },
                             btnOkOnPress: () {
-                                Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  EditStudentForm(courseDocId:widget.categoryId,teacherDocId: widget.teacherDocId,studentDocId: data[i].id,)),
-          );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditStudentForm(
+                                          courseDocId: widget.categoryId,
+                                          teacherDocId: widget.teacherDocId,
+                                          studentDocId: data[i].id,
+                                        )),
+                              );
                             },
                             btnOkText: "Update",
-                            buttonsTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
+                            buttonsTextStyle: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                             btnCancelText: "Delete",
                             title: 'Choose Action',
                             titleTextStyle: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ).show();
                         },
-                        
                         child: buildCourseContainer(
                             data[i]["name"],
                             data[i]["idStudent"],
@@ -115,7 +234,8 @@ class _ListofAddedStudentForCourseState
             context,
             MaterialPageRoute(
                 builder: (context) => AddStudentForm(
-                      courseDocId: widget.categoryId,teacherDocId:widget.teacherDocId
+                      courseDocId: widget.categoryId,
+                      teacherDocId: widget.teacherDocId,
                     )),
           );
         },
@@ -147,7 +267,7 @@ class _ListofAddedStudentForCourseState
       child: ListTile(
         title: Text(name,
             style: TextStyle(
-                color: textColor, fontSize: 18, fontWeight: FontWeight.bold)),
+                color: textColor, fontSize: 19, fontWeight: FontWeight.bold)),
         subtitle:
             Text(subtitle, style: TextStyle(color: textColor, fontSize: 17)),
         trailing: GestureDetector(
@@ -232,8 +352,7 @@ class _ListofAddedStudentForCourseState
           backgroundColor: Colors.white,
           backgroundImage: imagePath != null && imagePath!.isNotEmpty
               ? NetworkImage(Uri.parse(imagePath!).toString())
-              : AssetImage(AssetsData.imageAddCourseDef)
-                  as ImageProvider<Object>,
+              : AssetImage(AssetsData.profilepic) as ImageProvider<Object>,
         ),
         // onTap: () {
         //   print('onTap Pressed');

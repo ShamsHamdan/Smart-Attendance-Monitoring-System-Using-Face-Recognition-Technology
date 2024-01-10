@@ -14,7 +14,8 @@ import 'package:path/path.dart';
 class AddStudentForm extends StatefulWidget {
   final String courseDocId;
   final String teacherDocId;
-  AddStudentForm({super.key, required this.courseDocId, required this.teacherDocId});
+  AddStudentForm(
+      {super.key, required this.courseDocId, required this.teacherDocId});
 
   @override
   State<AddStudentForm> createState() => _AddStudentFormState();
@@ -40,6 +41,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
   String? idTeacher;
   String? WhichAdmin;
   int NumOfTeacher = 0;
+  String? courseId;
 
   final List<String> faculties = [
     'Faculty of Engineering and Information Technology',
@@ -63,15 +65,30 @@ class _AddStudentFormState extends State<AddStudentForm> {
     'Geographic Information Systems (GIS) Department',
   ];
 
+  Future getData() async {
+    DocumentSnapshot querySnapshott = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.teacherDocId)
+        .collection('courses')
+        .doc(widget.courseDocId)
+        .get();
+
+    DocumentSnapshot dataofcourse = querySnapshott;
+    courseId = dataofcourse["idCourse"];
+    setState(() {});
+  }
+
   Future<void> addStudentToCourseInTeacher(BuildContext context) async {
     // Call the user's CollectionReference to add a new user
-    await FirebaseFirestore.instance.collection('Teachers').doc(widget.teacherDocId)
+    await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.teacherDocId)
         .collection('courses')
         .doc(widget.courseDocId)
         .collection('students')
         .add({
       "name": _nameController.text,
-      "idStudent":_idController.text,
+      "idStudent": _idController.text,
       "idCourse": _courseController.text,
       "url": urlStudent ?? '',
       "faculty": _selectedFaculty,
@@ -98,7 +115,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
     await FirebaseFirestore.instance.collection('Students').add({
       "name": _nameController.text,
       "idCourse": _courseController.text,
-      "idStudent":_idController.text,
+      "idStudent": _idController.text,
       "url": urlStudent ?? '',
       "faculty": _selectedFaculty,
       "department": _selectedSpecialty,
@@ -112,6 +129,8 @@ class _AddStudentFormState extends State<AddStudentForm> {
 
   @override
   void initState() {
+    getData().then((_) => _courseController.text = courseId as String);
+
     // TODO: implement initState
     super.initState();
   }
@@ -232,7 +251,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(left: 20),
-                          hintText: 'ID',
+                          hintText: 'Student ID',
                           hintStyle: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -255,10 +274,10 @@ class _AddStudentFormState extends State<AddStudentForm> {
                       },
                       controller: _courseController,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(left: 20),
-                          hintText: 'Course Id',
-                          hintStyle: const TextStyle(
-                              fontSize: 16,
+                          contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                          labelText: 'Course Id',
+                          labelStyle: const TextStyle(
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.black),
                           fillColor: Colors.grey[250],
@@ -341,7 +360,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
                         } else {
                           print("========err");
                         }
-
+                    
                         // Navigator.pushNamed(context, "/homeadmin");
                       },
                       style: ButtonStyle(

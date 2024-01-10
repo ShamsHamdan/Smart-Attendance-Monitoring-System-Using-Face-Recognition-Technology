@@ -15,7 +15,7 @@ import 'package:path/path.dart';
 
 class AddCourseFormPage extends StatefulWidget {
   final String docId;
-  const AddCourseFormPage({super.key, required this.docId}) ;
+  const AddCourseFormPage({super.key, required this.docId});
 
   @override
   _AddCourseFormPageState createState() => _AddCourseFormPageState();
@@ -44,6 +44,9 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
   String _selectedFaculty = 'Faculty of Engineering and Information Technology';
   String _selectedSpecialty = 'Computer systems engineering Department';
 
+  String? teacherId;
+  String? nameTeacher;
+
   List<String> faculties = [
     'Faculty of Engineering and Information Technology',
     'Faculty of Arts',
@@ -65,6 +68,29 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
     'Multimedia Technology Department',
     'Geographic Information Systems (GIS) Department',
   ];
+
+  Future getData() async {
+    DocumentSnapshot querySnapshott = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.docId)
+        .get();
+
+    DocumentSnapshot dataofTeacher = querySnapshott;
+    teacherId = dataofTeacher["id"];
+    nameTeacher = dataofTeacher['name'];
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getData().then((_) {
+      _teacherName.text = nameTeacher as String;
+      _teacherId.text = teacherId as String;
+    });
+
+    // TODO: implement initState
+    super.initState();
+  }
 
   Future<void> addCourseToTeacher(BuildContext context) async {
     // Call the user's CollectionReference to add a new user
@@ -223,7 +249,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _name,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(left: 20),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
                         hintText: 'Course Name',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -238,7 +264,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   TextFormField(
                     validator: (val) {
                       if (val == "") {
@@ -247,7 +273,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _courseId,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(left: 20),
+                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
                         hintText: 'Course ID',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -262,7 +288,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   TextFormField(
                     validator: (val) {
                       if (val == "") {
@@ -272,10 +298,10 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     controller: _teacherName,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(left: 20),
-                        hintText: 'Teacher Name',
-                        hintStyle: const TextStyle(
-                            fontSize: 16,
+                        contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        labelText: 'Teacher Name',
+                        labelStyle: const TextStyle(
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                         fillColor: Colors.grey[250],
@@ -287,9 +313,9 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   TextFormField(
-                   // obscureText: true,
+                    // obscureText: true,
                     validator: (val) {
                       if (val == "") {
                         return "Empty filed";
@@ -297,10 +323,10 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _teacherId,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 20),
-                        hintText: 'Teacher ID',
-                        hintStyle: const TextStyle(
-                            fontSize: 16,
+                        contentPadding: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        labelText: 'Teacher ID',
+                        labelStyle: const TextStyle(
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                         fillColor: Colors.grey[250],
@@ -312,9 +338,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   TextFormField(
-                   
                     validator: (val) {
                       if (val == "") {
                         return "Empty filed";
@@ -322,7 +347,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _time,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 20),
+                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
                         hintText: 'Time',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -337,9 +362,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   TextFormField(
-                
                     validator: (val) {
                       if (val == "") {
                         return "Empty filed";
@@ -347,8 +371,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _date,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 20),
-                        hintText: 'Date',
+                      contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                        hintText: 'Days',
                         hintStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -362,9 +386,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   TextFormField(
-                
                     validator: (val) {
                       if (val == "") {
                         return "Empty filed";
@@ -372,7 +395,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _room,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 20),
+                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
                         hintText: 'Room',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -387,9 +410,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   TextFormField(
-              
                     validator: (val) {
                       if (val == "") {
                         return "Empty filed";
@@ -397,7 +419,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _sec,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 20),
+                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
                         hintText: 'Section Number',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -412,7 +434,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   DropdownButtonFormField<String>(
                     value: _selectedFaculty,
                     items: faculties.map((String faculty) {
@@ -429,7 +451,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                       _selectedFaculty = value!;
                     },
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(left: 10),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 7),
                         hintText: 'Faculty',
                         //  hintStyle: TextStyle(fontSize: 18),
                         fillColor: Colors.grey[250],
@@ -441,7 +463,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   DropdownButtonFormField<String>(
                     value: _selectedSpecialty,
                     items: specialties.map((String specialty) {
@@ -458,7 +480,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                       _selectedSpecialty = value!;
                     },
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(left: 8),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 7),
                         hintText: 'Specialty',
                         fillColor: Colors.grey[200],
                         filled: true,
@@ -469,62 +491,58 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 26),
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (formState.currentState!.validate()) {
-                          try {
-                            addCourseToTeacher(context);
-                            addCourseToMain(context);
-                          } catch (error) {
-                            print("$error");
-                          }
+                  const SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formState.currentState!.validate()) {
+                        try {
+                          addCourseToTeacher(context);
+                          addCourseToMain(context);
+                        } catch (error) {
+                          print("$error");
                         }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(kPrimaryColor),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 70, vertical: 7)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
-                      ),
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(fontSize: 24, color: Colors.white),
-                      ),
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.symmetric(horizontal: 70, vertical: 7)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(27))),
+                    ),
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(fontSize: 24, color: Colors.white),
                     ),
                   ),
                   //const SizedBox(height: 16),
-          //         Padding(
-          //           padding: EdgeInsets.all(15),
-          //           child: ElevatedButton(
-          //             onPressed: () {
-          //              // AddStudentForm()
-          //               Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) =>
-          //          AddStudentForm() ),
-          // );
-          //             },
-          //             style: ButtonStyle(
-          //               //  minimumSize: MaterialStateProperty.all(Size(double.minPositive, 7)),
-          //               backgroundColor:
-          //                   MaterialStateProperty.all(kPrimaryColor),
-          //               padding: MaterialStateProperty.all(
-          //                   EdgeInsets.symmetric(horizontal: 1, vertical: 7)),
-          //               shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          //                   borderRadius: BorderRadius.circular(27))),
-          //             ),
-          //             child: Text(
-          //               "Add Students",
-          //               style: TextStyle(fontSize: 24, color: Colors.white),
-          //             ),
-          //           ),
-          //         ),
+                  //         Padding(
+                  //           padding: EdgeInsets.all(15),
+                  //           child: ElevatedButton(
+                  //             onPressed: () {
+                  //              // AddStudentForm()
+                  //               Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) =>
+                  //          AddStudentForm() ),
+                  // );
+                  //             },
+                  //             style: ButtonStyle(
+                  //               //  minimumSize: MaterialStateProperty.all(Size(double.minPositive, 7)),
+                  //               backgroundColor:
+                  //                   MaterialStateProperty.all(kPrimaryColor),
+                  //               padding: MaterialStateProperty.all(
+                  //                   EdgeInsets.symmetric(horizontal: 1, vertical: 7)),
+                  //               shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(27))),
+                  //             ),
+                  //             child: Text(
+                  //               "Add Students",
+                  //               style: TextStyle(fontSize: 24, color: Colors.white),
+                  //             ),
+                  //           ),
+                  //         ),
                 ],
               ),
             ),

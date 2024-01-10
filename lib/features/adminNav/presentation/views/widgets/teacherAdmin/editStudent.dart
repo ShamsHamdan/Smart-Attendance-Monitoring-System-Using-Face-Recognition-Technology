@@ -422,37 +422,34 @@ class _EditStudentFormState extends State<EditStudentForm> {
                               borderSide: BorderSide(width: 1),
                               borderRadius: BorderRadius.circular(10.0))),
                     ),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (formState.currentState!.validate()) {
-                            try {
-                              UpdateStudentToCourseInTeacher(context);
-                              UpdateStudentToMain(context);
-                            } catch (e) {
-                            } catch (e) {
-                              print(e);
-                            }
-                          } else {
-                            print("========err");
+                    const SizedBox(height: 30),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (formState.currentState!.validate()) {
+                          try {
+                            UpdateStudentToCourseInTeacher(context);
+                            UpdateStudentToMain(context);
+                          } catch (e) {
+                          } catch (e) {
+                            print(e);
                           }
-                      
-                          // Navigator.pushNamed(context, "/homeadmin");
-                        },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(kPrimaryColor),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(horizontal: 80, vertical: 10)),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(27))),
-                        ),
-                        child: const Text(
-                          "Update",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        ),
+                        } else {
+                          print("========err");
+                        }
+                    
+                        // Navigator.pushNamed(context, "/homeadmin");
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(kPrimaryColor),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 80, vertical: 10)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                      child: const Text(
+                        "Update",
+                        style: TextStyle(fontSize: 24, color: Colors.white),
                       ),
                     ),
                   ],

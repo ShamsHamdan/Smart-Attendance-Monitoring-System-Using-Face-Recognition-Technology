@@ -572,32 +572,29 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                             borderSide: BorderSide(width: .5),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
-                  const SizedBox(height: 26),
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (formState.currentState!.validate()) {
-                          try {
-                            updateCourseToMain(context);
-                            updateCourseToTeacher(context);
-                          } catch (error) {
-                            print("$error");
-                          }
+                  const SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formState.currentState!.validate()) {
+                        try {
+                          updateCourseToMain(context);
+                          updateCourseToTeacher(context);
+                        } catch (error) {
+                          print("$error");
                         }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(kPrimaryColor),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 70, vertical: 7)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
-                      ),
-                      child: Text(
-                        "Update",
-                        style: TextStyle(fontSize: 24, color: Colors.white),
-                      ),
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(kPrimaryColor),
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.symmetric(horizontal: 70, vertical: 7)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(27))),
+                    ),
+                    child: Text(
+                      "Update",
+                      style: TextStyle(fontSize: 24, color: Colors.white),
                     ),
                   ),
                   //const SizedBox(height: 16),

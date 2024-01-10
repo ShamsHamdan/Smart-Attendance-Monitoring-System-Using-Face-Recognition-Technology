@@ -392,90 +392,87 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
                               borderSide: BorderSide(width: .5),
                               borderRadius: BorderRadius.circular(10.0))),
                     ),
-                    const SizedBox(height: 20.0),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (formState.currentState!.validate()) {
-                            try {
-                              updateTeacher(context);
-                              //   final credential = await FirebaseAuth.instance
-                              //       .createUserWithEmailAndPassword(
-                              //     email: _emailController.text,
-                              //     password: _passwordController.text,
-                              //   );
-                              //   idTeacher = FirebaseAuth.instance.currentUser!.uid;
-                              //   await FirebaseAuth.instance.signOut();
-                              //   final credentiall = await FirebaseAuth.instance
-                              //       .signInWithEmailAndPassword(
-                              //           email: Adminemail!, password: Adminpass!);
-                              //   WhichAdmin = FirebaseAuth.instance.currentUser!.uid;
-                              //   addTeacher(context);
-                              //   NumOfTeacher = NumOfTeacher! + 1;
-                              //   // FirebaseFirestore.instance
-                              //   //     .collection('Admins')
-                              //   //     .add({'name': username.text,
-                              //   //   'email': email.text,});
-                              //   //  String uid = userCredential.user.uid;
-                              //   // await admins.add({
-                              //   //   'name': username,
-                              //   //   'email': email,
-                              //   // });
-                              // } on FirebaseAuthException catch (e) {
-                              //   if (e.code == 'weak-password') {
-                              //     AwesomeDialog(
-                              //             context: context,
-                              //             dialogType: DialogType.error,
-                              //             animType: AnimType.rightSlide,
-                              //             title: 'Error',
-                              //             titleTextStyle: TextStyle(
-                              //                 fontWeight: FontWeight.bold,
-                              //                 fontSize: 22),
-                              //             desc:
-                              //                 'The password provided is too weak.',
-                              //             descTextStyle: TextStyle(fontSize: 17))
-                              //         .show();
-                              //     print('The password provided is too weak.');
-                              //   } else if (e.code == 'email-already-in-use') {
-                              //     print(
-                              //         'The account already exists for that email.');
-                              //     AwesomeDialog(
-                              //             context: context,
-                              //             dialogType: DialogType.error,
-                              //             animType: AnimType.rightSlide,
-                              //             title: 'Error',
-                              //             titleTextStyle: TextStyle(
-                              //                 fontWeight: FontWeight.bold,
-                              //                 fontSize: 22),
-                              //             desc:
-                              //                 'The account already exists for that email.',
-                              //             descTextStyle: TextStyle(fontSize: 17))
-                              //         .show();
-                              //   }
-                            } catch (e) {
-                              print(e);
-                            }
-                          } else {
-                            print("========err");
+                    const SizedBox(height: 30.0),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (formState.currentState!.validate()) {
+                          try {
+                            updateTeacher(context);
+                            //   final credential = await FirebaseAuth.instance
+                            //       .createUserWithEmailAndPassword(
+                            //     email: _emailController.text,
+                            //     password: _passwordController.text,
+                            //   );
+                            //   idTeacher = FirebaseAuth.instance.currentUser!.uid;
+                            //   await FirebaseAuth.instance.signOut();
+                            //   final credentiall = await FirebaseAuth.instance
+                            //       .signInWithEmailAndPassword(
+                            //           email: Adminemail!, password: Adminpass!);
+                            //   WhichAdmin = FirebaseAuth.instance.currentUser!.uid;
+                            //   addTeacher(context);
+                            //   NumOfTeacher = NumOfTeacher! + 1;
+                            //   // FirebaseFirestore.instance
+                            //   //     .collection('Admins')
+                            //   //     .add({'name': username.text,
+                            //   //   'email': email.text,});
+                            //   //  String uid = userCredential.user.uid;
+                            //   // await admins.add({
+                            //   //   'name': username,
+                            //   //   'email': email,
+                            //   // });
+                            // } on FirebaseAuthException catch (e) {
+                            //   if (e.code == 'weak-password') {
+                            //     AwesomeDialog(
+                            //             context: context,
+                            //             dialogType: DialogType.error,
+                            //             animType: AnimType.rightSlide,
+                            //             title: 'Error',
+                            //             titleTextStyle: TextStyle(
+                            //                 fontWeight: FontWeight.bold,
+                            //                 fontSize: 22),
+                            //             desc:
+                            //                 'The password provided is too weak.',
+                            //             descTextStyle: TextStyle(fontSize: 17))
+                            //         .show();
+                            //     print('The password provided is too weak.');
+                            //   } else if (e.code == 'email-already-in-use') {
+                            //     print(
+                            //         'The account already exists for that email.');
+                            //     AwesomeDialog(
+                            //             context: context,
+                            //             dialogType: DialogType.error,
+                            //             animType: AnimType.rightSlide,
+                            //             title: 'Error',
+                            //             titleTextStyle: TextStyle(
+                            //                 fontWeight: FontWeight.bold,
+                            //                 fontSize: 22),
+                            //             desc:
+                            //                 'The account already exists for that email.',
+                            //             descTextStyle: TextStyle(fontSize: 17))
+                            //         .show();
+                            //   }
+                          } catch (e) {
+                            print(e);
                           }
-
-                          // Navigator.pushNamed(context, "/homeadmin");
-                        },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(kPrimaryColor),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 80, vertical: 10)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(27))),
-                        ),
-                        child: const Text(
-                          "Update",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        ),
+                        } else {
+                          print("========err");
+                        }
+                    
+                        // Navigator.pushNamed(context, "/homeadmin");
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(kPrimaryColor),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                horizontal: 80, vertical: 10)),
+                        shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(27))),
+                      ),
+                      child: const Text(
+                        "Update",
+                        style: TextStyle(fontSize: 24, color: Colors.white),
                       ),
                     ),
                   ],

@@ -88,7 +88,6 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
       "faculty": _selectedFaculty,
       "department": _selectedSpecialty,
       "Admin": WhichAdmin ?? '',
-      
     }).then((value) {
       AwesomeDialog(
               context: context,
@@ -102,8 +101,21 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
           .show();
 
       print("=================================== teacher Added");
-    }).catchError((error) =>
-        print("=============================Failed to add teacher: $error"));
+    }).catchError((error) {
+           AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.error,
+                                            animType: AnimType.rightSlide,
+                                            title: 'Failed',
+                                            titleTextStyle: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22),
+                                            desc: 'Failed to add teacher.',
+                                            descTextStyle:
+                                                TextStyle(fontSize: 17))
+                                        .show();
+      print("=============================Failed to add teacher: $error");
+    });
   }
 
   @override
@@ -360,7 +372,7 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
                               password: _passwordController.text,
                             );
                             idTeacher = FirebaseAuth.instance.currentUser!.uid;
-                           // userTeacher = FirebaseAuth.instance.currentUser;
+                            // userTeacher = FirebaseAuth.instance.currentUser;
                             await FirebaseAuth.instance.signOut();
                             final credentiall = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(

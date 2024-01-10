@@ -21,6 +21,7 @@ class ListofAddedCoursesForTeacher extends StatefulWidget {
 class _ListofAddedCoursesForTeacherState
     extends State<ListofAddedCoursesForTeacher> {
   List<QueryDocumentSnapshot> data = [];
+  String? teacherId;
 
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -33,12 +34,27 @@ class _ListofAddedCoursesForTeacherState
     setState(() {});
   }
 
+  
+  Future getDataofTeacherId() async {
+    DocumentSnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(widget.categoryId)
+       
+        .get();
+     teacherId=querySnapshot['id'];
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     getData();
+    getDataofTeacherId();
     // TODO: implement initState
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,16 +105,93 @@ class _ListofAddedCoursesForTeacherState
                             dialogType: DialogType.question,
                             animType: AnimType.rightSlide,
                             btnCancelOnPress: () {
-                            //  EditCourseFormPage
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () async {
+                                  try {
+                                    await FirebaseFirestore.instance
+                                        .collection('Teachers')
+                                        .doc(widget.categoryId)
+                                        .collection('courses')
+                                        .doc(data[i].id)
+                                        
+                                        .delete();
+
+                                    CollectionReference collectionRef =
+                                        FirebaseFirestore.instance
+                                            .collection('Courses');
+
+                                    // Query the documents based on specific criteria using the 'where' clause
+                                    QuerySnapshot querySnapshot =
+                                        await collectionRef
+                                            .where('idCourse',
+                                                isEqualTo:  data[i]['idCourse'])
+                                            .where("TeacherId",
+                                                isEqualTo:teacherId)
+                                            .get();
+
+                                    for (QueryDocumentSnapshot docSnapshot
+                                        in querySnapshot.docs) {
+                                      await docSnapshot.reference.delete();
+                                    }
+
+                                    AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.success,
+                                            animType: AnimType.rightSlide,
+                                            title: 'Success',
+                                            titleTextStyle: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22),
+                                            desc:
+                                                'Course deleted successfully.',
+                                            descTextStyle:
+                                                TextStyle(fontSize: 17))
+                                        .show();
+                                  } catch (error) {
+                                    AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.error,
+                                            animType: AnimType.rightSlide,
+                                            title: 'Failed',
+                                            titleTextStyle: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22),
+                                            desc: 'Failed to delete course.',
+                                            descTextStyle:
+                                                TextStyle(fontSize: 17))
+                                        .show();
+                                  }
+                                },
+                                btnOkText: "Delete",
+                                buttonsTextStyle: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                                btnCancelText: "Cancel",
+                                title: 'Are you sure of deleting process?',
+                                titleTextStyle: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 22),
+                              ).show();
                             },
                             btnOkOnPress: () {
-                                Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  EditCourseFormPage(courseId:data[i].id,docId: widget.categoryId,)),
-          );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditCourseFormPage(
+                                          courseId: data[i].id,
+                                          docId: widget.categoryId,
+                                        )),
+                              );
                             },
                             btnOkText: "Update",
-                            buttonsTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
+                            buttonsTextStyle: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                             btnCancelText: "Delete",
                             title: 'Choose Action',
                             titleTextStyle: TextStyle(
@@ -124,8 +217,9 @@ class _ListofAddedCoursesForTeacherState
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    AddCourseFormPage(docId: widget.categoryId)),
+                builder: (context) => AddCourseFormPage(
+                      docId: widget.categoryId,
+                    )),
           );
         },
         child: Icon(
@@ -156,7 +250,7 @@ class _ListofAddedCoursesForTeacherState
       child: ListTile(
         title: Text(name,
             style: TextStyle(
-                color: textColor, fontSize: 18, fontWeight: FontWeight.bold)),
+                color: textColor, fontSize: 19, fontWeight: FontWeight.bold)),
         subtitle:
             Text(subtitle, style: TextStyle(color: textColor, fontSize: 17)),
         trailing: GestureDetector(

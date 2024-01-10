@@ -41,7 +41,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
     Map<String, dynamic>? data = data1.data() as Map<String, dynamic>?;
     setState(() {
       oldname = data1['name'];
-      oldemail = data1['email'];
+    //  oldemail = data1['email'];
       idd = data1.id;
     });
     if (data != null && data.containsKey('url')) {
@@ -71,7 +71,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
       if (urlAdmin == null) {
         await FirebaseFirestore.instance.collection('Admins').doc(idd).update({
           "name": username.text,
-          "email": email.text,
+         // "email": email.text,
         });
       //   ScaffoldMessenger.of(context).showSnackBar(
       //     SnackBar(
@@ -98,7 +98,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
       } else {
         await FirebaseFirestore.instance.collection('Admins').doc(idd).update({
           "name": username.text,
-          "email": email.text,
+         // "email": email.text,
           "url": urlAdmin ?? '',
         }).then((value) {
             AwesomeDialog(
@@ -286,48 +286,48 @@ class _EditProfileadminState extends State<EditProfileadmin>
                                     ),
                                   ],
                                 )),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 25.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        Text(
-                                          'Email',
-                                          style: TextStyle(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                )),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    Flexible(
-                                      child: TextFormField(
-                                        validator: (val) {
-                                          if (val == "") {
-                                            return "Empty filed";
-                                          }
-                                        },
-                                        controller: email,
-                                        decoration: const InputDecoration(
-                                            hintText: "Enter Your Email"),
-                                        enabled: !_status,
-                                      ),
-                                    ),
-                                  ],
-                                )),
+                            // Padding(
+                            //     padding: EdgeInsets.only(
+                            //         left: 25.0, right: 25.0, top: 25.0),
+                            //     child: Row(
+                            //       mainAxisSize: MainAxisSize.max,
+                            //       children: <Widget>[
+                            //         Column(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           mainAxisSize: MainAxisSize.min,
+                            //           children: <Widget>[
+                            //             Text(
+                            //               'Email',
+                            //               style: TextStyle(
+                            //                   fontSize: 16.0,
+                            //                   fontWeight: FontWeight.bold),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ],
+                            //     )),
+                            // Padding(
+                            //     padding: EdgeInsets.only(
+                            //         left: 25.0, right: 25.0, top: 2.0),
+                            //     child: Row(
+                            //       mainAxisSize: MainAxisSize.max,
+                            //       children: <Widget>[
+                            //         Flexible(
+                            //           child: TextFormField(
+                            //             validator: (val) {
+                            //               if (val == "") {
+                            //                 return "Empty filed";
+                            //               }
+                            //             },
+                            //             controller: email,
+                            //             decoration: const InputDecoration(
+                            //                 hintText: "Enter Your Email"),
+                            //             enabled: !_status,
+                            //           ),
+                            //         ),
+                            //       ],
+                            //     )),
                           ]),
                         ),
                         !_status ? _getActionButtons(context) : Container(),
