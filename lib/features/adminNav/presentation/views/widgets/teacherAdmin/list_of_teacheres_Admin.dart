@@ -69,16 +69,13 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
             MaterialPageRoute(builder: (context) => ListofAddedCoursesForTeacher(categoryId:data[i].id)),
           );
                     },
-                     onLongPress: () {
+                      onLongPress: () {
                           AwesomeDialog(
                             context: context,
                             dialogType: DialogType.question,
                             animType: AnimType.rightSlide,
                             btnCancelOnPress: () {
                                 
-
-
-
                                   AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.warning,
@@ -90,12 +87,6 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
                                         .collection('Teachers')
                                         .doc(data[i].id) 
                                         .delete();
-
-                                      
-                                
-
-
-
                                     AwesomeDialog(
                                             context: context,
                                             dialogType: DialogType.success,
