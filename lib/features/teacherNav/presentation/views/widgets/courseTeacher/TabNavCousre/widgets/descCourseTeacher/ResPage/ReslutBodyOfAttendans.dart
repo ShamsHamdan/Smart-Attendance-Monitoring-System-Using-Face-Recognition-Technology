@@ -3,10 +3,12 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/cou
 //import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/List_Names_Res.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/Res_Body_Header.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/filterButon.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/test.dart';
 import 'package:flutter/material.dart';
 
 class ReslutOfAttendans extends StatefulWidget {
-  const ReslutOfAttendans({super.key});
+  final String courseId;
+  const ReslutOfAttendans({super.key, required this.courseId});
 
   @override
   State<ReslutOfAttendans> createState() => _ReslutOfAttendansState();
@@ -31,23 +33,31 @@ class _ReslutOfAttendansState extends State<ReslutOfAttendans> {
           },
         ),
       ),
-      backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
-      body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(0),
-            child: Column(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+        child: Padding(
+          padding: const EdgeInsets.all(0),
+          child: Column(
+           
+            //padding: const EdgeInsets.all(8.0),
              
-              //padding: const EdgeInsets.all(8.0),
-               
-                    children: [
-              ResBodyHeader(),
-              FilterButton(),
-              SizedBox(height: 30,),
-              ListOfNameForRes(),
-                    ],
-                  ),
-          ),
-          ),
+                  children: [
+          //  ResBodyHeader(),
+         //  Expanded(child:Text('sham') ),
+           
+           
+           
+           
+          Expanded(child: StudentAttendancePage(courseId:widget.courseId )),
+          //  FilterButton(),
+            // SizedBox(height: 30,),
+          //  ListOfNameForRes(),
+                  ],
+                ),
+        ),
+      ),
     );
   }
 }

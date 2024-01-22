@@ -53,7 +53,7 @@ class _CourseInfoState extends State<CourseInfo> {
               SizedBox(
                 height: 60,
               ),
-              ResAtt(),
+              ResAtt(courseId: widget.courseId,),
               SizedBox(
                 height: 0,
               ),

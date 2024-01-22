@@ -152,7 +152,26 @@ class BodySettningsAdmin extends StatelessWidget {
                               },
                               child: cards(context, index),
                             );
-                          } else {
+                          } else if (data[index].label ==
+                              "Privacy Policy") {
+                            return GestureDetector(
+                              onTap: () {
+                                // Navigate to the new page here
+                                Navigator.pushNamed(
+                                    context, "/PrivacyPolicy");
+                              },
+                              child: cards(context, index),
+                            );
+                          }
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          else {
                             return cards(context, index);
                           }
                         }),

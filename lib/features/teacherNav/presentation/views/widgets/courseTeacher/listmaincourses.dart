@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ListCoursestest extends StatefulWidget {
- // const ListCoursestest({super.key});
-const ListCoursestest({Key? key}) : super(key: key);
+  // const ListCoursestest({super.key});
+  const ListCoursestest({Key? key}) : super(key: key);
   @override
   State<ListCoursestest> createState() => _ListCoursestestState();
 }
@@ -15,7 +15,7 @@ const ListCoursestest({Key? key}) : super(key: key);
 class _ListCoursestestState extends State<ListCoursestest> {
   List<QueryDocumentSnapshot> data = [];
 
- List<QueryDocumentSnapshot> dataOfCourses = [];
+  List<QueryDocumentSnapshot> dataOfCourses = [];
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
@@ -25,12 +25,14 @@ class _ListCoursestestState extends State<ListCoursestest> {
     data.addAll(querySnapshot.docs);
     String docId = data[0].id;
 
- QuerySnapshot querySnapshott = await FirebaseFirestore.instance
-        .collection('Teachers').doc(docId).collection('courses')
+    QuerySnapshot querySnapshott = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(docId)
+        .collection('courses')
         .get();
 
     dataOfCourses.addAll(querySnapshott.docs);
-   
+
     setState(() {
       // print("${data[0]['name']}");
       // Adminemail = data['email'];
@@ -52,16 +54,15 @@ class _ListCoursestestState extends State<ListCoursestest> {
     bool showSearchField = false;
 
     return Container(
-     // color: Colors.amber,
+      // color: Colors.amber,
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: 
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start, 
-          children: [
-            SizedBox(height: 70,),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(
+            height: 70,
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 1),
             child: Row(
@@ -80,7 +81,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
                   ),
                   onPressed: () {
                     setState(() {
-                     // showSearchField = true; // Set showSearchField to true
+                      // showSearchField = true; // Set showSearchField to true
                     });
                   },
                 ),
@@ -110,27 +111,34 @@ class _ListCoursestestState extends State<ListCoursestest> {
               ],
             ),
           ),
-         
           Expanded(
-            child: ListView.builder(
-               shrinkWrap: true,
-                itemCount: dataOfCourses.length,
-                itemBuilder: (context, i) {
-                  return InkWell(
-                    onTap: () {
-                        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CourseInTeacherTabNav(courseId:dataOfCourses[i].id)),
-          );
-                    },
-                    child: courseCont(
-                      dataOfCourses[i]["name"],
-                      dataOfCourses[i]["idCourse"],
-                      dataOfCourses[i]["url"],
-                        dataOfCourses[i]["section"],
-                    ),
-                  );
-                }),
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: dataOfCourses.length,
+              itemBuilder: (context, i) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CourseInTeacherTabNav(
+                              courseId: dataOfCourses[i].id)),
+                    );
+                  },
+                  child: courseCont(
+                    dataOfCourses[i]["name"],
+                    dataOfCourses[i]["idCourse"],
+                    dataOfCourses[i]["url"],
+                    dataOfCourses[i]["section"],
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  height: 20,
+                );
+              },
+            ),
           )
         ]),
       ),
@@ -138,7 +146,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
   }
 
   Widget courseCont(String name, String id, String url, String sec) {
-     double attendancePercentage = .75;
+    double attendancePercentage = .75;
     bool isLowAttendance = attendancePercentage <= 0.5;
     bool showSearchField = false;
 
@@ -165,9 +173,11 @@ class _ListCoursestestState extends State<ListCoursestest> {
                     width: double.infinity,
                     height: 130, // Set the desired height
                     child: url != null && url!.isNotEmpty
-            ? Image.network(Uri.parse(url!).toString(),fit:BoxFit.cover,)
-            : Image.asset(AssetsData.profilepic),
-    
+                        ? Image.network(
+                            Uri.parse(url!).toString(),
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(AssetsData.imageAddCourseDef),
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -176,10 +186,11 @@ class _ListCoursestestState extends State<ListCoursestest> {
                       padding: EdgeInsets.all(15),
                       child: Stack(
                         children: [
-                           Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("$name section$sec",
+                              Text(
+                                "$name section$sec",
                                 style: TextStyle(
                                   fontSize: 19,
                                   color: Colors.black,

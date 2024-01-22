@@ -121,7 +121,24 @@ class SettingsTeacherBody extends StatelessWidget {
                               },
                               child: cards(context, index),
                             );
-                          } else {
+                          } else if (data[index].label ==
+                              "Terms and Conditions") {
+                            return GestureDetector(
+                              onTap: () {
+                                // Navigate to the new page here
+                                Navigator.pushNamed(
+                                    context, "/TermsandConditions");
+                              },
+                              child: cards(context, index),
+                            );
+                          } 
+                          
+                          
+                          
+                          
+                          
+                          
+                          else {
                             return cards(context, index);
                           }
                         }),

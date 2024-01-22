@@ -77,7 +77,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         "/maincalendar": (context) => CalendarMainTeacher(),
       //  "/CourseInTeacherTabNav": (contex) => CourseInTeacherTabNav(courseId: null,),
         "/maintabcoursesinteacher": (context) => CourseTeacher(),
-        "/reslutofattendance": (context) => ReslutOfAttendans(),
+       // "/reslutofattendance": (context) => ReslutOfAttendans(),
         //   '/specialties': (context) => ListOfSpecialtiesTeacher(),
         "/Teachers": (context) => ListOfTeacherPageInAdmin(),
         // '/addProfessor': (context) => AddProfessorForm(),
