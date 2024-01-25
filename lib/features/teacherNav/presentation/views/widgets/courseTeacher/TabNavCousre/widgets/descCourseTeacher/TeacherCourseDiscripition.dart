@@ -20,6 +20,7 @@ class TeacherCourseDiscripition extends StatefulWidget {
 class _TeacherCourseDiscripitionState extends State<TeacherCourseDiscripition> {
   List<QueryDocumentSnapshot> data = [];
   String? url;
+  String? docId;
   //List<QueryDocumentSnapshot> dataOfCourses = [];
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -28,7 +29,7 @@ class _TeacherCourseDiscripitionState extends State<TeacherCourseDiscripition> {
         .get();
 
     data.addAll(querySnapshot.docs);
-    String docId = data[0].id;
+     docId = data[0].id;
 
     DocumentSnapshot querySnapshott = await FirebaseFirestore.instance
         .collection('Teachers')
@@ -38,10 +39,10 @@ class _TeacherCourseDiscripitionState extends State<TeacherCourseDiscripition> {
         .get();
 
     DocumentSnapshot dataofcourse = querySnapshott;
-     url = dataofcourse["url"];
+    url = dataofcourse["url"];
 
     setState(() {
-      // print("${data[0]['name']}");
+      print("$docId");
       // Adminemail = data['email'];
       // Adminpass = data['password'];
     });
@@ -84,6 +85,7 @@ class _TeacherCourseDiscripitionState extends State<TeacherCourseDiscripition> {
                         )),
                     child: CourseInfo(
                       courseId: widget.courseId,
+                     
                     ),
                   ))
             ],

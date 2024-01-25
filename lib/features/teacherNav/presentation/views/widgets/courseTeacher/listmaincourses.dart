@@ -14,8 +14,21 @@ class ListCoursestest extends StatefulWidget {
 
 class _ListCoursestestState extends State<ListCoursestest> {
   List<QueryDocumentSnapshot> data = [];
-
+   num? numofabsent;
+  num? numofattending;
+ List<QueryDocumentSnapshot> dataOfAttendance = [];
   List<QueryDocumentSnapshot> dataOfCourses = [];
+   List<QueryDocumentSnapshot> dataOfStudent = [];
+  int? numofstudent;
+
+
+
+
+
+
+
+
+
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
@@ -34,10 +47,54 @@ class _ListCoursestestState extends State<ListCoursestest> {
     dataOfCourses.addAll(querySnapshott.docs);
 
     setState(() {
-      // print("${data[0]['name']}");
-      // Adminemail = data['email'];
-      // Adminpass = data['password'];
+     
     });
+
+
+
+//  QuerySnapshot querySnapshotStu = await FirebaseFirestore.instance
+//         .collection('Teachers')
+//         .doc(docId)
+//         .collection('courses')
+//         .doc(widget.courseId)
+//         .collection('students')
+//         .get();
+
+//     dataOfStudent.addAll(querySnapshotStu.docs);
+//     numofstudent = dataOfStudent.length;
+
+
+//     QuerySnapshot querySnapshotAtt = await FirebaseFirestore.instance
+//         .collection('Teachers')
+//         .doc(docId)
+//         .collection('courses')
+//         .doc(widget.courseId)
+//         .collection('attendance')
+//         .orderBy('date',
+//             descending: true) // Order documents by date in descending order
+//         .limit(1)
+//         .get();
+
+//     dataOfAttendance.addAll(querySnapshotAtt.docs);
+//     if (dataOfAttendance.isNotEmpty) {
+//   numofabsent = dataOfAttendance[0]['absent'] ?? 0;
+//   numofattending = dataOfAttendance[0]['attending'] ?? 0;
+// } else {
+//   numofabsent = 0;
+//   numofattending = 0;
+// }
+   
+
+
+
+
+
+
+
+
+
+
+
   }
 
   @override
@@ -85,29 +142,6 @@ class _ListCoursestestState extends State<ListCoursestest> {
                     });
                   },
                 ),
-                // if (showSearchField)
-                //   Padding(
-                //     padding: const EdgeInsets.symmetric(horizontal: 16),
-                //     child: Row(
-                //       children: [
-                //         Expanded(
-                //           child: TextField(
-                //             decoration: InputDecoration(
-                //               hintText: 'Search for a course...',
-                //             ),
-                //           ),
-                //         ),
-                //         IconButton(
-                //           icon: Icon(Icons.cancel, color: Colors.black),
-                //           onPressed: () {
-                //             setState(() {
-                //               showSearchField = false;
-                //             });
-                //           },
-                //         ),
-                //       ],
-                //     ),
-                //   ),
               ],
             ),
           ),
@@ -220,21 +254,25 @@ class _ListCoursestestState extends State<ListCoursestest> {
                             right: 0,
                             top: 0,
                             child: CircularPercentIndicator(
-                              radius: 24.0,
-                              lineWidth: 5.0,
-                              percent:
-                                  0.75, // Change this to your actual percentage
-                              center: Text(
-                                "${(attendancePercentage * 100).toInt()}%",
-                                style: TextStyle(
-                                  color: isLowAttendance
-                                      ? Colors.red
-                                      : Colors.green,
-                                ),
-                              ), // Change this to your actual text
-                              progressColor:
-                                  isLowAttendance ? Colors.red : Colors.green,
-                            ),
+                radius: 70,
+                lineWidth: 15,
+            percent: numofstudent != null && numofattending != null && numofstudent != 0 ? (numofattending! / numofstudent!) : 0,// (numofattending!* 100).toInt(),
+                center:  Text(//" ",
+"${(numofattending != null && numofstudent != null && numofstudent != 0 ? ((numofattending! / numofstudent!) * 100).toInt() : 0)}%" ?? '0',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.green),
+                ),
+                footer: const Text(
+                  'Attendance',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                ),
+                circularStrokeCap: CircularStrokeCap.round,
+                progressColor: Colors.green,
+                animation: true,
+                animationDuration: 4000,
+              ),
                           ),
                         ],
                       ),

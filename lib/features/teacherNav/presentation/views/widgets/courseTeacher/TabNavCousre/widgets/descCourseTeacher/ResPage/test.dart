@@ -27,6 +27,10 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
   List<QueryDocumentSnapshot> dataOfStudent = [];
   int? numofstudent;
   bool _isLoading = false;
+  String? docId;
+  int? absentees;
+  int? attendees;
+  String? date;
 
   Future<void> getData() async {
     setState(() {
@@ -39,7 +43,8 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
         .get();
 
     data.addAll(querySnapshot.docs);
-    String docId = data[0].id;
+    docId = data[0].id;
+    print('$docId');
 
     QuerySnapshot querySnapshotStu = await FirebaseFirestore.instance
         .collection('Teachers')
@@ -57,11 +62,30 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
         querySnapshotStu.docs
             .map((DocumentSnapshot doc) => doc.data() as Map<String, dynamic>)
             .toList(),
-      );
+      );  print('SD=========================================$_studentData');
       _updateDisplayedData();
       _isLoading = false;
-      print('=========================================$_studentData');
+    
     });
+  }
+
+  Future<void> addAttendanceToCourseInTeacher(BuildContext context) async {
+    // Call the user's CollectionReference to add a new user
+    await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(docId)
+        .collection('courses')
+        .doc(widget.courseId)
+        .collection('attendance')
+        .add({
+      "date": date,
+      "absent": absentees ?? 0,
+      "attending": attendees ?? 0,
+    }).then((value) {
+      print('');
+      print("=================================== attendance Added to course");
+    }).catchError((error) => print(
+            "=============================Failed to add course teachher: $error"));
   }
 
   @override
@@ -81,15 +105,27 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
             _attendanceData =
                 data.values.toList(); // Adjust the conversion if needed
             getData();
-            _updateDisplayedData();
-            print('=========================================$_attendanceData');
+            //_updateDisplayedData();
+     
+            print(
+                'AT=========================================$_attendanceData');
           });
+
+          // absentees = _studentData
+          //               .where((student) => !student['is_attending'])
+          //               .length;
+          //           attendees =
+          //               _studentData.where((student) => student['is_attending']).length;
+
+          //           addAttendanceToCourseInTeacher(context);
+          //           addAttendanceToCourseInTeacher(context);
         }
       });
     });
+   
   }
 
-  void _updateDisplayedData() {
+  Future<void> _updateDisplayedData() async {
     _displayedData = [];
     if (_selectedOption == 'All') {
       for (var student in _studentData) {
@@ -102,7 +138,20 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
           'profile_picture_url': profilePictureUrl,
           'is_attending': isAttending,
         });
+       
+         
       }
+       attendees = _displayedData
+            .where((student) => student['is_attending'])
+            .length
+        ;
+        absentees = _displayedData
+            .where((student) => !student['is_attending'])
+            .length
+          ;
+        setState(() {});
+        print('$absentees$attendees');
+           addAttendanceToCourseInTeacher(context);
     } else if (_selectedOption == 'Attending') {
       for (var student in _studentData) {
         String studentId = student['idStudent'];
@@ -138,6 +187,8 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
     String uppercaseName = studentName.toUpperCase().trim();
     for (var attendance in _attendanceData) {
       print('bbbbbbb$attendance');
+      date = attendance['date'];
+      print('bbbbbbb$date');
       String nameInAttendance =
           attendance['name'].toString().toUpperCase().trim();
       print('Attendance name: $nameInAttendance');
@@ -158,183 +209,188 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
     return Scaffold(
       body: Container(
         color: Colors.white,
-       width: MediaQuery.of(context).size.width,
-       height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-             SizedBox(
-            height: 270,
-            child: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 210,
-                  decoration: const BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(30),
-                          bottomLeft: Radius.circular(30))),
-                ),
-                const Positioned(
-                  top: 0,
-                  left: 155,
-                  child: Text('Results',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white)),
-                ),
-                Positioned(
-                  top: 90,
-                  left: 20,
-                  right: 20,
-                  child: Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.shade300,
-                              blurRadius: 5,
-                              spreadRadius: 1,
-                              offset: const Offset(0, 5.0)),
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 25,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Icon(
-                              Icons.person,
-                              size: 37,
-                              color: kPrimaryColor,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-  _studentData.length.toString(),
-  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-),
+            SizedBox(
+              height: 270,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 210,
+                    decoration: const BoxDecoration(
+                        color: kPrimaryColor,
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(30),
+                            bottomLeft: Radius.circular(30))),
+                  ),
+                  const Positioned(
+                    top: 0,
+                    left: 155,
+                    child: Text('Results',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Colors.white)),
+                  ),
+                  Positioned(
+                    top: 90,
+                    left: 20,
+                    right: 20,
+                    child: Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade300,
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                                offset: const Offset(0, 5.0)),
+                          ]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 25,
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Icon(
+                                Icons.person,
+                                size: 37,
+                                color: kPrimaryColor,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                _studentData.length.toString(),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
 
-                            // Text(
-                            //   "15",
-                            //   style: TextStyle(
-                            //       fontSize: 20, fontWeight: FontWeight.bold),
-                            // ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "All",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: 55,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Icon(
-                              Icons.check,
-                              size: 37,
-                              color: Colors.green,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-  _displayedData
-      .where((student) => student['is_attending'])
-      .length
-      .toString(),
-  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "Attendess",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: 40,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            // Text(
-                            //   "X",
-                            //   style: TextStyle(
-                            //       fontSize: 30,
-                            //       color: Colors.red,
-                            //       fontWeight: FontWeight.bold),
-                            // ),
-                            Icon(
-                              Icons.close,
-                              size: 37,
-                              color: Colors.red,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                           Text(
-  _displayedData
-      .where((student) => !student['is_attending'])
-      .length
-      .toString(),
-  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "Absentees",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        )
-                      ],
+                              // Text(
+                              //   "15",
+                              //   style: TextStyle(
+                              //       fontSize: 20, fontWeight: FontWeight.bold),
+                              // ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "All",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            width: 55,
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Icon(
+                                Icons.check,
+                                size: 37,
+                                color: Colors.green,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                _displayedData
+                                    .where((student) => student['is_attending'])
+                                    .length
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Attendess",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              // Text(
+                              //   "X",
+                              //   style: TextStyle(
+                              //       fontSize: 30,
+                              //       color: Colors.red,
+                              //       fontWeight: FontWeight.bold),
+                              // ),
+                              Icon(
+                                Icons.close,
+                                size: 37,
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                _displayedData
+                                    .where(
+                                        (student) => !student['is_attending'])
+                                    .length
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Absentees",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-           // ResBodyHeader(),
+            // ResBodyHeader(),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                 padding: EdgeInsets.only(left: 20.0),
+                padding: EdgeInsets.only(left: 20.0),
                 child: Container(
-                   width: MediaQuery.of(context).size.width * 0.4, // Adjust the width as needed
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+                  width: MediaQuery.of(context).size.width *
+                      0.4, // Adjust the width as needed
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                   child: DropdownButtonFormField<String>(
                     value: _selectedOption,
                     onChanged: (String? newValue) {
@@ -357,32 +413,37 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                         child: Text('Absent'),
                       ),
                     ],
-                     decoration: InputDecoration(
-                            border: InputBorder.none, // Remove the border from the input decoration
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10.0), // Adjust the content padding as needed
-                          ),
+                    decoration: InputDecoration(
+                      border: InputBorder
+                          .none, // Remove the border from the input decoration
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal:
+                              10.0), // Adjust the content padding as needed
+                    ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             //  Text('shams'),
             _isLoading
                 ? Center(child: CircularProgressIndicator())
                 : Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: ListView.builder(
-                      
-                       // shrinkWrap: true,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: ListView.builder(
+                        // shrinkWrap: true,
                         itemCount: _displayedData.length,
                         itemBuilder: (BuildContext context, int index) {
                           var studentData = _displayedData[index];
                           String studentName = studentData['name'];
-                          String profilePictureUrl = studentData['profile_picture_url'] ??
-                              'assets/images/blank-profile-picture.png';
+                          String profilePictureUrl =
+                              studentData['profile_picture_url'] ??
+                                  'assets/images/blank-profile-picture.png';
                           bool isAttending = studentData['is_attending'];
-                                    
+
                           return Card(
                             color: Colors.white,
                             elevation: 5,
@@ -393,17 +454,20 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                             child: Padding(
                               padding: const EdgeInsets.all(16),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       CircleAvatar(
                                         radius: 30,
-                                        backgroundImage: profilePictureUrl.isNotEmpty
-                                                  ? NetworkImage(profilePictureUrl, scale: 1)
-                                                  : AssetImage(
-                                                          'assets/images/blank-profile-picture.png')
-                                                      as ImageProvider<Object>?,
+                                        backgroundImage: profilePictureUrl
+                                                .isNotEmpty
+                                            ? NetworkImage(profilePictureUrl,
+                                                scale: 1)
+                                            : AssetImage(
+                                                    'assets/images/blank-profile-picture.png')
+                                                as ImageProvider<Object>?,
                                       ),
                                       SizedBox(width: 10),
                                       Text(
@@ -417,9 +481,9 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                                   ),
                                   Icon(
                                     isAttending ? Icons.check : Icons.close,
-                                    color: isAttending ? Colors.green : Colors.red,
+                                    color:
+                                        isAttending ? Colors.green : Colors.red,
                                     size: 40,
-                                    
                                   ),
                                 ],
                               ),
@@ -430,8 +494,8 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                         //   return SizedBox(height: 10);
                         // },
                       ),
+                    ),
                   ),
-                ),
             // Expanded(
             //   child: _isLoading
             //       ? Center(child: CircularProgressIndicator())
@@ -444,7 +508,7 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
             //                 'profile_picture_url' ??
             //                     'assets/images/blank-profile-picture.png'];
             //             bool isAttending = studentData['is_attending'];
-                
+
             //             return ListTile(
             //               leading: CircleAvatar(
             //                 backgroundImage: profilePictureUrl.isNotEmpty

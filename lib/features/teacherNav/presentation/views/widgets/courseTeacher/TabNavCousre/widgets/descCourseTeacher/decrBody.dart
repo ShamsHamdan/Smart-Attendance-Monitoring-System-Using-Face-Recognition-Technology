@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 
 class CourseInfo extends StatefulWidget {
   final String courseId;
+ // final String teacherId;
   const CourseInfo({
-    Key? key, required this.courseId,
+    Key? key,
+    required this.courseId, 
   }) : super(key: key);
 
   @override
@@ -41,11 +43,15 @@ class _CourseInfoState extends State<CourseInfo> {
             mainAxisSize: MainAxisSize.min,
 
             children: [
-              NameOfCourse(courseId: widget.courseId,),
+              NameOfCourse(
+                courseId: widget.courseId,
+              ),
               SizedBox(
                 height: 20,
               ),
-              CourseDetails(courseId: widget.courseId,),
+              CourseDetails(
+                courseId: widget.courseId,
+              ),
               SizedBox(
                 height: 40,
               ),
@@ -53,11 +59,13 @@ class _CourseInfoState extends State<CourseInfo> {
               SizedBox(
                 height: 60,
               ),
-              ResAtt(courseId: widget.courseId,),
+              ResAtt(
+                courseId: widget.courseId,
+              ),
               SizedBox(
                 height: 0,
               ),
-              studentStatistics(),
+              studentStatistics(courseId: widget.courseId,),
               SizedBox(
                 height: 20,
               )
