@@ -81,6 +81,7 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
       "date": date,
       "absent": absentees ?? 0,
       "attending": attendees ?? 0,
+      "allNumber":_studentData.length,
     }).then((value) {
       print('');
       print("=================================== attendance Added to course");
@@ -111,14 +112,6 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                 'AT=========================================$_attendanceData');
           });
 
-          // absentees = _studentData
-          //               .where((student) => !student['is_attending'])
-          //               .length;
-          //           attendees =
-          //               _studentData.where((student) => student['is_attending']).length;
-
-          //           addAttendanceToCourseInTeacher(context);
-          //           addAttendanceToCourseInTeacher(context);
         }
       });
     });
