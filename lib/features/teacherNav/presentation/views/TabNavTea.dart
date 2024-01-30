@@ -17,11 +17,13 @@ class TabNavigationTeacher extends StatefulWidget {
 class _TabNavigationTeacherState extends State<TabNavigationTeacher>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late  PageController _pageController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
+        _pageController = PageController();
   }
 
   @override
@@ -29,8 +31,8 @@ class _TabNavigationTeacherState extends State<TabNavigationTeacher>
     return Scaffold(
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[
-          HomeTeacher(),
+        children:  <Widget>[
+          HomeTeacher(pageController:_pageController),
           CalendarMainTeacher(),
           CourseTeacher(),
           SettingsTeacher(),

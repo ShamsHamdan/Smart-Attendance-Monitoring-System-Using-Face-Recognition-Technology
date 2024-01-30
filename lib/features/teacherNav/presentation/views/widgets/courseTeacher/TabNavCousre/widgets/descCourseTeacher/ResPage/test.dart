@@ -78,7 +78,7 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
         .doc(widget.courseId)
         .collection('attendance')
         .add({
-      "date": date,
+      "date": date ,
       "absent": absentees ?? 0,
       "attending": attendees ?? 0,
       "allNumber":_studentData.length,

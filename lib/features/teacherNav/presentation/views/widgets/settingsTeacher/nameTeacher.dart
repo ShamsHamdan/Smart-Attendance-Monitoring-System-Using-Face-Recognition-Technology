@@ -11,15 +11,15 @@ class nameTeach extends StatefulWidget {
 
 class _nameTeachState extends State<nameTeach> {
   DocumentSnapshot? data4;
-  var dho="iM8b3g7bNwZDaLh7490f";
-String ? name;
+  var dho = "iM8b3g7bNwZDaLh7490f";
+  String? name;
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     DocumentSnapshot data4 = querySnapshot.docs[0];
-   name = data4['name'];
+    name = data4['name'];
     setState(() {});
   }
 
@@ -27,16 +27,18 @@ String ? name;
   void initState() {
     getData();
     super.initState();
+  
   }
+
   @override
   Widget build(BuildContext context) {
     return Text(
-                          "${name}",
-                           style: TextStyle(
-                      fontSize: 35,
-                     // fontFamily: "Verdana",
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                        );
+      "${name}",
+      style: TextStyle(
+          fontSize: 35,
+          // fontFamily: "Verdana",
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 0, 0, 0)),
+    );
   }
 }
