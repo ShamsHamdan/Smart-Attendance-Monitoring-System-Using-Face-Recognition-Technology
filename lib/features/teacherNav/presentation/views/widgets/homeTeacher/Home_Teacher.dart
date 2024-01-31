@@ -1,6 +1,6 @@
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/RecntlyAccessedCoursesINTeacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/chartallstudentTea.dart';
-import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/home_teacher_header.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/homenew.dart';
 
 import 'package:flutter/material.dart';
 

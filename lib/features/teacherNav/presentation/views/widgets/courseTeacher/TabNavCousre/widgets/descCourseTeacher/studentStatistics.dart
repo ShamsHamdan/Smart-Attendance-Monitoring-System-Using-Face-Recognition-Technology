@@ -87,6 +87,7 @@ class _studentStatisticsState extends State<studentStatistics> {
       //  mainAxisAlignment: MainAxisAlignment.start,
 
       children: [
+        SizedBox(height: 30,),
         Align(
           alignment: Alignment.topLeft,
           child: Text("Attendance Ratio",

@@ -31,7 +31,7 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
   int? absentees;
   int? attendees;
   String? date;
-
+  String? daysCourse;
   Future<void> getData() async {
     setState(() {
       _isLoading = true;
@@ -62,15 +62,43 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
         querySnapshotStu.docs
             .map((DocumentSnapshot doc) => doc.data() as Map<String, dynamic>)
             .toList(),
-      );  print('SD=========================================$_studentData');
+      );
+      print('SD=========================================$_studentData');
       _updateDisplayedData();
       _isLoading = false;
-    
     });
+
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(docId)
+        .collection('courses')
+        .doc(widget.courseId)
+        .get();
+
+    daysCourse = snapshot['date'];
+    print("$daysCourse");
   }
 
+  
+
+  Future<void> addAttendanceToMain(BuildContext context) async {
+    await FirebaseFirestore.instance.collection('Attendance').add({
+      "date": date,
+      "absent": absentees ?? 0,
+      "attending": attendees ?? 0,
+      "allNumber": _studentData.length,
+      "days": daysCourse,
+    }).then((value) {
+      print('');
+      print("=================================== attendance Added to main");
+    }).catchError((error) => print(
+        "=============================Failed to add course teachher: $error"));
+  }
+  
+  
   Future<void> addAttendanceToCourseInTeacher(BuildContext context) async {
     // Call the user's CollectionReference to add a new user
+
     await FirebaseFirestore.instance
         .collection('Teachers')
         .doc(docId)
@@ -78,10 +106,11 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
         .doc(widget.courseId)
         .collection('attendance')
         .add({
-      "date": date ,
+      "date": date,
       "absent": absentees ?? 0,
       "attending": attendees ?? 0,
-      "allNumber":_studentData.length,
+      "allNumber": _studentData.length,
+      "days": daysCourse,
     }).then((value) {
       print('');
       print("=================================== attendance Added to course");
@@ -107,15 +136,13 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                 data.values.toList(); // Adjust the conversion if needed
             getData();
             //_updateDisplayedData();
-     
+
             print(
                 'AT=========================================$_attendanceData');
           });
-
         }
       });
     });
-   
   }
 
   Future<void> _updateDisplayedData() async {
@@ -131,20 +158,15 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
           'profile_picture_url': profilePictureUrl,
           'is_attending': isAttending,
         });
-       
-         
       }
-       attendees = _displayedData
-            .where((student) => student['is_attending'])
-            .length
-        ;
-        absentees = _displayedData
-            .where((student) => !student['is_attending'])
-            .length
-          ;
-        setState(() {});
-        print('$absentees$attendees');
-           addAttendanceToCourseInTeacher(context);
+      attendees =
+          _displayedData.where((student) => student['is_attending']).length;
+      absentees =
+          _displayedData.where((student) => !student['is_attending']).length;
+      setState(() {});
+      print('$absentees$attendees');
+      addAttendanceToMain(context)
+          .then((value) => addAttendanceToCourseInTeacher(context));
     } else if (_selectedOption == 'Attending') {
       for (var student in _studentData) {
         String studentId = student['idStudent'];
@@ -200,6 +222,26 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        backgroundColor:kPrimaryColor,
+        elevation: 0,
+        title: const Text(
+          '',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 22, color: Colors.black),
+        ),
+        centerTitle: true, // Empty title
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            size: 25,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Container(
         color: Colors.white,
         width: MediaQuery.of(context).size.width,

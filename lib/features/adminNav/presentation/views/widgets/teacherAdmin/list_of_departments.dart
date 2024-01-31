@@ -14,16 +14,12 @@ class ListOfDepartments extends StatefulWidget {
 class _HomeScreenState extends State<ListOfDepartments> {
   List<String> facultyList = [
     'Computer Systems Engineering Department',
+    'Electrical Engineering Department',
     'Biomedical Engineering Department',
     'Architecture Engineering Department',
-    'Electrical Engineering Department',
     'Mechatronics Engineering Department',
-   
     'Civil Engineering Department',
-    'Computer Science Department',
-    'Multimedia Technology Department',
-    'Geographic Information Systems (GIS) Department',
-     'Telecommunications Engineering Department',
+    'Telecommunications Engineering Department',
   ];
 
   String filter = '';
@@ -133,7 +129,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
                               child: itemDashboard(
                                 context,
                                 faculty,
-                                'assets/images/school.jpeg',
+                                'assets/images/school-removebg-preview.png',
                                 Colors.blue,
                               ),
                             ))
