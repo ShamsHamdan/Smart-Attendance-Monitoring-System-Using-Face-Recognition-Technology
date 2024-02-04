@@ -1,5 +1,6 @@
 import 'package:first_version/constants.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/test.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,7 +19,7 @@ class ResAtt extends StatefulWidget {
 class _ResAttState extends State<ResAtt> {
   bool _isDataAvailable = false; // Track if new data is available
   bool _hasDialogShown = false; // Track if the dialog has been shown
-
+ dynamic _previousDataSnapshot;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -82,26 +83,35 @@ class _ResAttState extends State<ResAtt> {
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
   }
-
-  void listenToDataChanges() {
+ void listenToDataChanges() {
     DatabaseReference _databaseReference =
         FirebaseDatabase.instance.ref().child('attendance');
 
     _databaseReference.onValue.listen((event) {
       var data = event.snapshot.value;
+      
       if (data != null && data is Map<dynamic, dynamic>) {
-        // Check if there's new data
-        if (!_hasDialogShown) {
-          // If the dialog hasn't been shown, set _isDataAvailable to true
+        // Check if the new data is different from the previous one
+        if (!mapEquals(data, _previousDataSnapshot)) {
           setState(() {
             _isDataAvailable = true;
-            _hasDialogShown = true;
+            _previousDataSnapshot = data;
           });
           showDataArrivedDialog(); // Show the dialog when new data arrives
+        }
+      } else {
+        // No new data
+        if (_isDataAvailable) {
+          // Reset _hasDialogShown only if it was previously set
+          setState(() {
+            _isDataAvailable = false;
+          });
         }
       }
     });
   }
+
+
 
   void showDataArrivedDialog() {
     showDialog(

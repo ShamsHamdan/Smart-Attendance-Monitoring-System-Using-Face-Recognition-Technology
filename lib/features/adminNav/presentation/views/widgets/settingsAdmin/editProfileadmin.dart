@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first_version/features/adminNav/presentation/views/TabNav.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_version/constants.dart';
@@ -41,7 +43,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
     Map<String, dynamic>? data = data1.data() as Map<String, dynamic>?;
     setState(() {
       oldname = data1['name'];
-    //  oldemail = data1['email'];
+      //  oldemail = data1['email'];
       idd = data1.id;
     });
     if (data != null && data.containsKey('url')) {
@@ -71,48 +73,69 @@ class _EditProfileadminState extends State<EditProfileadmin>
       if (urlAdmin == null) {
         await FirebaseFirestore.instance.collection('Admins').doc(idd).update({
           "name": username.text,
-         // "email": email.text,
+          // "email": email.text,
         });
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(
-      //       content: Text('Password changed successfully.'),
-      //     ),
-      //  );
-          AwesomeDialog(
-                                      context: context,
-                                      dialogType: DialogType.success,
-                                      animType: AnimType.rightSlide,
-                                      title: 'Success',
-                                      titleTextStyle: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22),
-                                      desc:
-                                          'Updated successfully.',
-                                      descTextStyle: TextStyle(fontSize: 17))
-                                  .show();
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: Text('Password changed successfully.'),
+        //     ),
+        //  );
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.success,
+                animType: AnimType.rightSlide,
+                title: 'Success',
+                titleTextStyle:
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                desc: 'Updated successfully.',
+                descTextStyle: TextStyle(fontSize: 17),
+                 buttonsTextStyle: TextStyle(fontSize: 20,color: Colors.white),
+                btnOkText: "Ok",
+              btnOkOnPress: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) =>
+                  //         const TabNavigation(selectedIndex: 2),
+                  //   ),
+                  // );
 
-        // .then((value) {
-        //   print("===================================admin update$urlAdmin");
-        // }).catchError((error) =>
-        //     print("=============================Failed to update admin: $error"));
+              },
+                )
+            .show()
+            //  Navigator.pushReplacement(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) =>
+            //               const TabNavigation(selectedIndex: 2),
+            //         ),
+            //       );
+
+            .then((value) {
+           Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const TabNavigation(selectedIndex: 2),
+                    ),
+                  );
+        });
       } else {
         await FirebaseFirestore.instance.collection('Admins').doc(idd).update({
           "name": username.text,
-         // "email": email.text,
+          // "email": email.text,
           "url": urlAdmin ?? '',
         }).then((value) {
-            AwesomeDialog(
-                                      context: context,
-                                      dialogType: DialogType.success,
-                                      animType: AnimType.rightSlide,
-                                      title: 'Success',
-                                      titleTextStyle: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22),
-                                      desc:
-                                          'Updated successfully.',
-                                      descTextStyle: TextStyle(fontSize: 17))
-                                  .show();
+          AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.success,
+                  animType: AnimType.rightSlide,
+                  title: 'Success',
+                  titleTextStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  desc: 'Updated successfully.',
+                  descTextStyle: TextStyle(fontSize: 17))
+              .show();
           print("===================================admin update$urlAdmin");
         }).catchError((error) => print(
             "=============================Failed to update admin: $error"));
@@ -170,14 +193,15 @@ class _EditProfileadminState extends State<EditProfileadmin>
                                   showImagePickerOption(context);
                                 },
                                 child: CircleAvatar(
-                                  backgroundImage:urlAdmin !=null && urlAdmin!.isNotEmpty? 
-                                  NetworkImage(
-                                              Uri.parse(urlAdmin!).toString()) :
-                                      oldUrl != null && oldUrl!.isNotEmpty
+                                  backgroundImage: urlAdmin != null &&
+                                          urlAdmin!.isNotEmpty
+                                      ? NetworkImage(
+                                          Uri.parse(urlAdmin!).toString())
+                                      : oldUrl != null && oldUrl!.isNotEmpty
                                           ? NetworkImage(
                                               Uri.parse(oldUrl!).toString())
                                           : AssetImage(AssetsData.profilepic)
-                                              as ImageProvider<Object>  ,
+                                              as ImageProvider<Object>,
                                   radius: 70,
                                 ),
                               ),
@@ -357,6 +381,7 @@ class _EditProfileadminState extends State<EditProfileadmin>
                 onTap: () {
                   // _pickImageFromGallery();
                   updateAdmin(context);
+                  // navigator?.pop();
                 },
                 child: Container(
                   width: 100,

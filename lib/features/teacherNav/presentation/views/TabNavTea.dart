@@ -1,6 +1,7 @@
 import 'package:first_version/constants.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/Course_Teacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/homeTeacher/Home_Teacher.dart';
+
 import 'package:first_version/features/teacherNav/presentation/views/widgets/mainCalendar/mainCalTeacher.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/settingsTeacher/settings_teacher.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,13 @@ class TabNavigationTeacher extends StatefulWidget {
 class _TabNavigationTeacherState extends State<TabNavigationTeacher>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late  PageController _pageController;
+
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-        _pageController = PageController();
+       
   }
 
   @override
@@ -32,7 +33,7 @@ class _TabNavigationTeacherState extends State<TabNavigationTeacher>
       body: TabBarView(
         controller: _tabController,
         children:  <Widget>[
-          HomeTeacher(pageController:_pageController),
+          HomeTeacher(),
           CalendarMainTeacher(),
           CourseTeacher(),
           SettingsTeacher(),

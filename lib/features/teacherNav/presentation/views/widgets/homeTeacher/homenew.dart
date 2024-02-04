@@ -2,16 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
+
 import 'package:flutter/material.dart';
 
-class HomeTeacherHeader extends StatefulWidget {
+class HomeTeacherHeader extends StatefulWidget  {
   const HomeTeacherHeader({super.key});
 
   @override
   State<HomeTeacherHeader> createState() => _HomeTeacherHeaderState();
 }
 
-class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
+class _HomeTeacherHeaderState extends State<HomeTeacherHeader>    {
   //final PageController _pageController = PageController();
   String? url;
   DocumentSnapshot? data1;
@@ -114,11 +115,11 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  //  WidgetsBinding.instance.addPostFrameCallback((_) {
       getData().then((_) =>  getDataAtten() ,);
     
       print("hello home");
-    });
+   // });
   }
 
   // @override
@@ -160,6 +161,8 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
 
   @override
   Widget build(BuildContext context) {
+    
+
     // dataFetched = false;
     // getData().then((_) => getDataAtten());
     return SizedBox(
@@ -392,4 +395,8 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
           }),
     );
   }
+  
+  // @override
+  // // TODO: implement wantKeepAlive
+  // bool get wantKeepAlive => throw UnimplementedError();
 }

@@ -2,6 +2,7 @@
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:first_version/constants.dart';
+import 'package:first_version/features/adminNav/presentation/views/TabNav.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -42,8 +43,28 @@ class _ChangePasswordAdminState extends State<ChangePasswordAdmin> {
                                           fontSize: 22),
                                       desc:
                                           'Password changed successfully.',
-                                      descTextStyle: TextStyle(fontSize: 17))
-                                  .show();
+                                      descTextStyle: TextStyle(fontSize: 17),
+                                      btnOkText: "ok",
+                                      buttonsTextStyle: TextStyle(fontSize: 20,color: Colors.white),
+                                      btnOkOnPress: () {
+                                        
+                                      },)
+                                  .show()
+
+
+
+
+
+
+            .then((value) {
+           Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const TabNavigation(selectedIndex: 2),
+                    ),
+                  );
+        });
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(
         //     content: Text('Password changed successfully.'),

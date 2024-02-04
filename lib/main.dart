@@ -65,7 +65,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         // '/':(context) => const getStarted(),
         "/loginTeacher": (context) => const loginTeacher(),
         "/loginAdmin": (context) => const adminLoginRegstrationBody(),
-        "/homeadmin": (context) => TabNavigation(),
+        "/homeadmin": (context) => TabNavigation(selectedIndex: 0,),
         "/changepassowrdadmin": (context) => ChangePasswordAdmin(),
         "/editProfileadmin": (context) => EditProfileadmin(),
         "/TermsandConditions": (context) => TermsandConditions(),
