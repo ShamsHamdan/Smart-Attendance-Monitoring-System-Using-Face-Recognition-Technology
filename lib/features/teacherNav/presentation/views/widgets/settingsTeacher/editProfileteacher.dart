@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first_version/features/teacherNav/presentation/views/TabNavTea.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_version/constants.dart';
@@ -93,13 +94,25 @@ class _EditProfileTeacherState extends State<EditProfileTeacher>
                 titleTextStyle:
                     TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 desc: 'Updated successfully.',
-                descTextStyle: TextStyle(fontSize: 17))
-            .show();
+                descTextStyle: TextStyle(fontSize: 17),
+                  btnOkText: "Ok",
+                     buttonsTextStyle: TextStyle(fontSize: 20,color: Colors.white),
+                  btnOkOnPress: () {
+                    
+                  },)
+            .show() .then((value) {
+          Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TabNavigationTeacher(
+                          initialIndex: 3,
+                        ),
+                      ),
+                    ); 
+        });
 
-        // .then((value) {
-        //   print("===================================admin update$urlAdmin");
-        // }).catchError((error) =>
-        //     print("=============================Failed to update admin: $error"));
+
+     
       } else {
         await FirebaseFirestore.instance.collection('Admins').doc(idd).update({
           "name": username.text,
@@ -114,8 +127,32 @@ class _EditProfileTeacherState extends State<EditProfileTeacher>
                   titleTextStyle:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                   desc: 'Updated successfully.',
-                  descTextStyle: TextStyle(fontSize: 17))
-              .show();
+                  descTextStyle: TextStyle(fontSize: 17),
+                  btnOkText: "Ok",
+                  buttonsTextStyle: TextStyle(fontSize: 20,color: Colors.white),
+                  btnOkOnPress: () {
+                    
+                  },)
+              .show()
+              
+            .then((value) {
+          Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TabNavigationTeacher(
+                          initialIndex: 3,
+                        ),
+                      ),
+                    ); 
+        });
+
+
+
+
+
+
+
+
           print("===================================admin update$urlAdmin");
         }).catchError((error) => print(
             "=============================Failed to update admin: $error"));

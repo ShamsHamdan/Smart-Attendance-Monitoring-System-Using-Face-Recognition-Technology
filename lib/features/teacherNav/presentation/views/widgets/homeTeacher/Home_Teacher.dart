@@ -4,6 +4,12 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/hom
 
 import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+
+
+
+
+
 class HomeTeacher extends StatefulWidget {
   const HomeTeacher({super.key,});
 
@@ -12,13 +18,14 @@ class HomeTeacher extends StatefulWidget {
 }
 
 class _HomeTeacherState extends State<HomeTeacher>   {
- //final PageController _pageController = PageController();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print("hello");
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    
+    });
   }
 
 

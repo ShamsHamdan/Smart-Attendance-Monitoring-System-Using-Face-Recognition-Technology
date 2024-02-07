@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add-student-form.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/listCoursesOfEachTeacher.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -112,15 +113,29 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
       "department": _selectedSpecialty,
     }).then((value) {
       AwesomeDialog(
-              context: context,
-              dialogType: DialogType.success,
-              animType: AnimType.rightSlide,
-              title: 'Success',
-              titleTextStyle:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              desc: 'Course added successfully.',
-              descTextStyle: TextStyle(fontSize: 17))
-          .show();
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'Success',
+        titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        desc: 'Course added successfully.',
+        descTextStyle: TextStyle(fontSize: 17),
+        btnOkText: "Ok",
+        buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        btnOkOnPress: () {},
+      ).show()
+      .then((value) {
+        Navigator.pushReplacement(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                               ListofAddedCoursesForTeacher(categoryId: widget.docId,
+                           
+                          ),
+                          transitionDuration: Duration.zero,
+                        ),
+                      );
+      });
 
       print("=================================== course Added to teacher");
     }).catchError((error) => print(
@@ -249,7 +264,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _name,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 20),
                         hintText: 'Course Name',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -273,7 +289,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _courseId,
                     decoration: InputDecoration(
-                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 20),
                         hintText: 'Course ID',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -298,7 +315,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     controller: _teacherName,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
                         labelText: 'Teacher Name',
                         labelStyle: const TextStyle(
                             fontSize: 20,
@@ -323,7 +341,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _teacherId,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                         labelText: 'Teacher ID',
                         labelStyle: const TextStyle(
                             fontSize: 20,
@@ -347,7 +366,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _time,
                     decoration: InputDecoration(
-                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 20),
                         hintText: 'Time',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -371,7 +391,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _date,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 20),
                         hintText: 'Days',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -395,7 +416,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _room,
                     decoration: InputDecoration(
-                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 20),
                         hintText: 'Room',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -419,7 +441,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     controller: _sec,
                     decoration: InputDecoration(
-                       contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 20),
                         hintText: 'Section Number',
                         hintStyle: const TextStyle(
                             fontSize: 16,
@@ -451,7 +474,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                       _selectedFaculty = value!;
                     },
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 7),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 7),
                         hintText: 'Faculty',
                         //  hintStyle: TextStyle(fontSize: 18),
                         fillColor: Colors.grey[250],
@@ -480,7 +504,8 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                       _selectedSpecialty = value!;
                     },
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 13,horizontal: 7),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 7),
                         hintText: 'Specialty',
                         fillColor: Colors.grey[200],
                         filled: true,

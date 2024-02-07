@@ -142,15 +142,21 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
       "department": _selectedSpecialty,
     }).then((value) {
       AwesomeDialog(
-              context: context,
-              dialogType: DialogType.success,
-              animType: AnimType.rightSlide,
-              title: 'Success',
-              titleTextStyle:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              desc: 'Course updated successfully.',
-              descTextStyle: TextStyle(fontSize: 17))
-          .show();
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'Success',
+        titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        desc: 'Course updated successfully.',
+        descTextStyle: TextStyle(fontSize: 17),
+        btnOkText: "Ok",
+        buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        btnOkOnPress: () {},
+       ).show();
+      //.then((value) {
+      //   Navigator.pushAndRemoveUntil(
+      //       context, '/listofaddedcourse' as Route<Object?>, (route) => false);
+      // });
 
       print("=================================== course updated to teacher");
     }).catchError((error) => print(
@@ -192,7 +198,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
       print(
           "=============================Failed to add course to main: $error");
 
-           AwesomeDialog(
+      AwesomeDialog(
               context: context,
               dialogType: DialogType.error,
               animType: AnimType.rightSlide,
@@ -329,8 +335,9 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                           borderSide: BorderSide(color: Colors.red),
                         ),
                         border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: .5, ),
+                            borderSide: BorderSide(
+                              width: .5,
+                            ),
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
                   const SizedBox(height: 30),
@@ -530,8 +537,10 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 5),
                         labelText: 'Faculty',
-                        labelStyle:
-                            TextStyle(fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold),
+                        labelStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
                         fillColor: Colors.grey[250],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
@@ -561,8 +570,10 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 5),
                         labelText: 'Specialty',
-                        labelStyle:
-                            TextStyle(fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold),
+                        labelStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
                         fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
@@ -585,8 +596,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(kPrimaryColor),
+                      backgroundColor: MaterialStateProperty.all(kPrimaryColor),
                       padding: MaterialStateProperty.all(
                           EdgeInsets.symmetric(horizontal: 70, vertical: 7)),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(

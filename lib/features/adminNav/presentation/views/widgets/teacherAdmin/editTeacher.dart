@@ -108,8 +108,20 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
               titleTextStyle:
                   TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               desc: 'Teacher updated successfully.',
-              descTextStyle: TextStyle(fontSize: 17))
-          .show();
+              descTextStyle: TextStyle(fontSize: 17),
+               buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        btnOkText: "Ok",
+        btnOkOnPress: () {},)
+          .show() .then((value) { Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const AddTeacherandCourseInAdminTabNav(
+                              initialIndex: 1,
+                            ),
+                          ),
+                        ); });
+
 
       print("=================================== teacher updated");
     }).catchError((error) {

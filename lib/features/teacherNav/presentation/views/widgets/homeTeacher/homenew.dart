@@ -5,14 +5,14 @@ import 'package:first_version/core/utils/assets.dart';
 
 import 'package:flutter/material.dart';
 
-class HomeTeacherHeader extends StatefulWidget  {
+class HomeTeacherHeader extends StatefulWidget {
   const HomeTeacherHeader({super.key});
 
   @override
   State<HomeTeacherHeader> createState() => _HomeTeacherHeaderState();
 }
 
-class _HomeTeacherHeaderState extends State<HomeTeacherHeader>    {
+class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
   //final PageController _pageController = PageController();
   String? url;
   DocumentSnapshot? data1;
@@ -112,20 +112,40 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader>    {
     setState(() {});
   }
 
+
+  
+
   @override
   void initState() {
     super.initState();
-  //  WidgetsBinding.instance.addPostFrameCallback((_) {
-      getData().then((_) =>  getDataAtten() ,);
-    
-      print("hello home");
-   // });
+     print("hello home");
+    //  WidgetsBinding.instance.addPostFrameCallback((_) {
+    getData().then(
+      (_) => getDataAtten(),
+    );
+
+   
+    // });
   }
+
+  
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   print("didChangeDependencies called");
+  //   getData().then(
+  //     (_) => getDataAtten(),
+  //   );
+  // }
 
   // @override
   // void didUpdateWidget(HomeTeacherHeader oldWidget) {
   //   super.didUpdateWidget(oldWidget);
-  //   fetchData();
+  //   getData().then(
+  //     (_) => getDataAtten(),
+  //   );
+  //   print("changes");
   // }
 
   // void fetchData() async {
@@ -161,8 +181,6 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader>    {
 
   @override
   Widget build(BuildContext context) {
-    
-
     // dataFetched = false;
     // getData().then((_) => getDataAtten());
     return SizedBox(
@@ -172,8 +190,8 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader>    {
 
           // controller: _pageController,
           itemBuilder: (BuildContext context, int index) {
-           // fetchData();
-           // dataFetched = false;
+            // fetchData();
+            // dataFetched = false;
             return Stack(
               children: [
                 Container(
@@ -395,7 +413,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader>    {
           }),
     );
   }
-  
+
   // @override
   // // TODO: implement wantKeepAlive
   // bool get wantKeepAlive => throw UnimplementedError();

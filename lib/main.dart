@@ -69,7 +69,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         "/changepassowrdadmin": (context) => ChangePasswordAdmin(),
         "/editProfileadmin": (context) => EditProfileadmin(),
         "/TermsandConditions": (context) => TermsandConditions(),
-        "/homeTeacher": (context) => TabNavigationTeacher(),
+        "/homeTeacher": (context) => TabNavigationTeacher(initialIndex: 0,),
         "/editProfileteacher": (context) => EditProfileTeacher(),
         "/changepassowrdteacher": (context) => ChangePasswordTeacher(),
         "/PrivacyPolicy": (context) => PrivacyPolicy(),
@@ -85,7 +85,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         '/listOfCourses': (context) => ListOfCoursesPage(),
         '/addCourseForm': (context) => const AddCourseFormPage(),
         '/recnAddCoursesInAdmin': (context) => ListofAddedCourses(),
-        '/addNavInAdmin': (context) => AddTeacherandCourseInAdminTabNav(),
+        '/addNavInAdmin': (context) => AddTeacherandCourseInAdminTabNav(initialIndex: 0,),
       },
     );
   }

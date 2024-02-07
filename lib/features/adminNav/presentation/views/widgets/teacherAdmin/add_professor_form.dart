@@ -90,30 +90,39 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
       "Admin": WhichAdmin ?? '',
     }).then((value) {
       AwesomeDialog(
-              context: context,
-              dialogType: DialogType.success,
-              animType: AnimType.rightSlide,
-              title: 'Success',
-              titleTextStyle:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              desc: 'Teacher added successfully.',
-              descTextStyle: TextStyle(fontSize: 17))
-          .show();
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'Success',
+        titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        desc: 'Teacher added successfully.',
+        descTextStyle: TextStyle(fontSize: 17),
+        buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        btnOkText: "Ok",
+        btnOkOnPress: () {},
+      ).show()
+      .then((value) { Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const AddTeacherandCourseInAdminTabNav(
+                              initialIndex: 1,
+                            ),
+                          ),
+                        ); });
 
       print("=================================== teacher Added");
     }).catchError((error) {
-           AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.error,
-                                            animType: AnimType.rightSlide,
-                                            title: 'Failed',
-                                            titleTextStyle: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 22),
-                                            desc: 'Failed to add teacher.',
-                                            descTextStyle:
-                                                TextStyle(fontSize: 17))
-                                        .show();
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.rightSlide,
+              title: 'Failed',
+              titleTextStyle:
+                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+              desc: 'Failed to add teacher.',
+              descTextStyle: TextStyle(fontSize: 17))
+          .show();
       print("=============================Failed to add teacher: $error");
     });
   }

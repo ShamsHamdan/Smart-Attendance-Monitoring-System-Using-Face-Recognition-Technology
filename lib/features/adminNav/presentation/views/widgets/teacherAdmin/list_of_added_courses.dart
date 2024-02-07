@@ -16,43 +16,36 @@ class ListofAddedCourses extends StatefulWidget {
 }
 
 class _ListofAddedCoursesState extends State<ListofAddedCourses> {
-
- List<QueryDocumentSnapshot> data = [];
-
+  List<QueryDocumentSnapshot> data = [];
+  // String? depInDai;
+  // String? faculty;
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Courses')
         .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     data.addAll(querySnapshot.docs);
-  
-    setState(() {
-     
-    });
+
+    setState(() {});
   }
 
-
-
- @override
+  @override
   void initState() {
     getData();
     // TODO: implement initState
     super.initState();
   }
 
-
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('List of added Courses',style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),),
+        title: Text(
+          'List of added Courses',
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -61,26 +54,73 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-          
             Expanded(
                 child: ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, i) {
-                   return   InkWell(
-                    onTap: () {
-                       Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ListofAddedStudentForCourseMain(categoryId:data[i].id)),
-          );
-                    },
-                     child: buildCourseContainer(
+                       String faculty = "";
+                String depInDai = "";
+                     
+                if (data[i]["faculty"] == "Faculty of Engineering and Information Technology") {
+                  faculty = "EIT";
+                  print("$faculty");
+                } else {
+                  faculty = data[i]["faculty"];
+                }
+
+                if (data[i]["department"] == "Computer systems engineering Department") {
+                  depInDai = "CSE";
+                }
+                      return InkWell(
+                        onLongPress: () {
+                          _showAttendanceDialog(
+                              context,
+                              data[i]["TeacherName"],
+                              faculty ,
+                              depInDai );
+                          //             showDialog(
+                          //   context: context,
+                          //   builder: (BuildContext context) {
+                          //     return Dialog(
+                          //       shape: RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.circular(20),
+                          //       ),
+                          //       child: SizedBox(
+                          //         height: 200,
+                          //         child: Column(
+                          //           mainAxisAlignment: MainAxisAlignment.center,
+                          //           children: [
+                          //              Text('Teacher: Mohammad Awad',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                          //             SizedBox(height: 10,),
+                          //            Text('Faculty:EIT',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                          //             SizedBox(height: 10,),
+                          //             Text('Department:CSE',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          // );
+                        },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ListofAddedStudentForCourseMain(
+                                        categoryId: data[i].id)),
+                          );
+                        },
+                        child: buildCourseContainer(
                             data[i]["name"],
                             data[i]["idCourse"],
                             Colors.white,
                             kPrimaryColor,
                             data[i]["url"],
-                            kPrimaryColor,context),
-                   );
+                            kPrimaryColor,
+                            context),
+                      );
                     })),
           ],
         ),
@@ -88,7 +128,7 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
       // floatingActionButton: FloatingActionButton(
       //   backgroundColor: kPrimaryColor,
       //   onPressed: () {
-           
+
       //     Navigator.push(
       //       context,
       //       MaterialPageRoute(builder: (context) => MyApp()),
@@ -98,7 +138,15 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
       // ),
     );
   }
- Widget buildCourseContainer(String name, String subtitle, Color containerColor, Color textColor, String imagePath, Color iconColor, BuildContext context) {
+
+  Widget buildCourseContainer(
+      String name,
+      String subtitle,
+      Color containerColor,
+      Color textColor,
+      String imagePath,
+      Color iconColor,
+      BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
@@ -109,78 +157,94 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
         color: containerColor,
       ),
       child: ListTile(
-        title: Text(name, style: TextStyle(color: textColor,fontSize: 18,fontWeight: FontWeight.bold)),
-        subtitle: Text(subtitle, style: TextStyle(color: textColor,fontSize: 17)),
+        title: Text(name,
+            style: TextStyle(
+                color: textColor, fontSize: 18, fontWeight: FontWeight.bold)),
+        subtitle:
+            Text(subtitle, style: TextStyle(color: textColor, fontSize: 17)),
         trailing: GestureDetector(
-          onTap: () {
-            // Show dialog here
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: SizedBox(
-                    height: 200,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Teacher: Mohammad Awad',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 10,),
-                        const Text('Faculty:EIT',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-                        SizedBox(height: 10,),
-                        const Text('Department:CSE',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+          // onLongPress: () {
+          //   // Show dialog here
+          //   showDialog(
+          //     context: context,
+          //     builder: (BuildContext context) {
+          //       return Dialog(
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(20),
+          //         ),
+          //         child: SizedBox(
+          //           height: 200,
+          //           child: Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               const Text(
+          //                 'Teacher: Mohammad Awad',
+          //                 style: TextStyle(
+          //                     fontSize: 20, fontWeight: FontWeight.bold),
+          //               ),
+          //               SizedBox(
+          //                 height: 10,
+          //               ),
+          //               const Text('Faculty:EIT',
+          //                   style: TextStyle(
+          //                       fontSize: 20, fontWeight: FontWeight.bold)),
+          //               SizedBox(
+          //                 height: 10,
+          //               ),
+          //               const Text('Department:CSE',
+          //                   style: TextStyle(
+          //                       fontSize: 20, fontWeight: FontWeight.bold)),
 
-                  //       const SizedBox(height: 20),
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //         children: [
-                  //           ElevatedButton(
-                  //             onPressed: () {
-                  //               // Handle Add button press
-                                
-                  //               Navigator.of(context).pop();
-                  //             },
-                  //             style:  ButtonStyle(
-                  //   backgroundColor: MaterialStateProperty.all(kPrimaryColor),
-                  //   padding: MaterialStateProperty.all(
-                  //       EdgeInsets.symmetric(horizontal: 40, vertical: 10)),
-                  //   shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(27))),
-                  // ),
-                  //             child: const Text('Add', style: TextStyle(color: Colors.white)),
-                  //           ),
-                  //           ElevatedButton(
-                  //             onPressed: () {
-                  //               Navigator.of(context).pop();
-                  //             },
-                  //             style:  ButtonStyle(
-                  //   backgroundColor: MaterialStateProperty.all(Colors.red),
-                  //   padding: MaterialStateProperty.all(
-                  //       EdgeInsets.symmetric(horizontal: 40, vertical: 10)),
-                  //   shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(27))),
-                  // ),
-                  //             child: const Text('Cancel', style: TextStyle(color: Colors.white)),
-                  //           ),
-                  //         ],
-                  //       ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
-          },
+          //               //       const SizedBox(height: 20),
+          //               //       Row(
+          //               //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //               //         children: [
+          //               //           ElevatedButton(
+          //               //             onPressed: () {
+          //               //               // Handle Add button press
+
+          //               //               Navigator.of(context).pop();
+          //               //             },
+          //               //             style:  ButtonStyle(
+          //               //   backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+          //               //   padding: MaterialStateProperty.all(
+          //               //       EdgeInsets.symmetric(horizontal: 40, vertical: 10)),
+          //               //   shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          //               //       borderRadius: BorderRadius.circular(27))),
+          //               // ),
+          //               //             child: const Text('Add', style: TextStyle(color: Colors.white)),
+          //               //           ),
+          //               //           ElevatedButton(
+          //               //             onPressed: () {
+          //               //               Navigator.of(context).pop();
+          //               //             },
+          //               //             style:  ButtonStyle(
+          //               //   backgroundColor: MaterialStateProperty.all(Colors.red),
+          //               //   padding: MaterialStateProperty.all(
+          //               //       EdgeInsets.symmetric(horizontal: 40, vertical: 10)),
+          //               //   shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          //               //       borderRadius: BorderRadius.circular(27))),
+          //               // ),
+          //               //             child: const Text('Cancel', style: TextStyle(color: Colors.white)),
+          //               //           ),
+          //               //         ],
+          //               //       ),
+          //             ],
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   );
+          // },
           child: Icon(Icons.arrow_forward_ios, color: iconColor),
         ),
         leading: CircleAvatar(
           radius: 20,
           backgroundColor: Colors.white,
-          backgroundImage:imagePath != null && imagePath!.isNotEmpty
+          backgroundImage: imagePath != null && imagePath!.isNotEmpty
               ? NetworkImage(Uri.parse(imagePath!).toString())
-              : AssetImage(AssetsData.imageAddCourseDef) as ImageProvider<Object>,
+              : AssetImage(AssetsData.imageAddCourseDef)
+                  as ImageProvider<Object>,
         ),
         // onTap: () {
         //   print('onTap Pressed');
@@ -192,6 +256,72 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
+    );
+  }
+
+  void _showAttendanceDialog(
+      BuildContext context, String name, String faculty, String dep) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Course Details:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Teacher:$name',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Faculty:$faculty',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Department:$dep',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: kPrimaryColor,
+                  onPrimary: Colors.white,
+                ),
+                child: Text(
+                  'OK',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        );
+      },
     );
   }
 }

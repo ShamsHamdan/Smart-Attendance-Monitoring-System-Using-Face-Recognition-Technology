@@ -112,31 +112,141 @@ class _ListofAddedCoursesForTeacherState
                                 btnCancelOnPress: () {},
                                 btnOkOnPress: () async {
                                   try {
-                                    await FirebaseFirestore.instance
-                                        .collection('Teachers')
-                                        .doc(widget.categoryId)
-                                        .collection('courses')
-                                        .doc(data[i].id)
+                                    // await FirebaseFirestore.instance
+                                    //     .collection('Teachers')
+                                    //     .doc(widget.categoryId)
+                                    //     .collection('courses')
+                                    //     .doc(data[i].id)
                                         
-                                        .delete();
+                                    //     .delete();
 
-                                    CollectionReference collectionRef =
-                                        FirebaseFirestore.instance
-                                            .collection('Courses');
 
-                                    // Query the documents based on specific criteria using the 'where' clause
-                                    QuerySnapshot querySnapshot =
-                                        await collectionRef
-                                            .where('idCourse',
-                                                isEqualTo:  data[i]['idCourse'])
-                                            .where("TeacherId",
-                                                isEqualTo:teacherId)
-                                            .get();
+  // Get a reference to the teacher document
+  final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(widget.categoryId);
 
-                                    for (QueryDocumentSnapshot docSnapshot
-                                        in querySnapshot.docs) {
-                                      await docSnapshot.reference.delete();
-                                    }
+  // Get a reference to the course document
+  final courseRef = teacherRef.collection('courses').doc(data[i].id);
+
+  // Start a batch to perform atomic operations
+  final batch = FirebaseFirestore.instance.batch();
+
+  // Delete the course document
+  batch.delete(courseRef);
+
+  // Get a reference to the students subcollection of the course
+  final studentsRef = courseRef.collection('students');
+
+  // Get a reference to the attendance subcollection of the course
+  final attendanceRef = courseRef.collection('attendance');
+
+  // Check if the course has any students or attendance
+  final studentsQuerySnapshot = await studentsRef.get();
+  final attendanceQuerySnapshot = await attendanceRef.get();
+
+  // If either students or attendance exist, delete them
+  if (studentsQuerySnapshot.docs.isNotEmpty || attendanceQuerySnapshot.docs.isNotEmpty) {
+    // Delete all documents in the students subcollection
+    for (final studentDoc in studentsQuerySnapshot.docs) {
+      batch.delete(studentDoc.reference);
+    }
+
+    // Delete all documents in the attendance subcollection
+    for (final attendanceDoc in attendanceQuerySnapshot.docs) {
+      batch.delete(attendanceDoc.reference);
+    }
+  }
+
+  // Commit the batch operation
+  await batch.commit();
+
+  // Get a reference to the main Courses collection
+  final mainCoursesRef = FirebaseFirestore.instance.collection('Courses');
+
+  // Delete the course documents from the main Courses collection
+  final mainCourseQuerySnapshot = await mainCoursesRef
+      .where('idCourse', isEqualTo: data[i]["idCourse"])
+      .where('TeacherId', isEqualTo: teacherId)
+      .get();
+
+  for (final mainCourseDoc in mainCourseQuerySnapshot.docs) {
+    await mainCourseDoc.reference.delete();
+  }
+
+  // Get a reference to the main Students collection
+  final mainStudentsRef = FirebaseFirestore.instance.collection('Students');
+
+  // Delete the student documents from the main Students collection
+  for (final studentDoc in studentsQuerySnapshot.docs) {
+    final studentId = studentDoc["idStudent"];
+    final mainStudentQuerySnapshot = await mainStudentsRef
+        .where('idStudent', isEqualTo: studentId)
+        .get();
+
+    for (final mainStudentDoc in mainStudentQuerySnapshot.docs) {
+      await mainStudentDoc.reference.delete();
+    }
+  }
+
+
+
+
+//  final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(widget.categoryId);
+
+//   // Get a reference to the course document
+//   final courseRef = teacherRef.collection('courses').doc(data[i].id);
+
+//   // Start a batch to perform atomic operations
+//   final batch = FirebaseFirestore.instance.batch();
+
+//   // Delete the course document
+//   batch.delete(courseRef);
+
+//   // Get a reference to the students subcollection of the course
+//   final studentsRef = courseRef.collection('students');
+
+//   // Get a reference to the attendance subcollection of the course
+//   final attendanceRef = courseRef.collection('attendance');
+
+//   // Check if the course has any students or attendance
+//   final studentsQuerySnapshot = await studentsRef.get();
+//   final attendanceQuerySnapshot = await attendanceRef.get();
+
+//   // If either students or attendance exist, delete them
+//   if (studentsQuerySnapshot.docs.isNotEmpty || attendanceQuerySnapshot.docs.isNotEmpty) {
+//     // Delete all documents in the students subcollection
+//     for (final studentDoc in studentsQuerySnapshot.docs) {
+//       batch.delete(studentDoc.reference);
+//     }
+
+//     // Delete all documents in the attendance subcollection
+//     for (final attendanceDoc in attendanceQuerySnapshot.docs) {
+//       batch.delete(attendanceDoc.reference);
+//     }
+//   }
+
+//   // Commit the batch operation
+//   await batch.commit();
+
+
+
+
+//                                     CollectionReference collectionRef =
+//                                         FirebaseFirestore.instance
+//                                             .collection('Courses');
+
+//                                     // Query the documents based on specific criteria using the 'where' clause
+//                                     QuerySnapshot querySnapshot =
+//                                         await collectionRef
+//                                             .where('idCourse',
+//                                                 isEqualTo:  data[i]['idCourse'])
+//                                             .where("TeacherId",
+//                                                 isEqualTo:teacherId)
+//                                             .get();
+
+//                                     for (QueryDocumentSnapshot docSnapshot
+//                                         in querySnapshot.docs) {
+//                                       await docSnapshot.reference.delete();
+//                                     }
 
                                     AwesomeDialog(
                                             context: context,
