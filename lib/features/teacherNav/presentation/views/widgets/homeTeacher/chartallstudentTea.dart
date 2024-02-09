@@ -13,7 +13,6 @@ class TeacherHomeChart extends StatefulWidget {
 }
 
 class _TeacherHomeChartState extends State<TeacherHomeChart> {
-  
   String? docId;
   String? courseId;
   int? numofattending;
@@ -74,7 +73,13 @@ class _TeacherHomeChartState extends State<TeacherHomeChart> {
     // TODO: implement initState
     super.initState();
     print("hello");
-    getData().then((_) => getDataAtten());
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      if (ModalRoute.of(context)?.isCurrent == true) {
+        print("Fetching data for TeacherHomeChart");
+        getData().then((_) => getDataAtten());
+        print("$courseId");
+      }
+    });
   }
 
   @override
@@ -240,7 +245,7 @@ class BarChartSample2 extends StatelessWidget {
               reservedSize: 42,
             ),
           ),
-         leftTitles: AxisTitles(
+          leftTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 28,
@@ -256,7 +261,6 @@ class BarChartSample2 extends StatelessWidget {
               // ),
             ),
           ),
-
           show: true,
         ),
         borderData: FlBorderData(

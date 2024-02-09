@@ -69,7 +69,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         "/changepassowrdadmin": (context) => ChangePasswordAdmin(),
         "/editProfileadmin": (context) => EditProfileadmin(),
         "/TermsandConditions": (context) => TermsandConditions(),
-        "/homeTeacher": (context) => TabNavigationTeacher(initialIndex: 0,),
+       // "/homeTeacher": (context) => TabNavigationTeacher(initialIndex: 0,),
         "/editProfileteacher": (context) => EditProfileTeacher(),
         "/changepassowrdteacher": (context) => ChangePasswordTeacher(),
         "/PrivacyPolicy": (context) => PrivacyPolicy(),

@@ -119,10 +119,18 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
   void initState() {
     super.initState();
      print("hello home");
-    //  WidgetsBinding.instance.addPostFrameCallback((_) {
-    getData().then(
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+      if (ModalRoute.of(context)?.isCurrent == true) {
+        print("Fetching data for HomeTeacherHeader");
+        getData().then(
       (_) => getDataAtten(),
     );
+
+      }
+    });
+    //  WidgetsBinding.instance.addPostFrameCallback((_) {
+   
+   
 
    
     // });
@@ -416,5 +424,5 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
 
   // @override
   // // TODO: implement wantKeepAlive
-  // bool get wantKeepAlive => throw UnimplementedError();
+  // bool get wantKeepAlive => false;
 }

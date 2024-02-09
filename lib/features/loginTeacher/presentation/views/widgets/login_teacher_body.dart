@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
+import 'package:first_version/features/teacherNav/presentation/views/TabNavTea.dart';
 import 'package:flutter/material.dart';
 
 class LoginTeacherBody extends StatefulWidget {
@@ -154,7 +155,14 @@ class _LoginTeacherBodyState extends State<LoginTeacherBody> {
                               email: email.text,
                               password: pass.text,
                             );
-                            Navigator.pushNamed(context, "/homeTeacher");
+                             Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                TabNavigationTeacher(initialIndex: 0,),    ),
+                          );
+                           // TabNavigationTeacher(initialIndex: 0,),
+                           // Navigator.pushNamed(context, "/homeTeacher");
                           } on FirebaseAuthException catch (e) {
                             if (e.code == e.code) {
                               print('No user found for that email.');
