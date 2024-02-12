@@ -3,7 +3,6 @@ import 'package:first_version/features/adminNav/presentation/views/widgets/cours
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/TabNavAddTeacherandCourse.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_professor_form.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_teacheres_Admin.dart';
-//import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
 import 'package:flutter/material.dart';
 
 
@@ -138,36 +137,36 @@ class  QuickActions extends StatelessWidget {
           //     ),
           //   ],
           // ), 
-            // Column(
-            //   children: [
-            //     Container(
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(50),
-            //         border: Border.all(
-            //           color: Color(0xFFE4E7EC),
-            //           width: 2,
-            //         ),
-            //       ),
-            //       child: CircleAvatar(
-            //         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-            //         radius: 30,
-            //         child: Icon(
-            //           Icons.bar_chart,
-            //           color: kPrimaryColor,
-            //           size: 30,
-            //         ),
-            //       ),
-            //     ),
-            //     SizedBox(height: 7),
-            //     const Text(
-            //       "Statistics",
-            //       style: TextStyle(
-            //         color: Color.fromARGB(255, 0, 0, 0),
-            //         fontSize: 17,
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(
+                      color: Color(0xFFE4E7EC),
+                      width: 2,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+                    radius: 30,
+                    child: Icon(
+                      Icons.bar_chart,
+                      color: kPrimaryColor,
+                      size: 30,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 7),
+                const Text(
+                  "Statistics",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 17,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       );

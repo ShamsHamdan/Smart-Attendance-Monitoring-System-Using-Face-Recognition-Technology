@@ -49,6 +49,7 @@ dependencies:
   firebase_database: ^10.4.0
   collection: ^1.15.0
   scroll_to_index: ^3.0.1
+  shared_preferences: ^2.0.0
 
 dev_dependencies:
 

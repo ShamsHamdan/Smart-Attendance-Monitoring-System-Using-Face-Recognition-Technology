@@ -107,23 +107,27 @@ class _ListCoursestestState extends State<ListCoursestest> {
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 26,
                         fontWeight: FontWeight.bold)),
-                IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      // showSearchField = true; // Set showSearchField to true
-                    });
-                  },
-                ),
+                // IconButton(
+                //   icon: Icon(
+                //     Icons.search,
+                //     color: Colors.black,
+                //     size: 30,
+                //   ),
+                //   onPressed: () {
+                //     setState(() {
+                //       // showSearchField = true; // Set showSearchField to true
+                //     });
+                //   },
+                // ),
               ],
             ),
           ),
           Expanded(
-            child: ListView.separated(
+            child:
+             dataOfCourses.isEmpty
+            ? Center(child: CircularProgressIndicator()) // Show loading indicator
+            :
+             ListView.separated(
               shrinkWrap: true,
               itemCount: dataOfCourses.length,
               itemBuilder: (context, i) {

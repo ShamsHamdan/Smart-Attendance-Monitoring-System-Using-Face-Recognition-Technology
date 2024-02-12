@@ -30,11 +30,9 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
         .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     data.addAll(querySnapshot.docs);
-    // Map<String, dynamic>? data = data1.data() as Map<String, dynamic>?;
+    
     setState(() {
-      // print("${data[0]['name']}");
-      // Adminemail = data['email'];
-      // Adminpass = data['password'];
+      
     });
   }
 
@@ -64,7 +62,10 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
         child: Column(
           children: [
             Expanded(
-                child: ListView.builder(
+                child:  data.isEmpty
+            ? Center(child: CircularProgressIndicator()) // Show loading indicator
+            :
+                ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, i) {
                       return InkWell(
@@ -307,7 +308,8 @@ final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(data[i]
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ).show();
                         },
-                        child: buildTeacherContainer(
+                        child:  
+                         buildTeacherContainer(
                             data[i]["name"],
                             data[i]["id"],
                             Colors.white,

@@ -111,7 +111,7 @@ class _HomeAdminHeaderState extends State<HomeAdminHeader> {
           Positioned(
             top: 100,
             left: 20,
-            child: Text("Hi ${name ?? 'Admin'}",
+            child: Text(" ${name ?? 'Admin'}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,

@@ -1,3 +1,4 @@
+
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdminfol/AdminHeader.dart';
@@ -17,24 +18,28 @@ class BodyHomeAdmin extends StatefulWidget {
 }
 
 class _BodyHomeAdminState extends State<BodyHomeAdmin> {
-  final AutoScrollController _scrollController = AutoScrollController();
+
+    final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-     children: [
-      HomeAdminHeader(),
-      QuickActions(scrollController: _scrollController,),
-      SizedBox(
-        height: 30,
+    return SingleChildScrollView(
+         controller: scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+       children: [
+        HomeAdminHeader(),
+        QuickActions(scrollController: scrollController,),
+        SizedBox(
+          height: 30,
+        ),
+       RecentlyAddCourses(),
+        SizedBox(
+          height: 30,
+        ),
+         RecentlyAddTeachers(),
+         AdminChart(),
+      ]
       ),
-      RecntlyAddCourses(),
-      SizedBox(
-        height: 30,
-      ),
-   RecentlyAddTeachers(),
-   AdminChart(),
-    ]
     );
   }
 }

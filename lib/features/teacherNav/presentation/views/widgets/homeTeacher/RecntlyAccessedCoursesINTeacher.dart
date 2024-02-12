@@ -1,17 +1,64 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/Course_Teacher.dart';
+import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/CourseInTeacherTabNav.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class RecntlyAccessedCourses extends StatelessWidget {
+class RecntlyAccessedCourses extends StatefulWidget {
   const RecntlyAccessedCourses({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    double attendancePercentage = .75;
-    bool isLowAttendance = attendancePercentage <= 0.5;
-    return Column(children: [
+  State<RecntlyAccessedCourses> createState() => _RecntlyAccessedCoursesState();
+}
+
+class _RecntlyAccessedCoursesState extends State<RecntlyAccessedCourses> {
+  List<QueryDocumentSnapshot> data = [];
+  num? numofabsent;
+  num? numofattending;
+  List<QueryDocumentSnapshot> dataOfAttendance = [];
+  List<QueryDocumentSnapshot> dataOfCourses = [];
+  List<QueryDocumentSnapshot> dataOfStudent = [];
+  int? numofstudent;
+
+  String? docId;
+
+  Future getData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    data.addAll(querySnapshot.docs);
+    docId = data[0].id;
+
+    QuerySnapshot querySnapshott = await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(docId)
+        .collection('courses')
+        .get();
+
+    dataOfCourses.addAll(querySnapshott.docs);
+
+    setState(() {});
+
+  }
+
+  @override
+  void initState() {
+    getData();
+   
+    super.initState();
+  }
+
+  @override
+Widget build(BuildContext context) {
+  double attendancePercentage = .75;
+  bool isLowAttendance = attendancePercentage <= 0.5;
+  
+  return Column(
+    children: [
       SizedBox(
         height: 60,
       ),
@@ -20,222 +67,285 @@ class RecntlyAccessedCourses extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          Text("Recently accessed courses",
-              style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold)),
-          SizedBox(
-            width: 10,
-          ),
-          GestureDetector(
-            onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CourseTeacher()));
-                //Navigator.pushNamed(context, "/maintabcoursesinteacher");
-            },
-            child: Text("see all",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 149, 149, 149), fontSize: 19)),
-          )
+          Text(
+            "Recently Added Courses",
+            style: TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+              fontSize: 25,
+              fontWeight: FontWeight.bold)),
         ],
       ),
       SizedBox(
         height: 30,
       ),
-      SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(children: <Widget>[
-            SizedBox(
-              width: 20,
-            ),
-            Container(
-                width: 340,
-                margin: const EdgeInsets.only(bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(0, 0),
-                      blurRadius: 5,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Material(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                          SizedBox(
-                            width: double.infinity,
-                            height: 130, // Set the desired height
-                            child: Image.asset(
-                              AssetsData.webcourse,
-                              fit: BoxFit.cover,
-                              //  width: double.infinity,
+      Align(
+        alignment: dataOfCourses.length == 1 ? Alignment.centerLeft : Alignment.center,
+        child: dataOfCourses.isEmpty
+            ? CircularProgressIndicator() // Show loading indicator
+            : SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: dataOfCourses.map((courseDoc) {
+                    final imageUrl = courseDoc['url'];
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CourseInTeacherTabNav(courseId: courseDoc.id),
                             ),
+                          );
+                        },
+                        child: Container(
+                          width: 340,
+                          margin: EdgeInsets.only(bottom: 15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(0, 0),
+                                blurRadius: 5,
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 110,
-                            child: Container(
-                              padding: EdgeInsets.all(15),
-                              child: Stack(
-                                children: [
-                                  const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        "INTERNSHIP Section1",
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 5),
-                                      ),
-                                      Text(
-                                        'EIT',
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        '230214990',
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Material(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 130,
+                                    child: imageUrl.isNotEmpty
+                                        ? Image.network(
+                                            imageUrl,
+                                            fit: BoxFit.cover,
+                                            scale: 1.0,
+                                          )
+                                        : Image.asset(
+                                            AssetsData.webcourse, // Default image asset
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
-                                  Positioned(
-                                    right: 0,
-                                    top: 0,
-                                    child: CircularPercentIndicator(
-                                      radius: 24.0,
-                                      lineWidth: 5.0,
-                                      percent:
-                                          0.75, // Change this to your actual percentage
-                                     center: Text(
-                                        "${(attendancePercentage * 100).toInt()}%",
-                                        style: TextStyle(
-                                          color: isLowAttendance
-                                              ? Colors.red
-                                              : Colors.green,
-                                        ),
-                                      ), // Change this to your actual text
-                                      progressColor: isLowAttendance
-                                          ? Colors.red
-                                          : Colors.green,
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 110,
+                                    child: Container(
+                                      padding: EdgeInsets.all(15),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            courseDoc['name'],
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            "EIT",
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            courseDoc['idCourse'],
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                        ])))),
-            SizedBox(
-              width: 30,
-            ),
-            Container(
-                width: 340,
-                margin: const EdgeInsets.only(bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(0, 0),
-                      blurRadius: 5,
-                    ),
-                  ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Material(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                          SizedBox(
-                            width: double.infinity,
-                            height: 130, // Set the desired height
-                            child: Image.asset(
-                              AssetsData.webcourse,
-                              fit: BoxFit.cover,
-                              //  width: double.infinity,
-                            ),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 110,
-                            child: Container(
-                              padding: EdgeInsets.all(15),
-                              child: Stack(
-                                children: [
-                                  const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        "INTERNSHIP Section1",
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 5),
-                                      ),
-                                      Text(
-                                        'EIT',
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        '230214990',
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Positioned(
-                                    right: 0,
-                                    top: 0,
-                                    child: CircularPercentIndicator(
-                                      radius: 24.0,
-                                      lineWidth: 5.0,
-                                      percent:
-                                          0.75, // Change this to your actual percentage
-                                      center: Text(
-                                        "${(attendancePercentage * 100).toInt()}%",
-                                        style: TextStyle(
-                                          color: isLowAttendance
-                                              ? Colors.red
-                                              : Colors.green,
-                                        ),
-                                      ), // Change this to your actual text
-                                      progressColor: isLowAttendance
-                                          ? Colors.red
-                                          : Colors.green,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ])))),
-          ]))
-    ]);
-  }
+              ),
+      ),
+    ],
+  );
 }
+
+}
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:first_version/core/utils/assets.dart';
+// import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/Course_Teacher.dart';
+// import 'package:flutter/material.dart';
+// import 'package:percent_indicator/circular_percent_indicator.dart';
+
+// class RecntlyAccessedCourses extends StatefulWidget {
+//   const RecntlyAccessedCourses({super.key});
+
+//   @override
+//   State<RecntlyAccessedCourses> createState() => _RecntlyAccessedCoursesState();
+// }
+
+// class _RecntlyAccessedCoursesState extends State<RecntlyAccessedCourses> {
+//   List<QueryDocumentSnapshot> data = [];
+//   num? numofabsent;
+//   num? numofattending;
+//   List<QueryDocumentSnapshot> dataOfAttendance = [];
+//   List<QueryDocumentSnapshot> dataOfCourses = [];
+//   List<QueryDocumentSnapshot> dataOfStudent = [];
+//   int? numofstudent;
+
+//   String? docId;
+
+//   Future getData() async {
+//     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+//         .collection('Teachers')
+//         .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+//         .get();
+
+//     data.addAll(querySnapshot.docs);
+//     docId = data[0].id;
+
+//     QuerySnapshot querySnapshott = await FirebaseFirestore.instance
+//         .collection('Teachers')
+//         .doc(docId)
+//         .collection('courses')
+//         .get();
+
+//     dataOfCourses.addAll(querySnapshott.docs);
+
+//     setState(() {});
+
+//   }
+
+//   @override
+//   void initState() {
+//     getData();
+   
+//     super.initState();
+//   }
+
+//  @override
+// Widget build(BuildContext context) {
+//   return Column(
+//     children: [
+//       SizedBox(height: 30,),
+//       Row(
+//         children: [
+//           SizedBox(
+//             width: 20,
+//           ),
+//           Text(
+//             "Recently added courses",
+//             style: TextStyle(
+//               color: Color.fromARGB(255, 0, 0, 0),
+//               fontSize: 22,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//         ],
+//       ),
+//       SizedBox(
+//         height: 30,
+//       ),
+//       Align(
+//         alignment: dataOfCourses.length == 1 ? Alignment.centerLeft : Alignment.center,
+//         child: SingleChildScrollView(
+//           scrollDirection: Axis.horizontal,
+//           child: Row(
+//             children: dataOfCourses.map((courseDoc) {
+//               final imageUrl = courseDoc['url'];
+//               return Padding(
+//                 padding: const EdgeInsets.only(left: 20.0),
+//                 child: Container(
+//                   width: 300,
+//                   margin: EdgeInsets.only(bottom: 15),
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(10),
+//                     boxShadow: [
+//                       BoxShadow(
+//                         color: Colors.white,
+//                         offset: Offset(0, 0),
+//                         blurRadius: 5,
+//                       ),
+//                     ],
+//                   ),
+//                   child: ClipRRect(
+//                     borderRadius: BorderRadius.circular(10),
+//                     child: Material(
+//                       child: Column(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: <Widget>[
+//                           SizedBox(
+//                             width: double.infinity,
+//                             height: 110,
+//                             child: imageUrl.isNotEmpty
+//                                   ? Image.network(
+//                                       imageUrl,
+//                                       fit: BoxFit.cover,
+//                                       scale: 1.0,
+//                                     )
+//                                   : Image.asset(
+//                                       AssetsData.webcourse, // Default image asset
+//                                       fit: BoxFit.cover,
+//                                     ),
+//                           ),
+//                           SizedBox(
+//                             width: double.infinity,
+//                             height: 107,
+//                             child: Container(
+//                               padding: EdgeInsets.all(15),
+//                               child: Column(
+//                                 crossAxisAlignment: CrossAxisAlignment.start,
+//                                 children: <Widget>[
+//                                   Text(
+//                                     courseDoc['name'],
+//                                     style: TextStyle(
+//                                       fontSize: 20,
+//                                       color: Colors.black,
+//                                       fontWeight: FontWeight.bold,
+//                                     ),
+//                                   ),
+//                                   Text(
+//                                   "EIT",
+//                                     style: TextStyle(
+//                                       fontSize: 17,
+//                                       color: Colors.black,
+//                                       fontWeight: FontWeight.bold,
+//                                     ),
+//                                   ),
+//                                   Text(
+//                                     courseDoc['idCourse'],
+//                                     style: TextStyle(
+//                                       fontSize: 17,
+//                                       color: Colors.grey,
+//                                     ),
+//                                   ),
+//                                 ],
+//                               ),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               );
+//             }).toList(),
+//           ),
+//         ),
+//       ),
+//     ],
+//   );
+// }
+// }

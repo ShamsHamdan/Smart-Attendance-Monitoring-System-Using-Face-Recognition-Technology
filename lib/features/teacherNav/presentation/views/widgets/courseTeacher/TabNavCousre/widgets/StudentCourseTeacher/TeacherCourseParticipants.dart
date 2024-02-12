@@ -61,7 +61,10 @@ class _TeacherCourseParticipantsState extends State<TeacherCourseParticipants> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
+            child:
+             dataOfStudent.isEmpty
+            ? Center(child: CircularProgressIndicator()) // Show loading indicator
+            : ListView.builder(
               padding: EdgeInsets.all(16),
                shrinkWrap: true,
                 itemCount: dataOfStudent.length,

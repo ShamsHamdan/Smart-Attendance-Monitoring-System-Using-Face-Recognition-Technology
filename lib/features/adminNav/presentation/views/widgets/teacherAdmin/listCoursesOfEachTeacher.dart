@@ -85,7 +85,10 @@ class _ListofAddedCoursesForTeacherState
         child: Column(
           children: [
             Expanded(
-                child: ListView.builder(
+                child: data.isEmpty
+            ? Center(child: CircularProgressIndicator()) // Show loading indicator
+            :
+                 ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, i) {
                       return InkWell(

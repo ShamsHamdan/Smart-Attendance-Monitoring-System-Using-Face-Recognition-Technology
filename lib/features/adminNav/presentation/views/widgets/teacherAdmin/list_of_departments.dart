@@ -40,6 +40,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
               color: kPrimaryColor,
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(50),
+                bottomLeft: Radius.circular(50)
               ),
             ),
             child: Column(
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
           ),
           Expanded(
             child: Container(
-              color: kPrimaryColor,
+              color: Colors.grey[100],
               child: SingleChildScrollView(
                 child: Container(
                   //color: Colors.grey[100],
