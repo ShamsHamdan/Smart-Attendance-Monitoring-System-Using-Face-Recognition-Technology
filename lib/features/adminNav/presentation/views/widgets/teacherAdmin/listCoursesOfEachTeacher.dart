@@ -23,8 +23,10 @@ class _ListofAddedCoursesForTeacherState
     extends State<ListofAddedCoursesForTeacher> {
   List<QueryDocumentSnapshot> data = [];
   String? teacherId;
+ bool isLoading = false;
 
   Future getData() async {
+     setState(() {  isLoading = true;});
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .doc(widget.categoryId)
@@ -32,7 +34,7 @@ class _ListofAddedCoursesForTeacherState
         .get();
     data.addAll(querySnapshot.docs);
 
-    setState(() {});
+    setState(() {  isLoading = false;});
   }
 
   Future getDataofTeacherId() async {
@@ -82,7 +84,7 @@ class _ListofAddedCoursesForTeacherState
         child: Column(
           children: [
             Expanded(
-                child: data.isEmpty
+                child: isLoading
                     ? Center(
                         child:
                             CircularProgressIndicator()) // Show loading indicator

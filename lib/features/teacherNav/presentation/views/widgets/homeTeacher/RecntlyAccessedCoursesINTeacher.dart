@@ -21,10 +21,11 @@ class _RecntlyAccessedCoursesState extends State<RecntlyAccessedCourses> {
   List<QueryDocumentSnapshot> dataOfCourses = [];
   List<QueryDocumentSnapshot> dataOfStudent = [];
   int? numofstudent;
-
+  bool isLoading = false;
   String? docId;
 
   Future getData() async {
+     setState(() {  isLoading = true;});
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -41,7 +42,7 @@ class _RecntlyAccessedCoursesState extends State<RecntlyAccessedCourses> {
 
     dataOfCourses.addAll(querySnapshott.docs);
 
-    setState(() {});
+    setState(() {  isLoading = false;});
 
   }
 
@@ -80,7 +81,7 @@ Widget build(BuildContext context) {
       ),
       Align(
         alignment: dataOfCourses.length == 1 ? Alignment.centerLeft : Alignment.center,
-        child: dataOfCourses.isEmpty
+        child: isLoading
             ? CircularProgressIndicator() // Show loading indicator
             : SingleChildScrollView(
                 scrollDirection: Axis.horizontal,

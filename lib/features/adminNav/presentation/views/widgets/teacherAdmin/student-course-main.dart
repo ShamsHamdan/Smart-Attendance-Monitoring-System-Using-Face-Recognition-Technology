@@ -21,8 +21,13 @@ class _ListofAddedStudentForCourseMainState
     extends State<ListofAddedStudentForCourseMain> {
   List<QueryDocumentSnapshot> data = [];
   String? idofthisCourse;
+   bool isLoading = false;
 
   Future getDataofCourse() async {
+     setState(() {
+      
+       isLoading = true;
+    });
     DocumentSnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Courses')
         .doc(widget.categoryId)
@@ -33,6 +38,7 @@ class _ListofAddedStudentForCourseMainState
 
     setState(() {
       print("$idofthisCourse");
+       isLoading = false;
     });
   }
 Future<void> getData() async {
@@ -87,7 +93,12 @@ void initState() {
         child: Column(
           children: [
             Expanded(
-                child: ListView.builder(
+                child:
+                 isLoading
+                    ? Center(
+                        child:
+                            CircularProgressIndicator()) // Show loading indicator
+                    : ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, i) {
                       return InkWell(

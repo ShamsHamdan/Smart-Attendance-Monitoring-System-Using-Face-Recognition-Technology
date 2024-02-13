@@ -20,10 +20,11 @@ class _ListCoursestestState extends State<ListCoursestest> {
   List<QueryDocumentSnapshot> dataOfCourses = [];
   List<QueryDocumentSnapshot> dataOfStudent = [];
   int? numofstudent;
-
+  bool isLoading = false;
   String? docId;
 
   Future getData() async {
+    setState(() { isLoading = true;});
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -40,7 +41,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
 
     dataOfCourses.addAll(querySnapshott.docs);
 
-    setState(() {});
+    setState(() { isLoading = false;});
 
 //  QuerySnapshot querySnapshotStu = await FirebaseFirestore.instance
 //         .collection('Teachers')
@@ -124,7 +125,7 @@ class _ListCoursestestState extends State<ListCoursestest> {
           ),
           Expanded(
             child:
-             dataOfCourses.isEmpty
+             isLoading
             ? Center(child: CircularProgressIndicator()) // Show loading indicator
             :
              ListView.separated(

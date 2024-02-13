@@ -23,8 +23,12 @@ class ListOfTeacherPageInAdmin extends StatefulWidget {
 
 class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
   List<QueryDocumentSnapshot> data = [];
+  bool isLoading = false;
 
   Future getData() async {
+      setState(() {
+        bool isLoading = true;
+    });
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -32,7 +36,7 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
     data.addAll(querySnapshot.docs);
     
     setState(() {
-      
+        bool isLoading = false;
     });
   }
 
@@ -62,7 +66,7 @@ class _ListOfTeacherPageInAdminState extends State<ListOfTeacherPageInAdmin> {
         child: Column(
           children: [
             Expanded(
-                child:  data.isEmpty
+                child:  isLoading
             ? Center(child: CircularProgressIndicator()) // Show loading indicator
             :
                 ListView.builder(

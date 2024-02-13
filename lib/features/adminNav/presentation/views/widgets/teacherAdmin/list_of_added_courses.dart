@@ -16,16 +16,18 @@ class ListofAddedCourses extends StatefulWidget {
 
 class _ListofAddedCoursesState extends State<ListofAddedCourses> {
   List<QueryDocumentSnapshot> data = [];
+   bool isLoading = false;
   // String? depInDai;
   // String? faculty;
   Future getData() async {
+     setState(() {  isLoading = true;});
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Courses')
         .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     data.addAll(querySnapshot.docs);
 
-    setState(() {});
+ setState(() { isLoading = false;});
   }
 
   @override
@@ -55,7 +57,7 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
           children: [
             Expanded(
                 child:
-                data.isEmpty
+                isLoading
             ? Center(child: CircularProgressIndicator()) // Show loading indicator
             : ListView.builder(
                     itemCount: data.length,

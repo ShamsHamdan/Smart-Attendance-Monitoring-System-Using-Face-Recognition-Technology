@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/StudentCourseTeacher/student_card.dart';
@@ -18,9 +20,11 @@ class _TeacherCourseParticipantsState extends State<TeacherCourseParticipants> {
   int? numofstudent;
   String? name;
   String? url;
+  bool isLoading = false;
 
   //List<QueryDocumentSnapshot> dataOfCourses = [];
   Future getData() async {
+     setState(() {  isLoading = true;});
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -41,9 +45,7 @@ class _TeacherCourseParticipantsState extends State<TeacherCourseParticipants> {
     numofstudent = dataOfStudent.length;
 
     setState(() {
-      // print("${data[0]['name']}");
-      // Adminemail = data['email'];
-      // Adminpass = data['password'];
+        isLoading = false;
     });
   }
 
@@ -62,7 +64,7 @@ class _TeacherCourseParticipantsState extends State<TeacherCourseParticipants> {
         children: [
           Expanded(
             child:
-             dataOfStudent.isEmpty
+             isLoading
             ? Center(child: CircularProgressIndicator()) // Show loading indicator
             : ListView.builder(
               padding: EdgeInsets.all(16),

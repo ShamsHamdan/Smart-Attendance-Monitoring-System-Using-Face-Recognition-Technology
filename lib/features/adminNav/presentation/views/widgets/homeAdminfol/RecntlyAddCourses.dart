@@ -15,7 +15,7 @@ class RecentlyAddCourses extends StatefulWidget {
 
 class _RecentlyAddCoursesState extends State<RecentlyAddCourses> {
   List<QueryDocumentSnapshot> coursesData = [];
-
+ bool isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -23,6 +23,9 @@ class _RecentlyAddCoursesState extends State<RecentlyAddCourses> {
   }
 
   Future getData() async {
+     setState(() {
+       isLoading = true;
+    });
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Courses')
         .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -31,6 +34,7 @@ class _RecentlyAddCoursesState extends State<RecentlyAddCourses> {
         .get();
     setState(() {
       coursesData = querySnapshot.docs;
+        isLoading = false;
     });
   }
 
@@ -58,7 +62,7 @@ class _RecentlyAddCoursesState extends State<RecentlyAddCourses> {
         ),
         Align(
            alignment: coursesData.length == 1 ? Alignment.centerLeft : Alignment.center,
-          child:coursesData.isEmpty
+          child:isLoading
             ? CircularProgressIndicator() // Show loading indicator
             :
            SingleChildScrollView(

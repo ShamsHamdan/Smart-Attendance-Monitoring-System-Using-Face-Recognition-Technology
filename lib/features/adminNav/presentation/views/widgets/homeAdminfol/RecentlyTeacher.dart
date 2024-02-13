@@ -213,8 +213,12 @@ class RecentlyAddTeachers extends StatefulWidget {
 
 class _RecentlyAddTeachersState extends State<RecentlyAddTeachers> {
   List<QueryDocumentSnapshot> data = [];
+   bool isLoading = false;
 
   Future getData() async {
+     setState(() {
+       isLoading = true;
+    });
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("Admin", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -224,7 +228,7 @@ class _RecentlyAddTeachersState extends State<RecentlyAddTeachers> {
     data.addAll(querySnapshot.docs);
     
     setState(() {
-      
+       isLoading = false;
     });
   }
 
@@ -259,7 +263,7 @@ class _RecentlyAddTeachersState extends State<RecentlyAddTeachers> {
         ),
         Align(
            alignment: data.length == 1 ? Alignment.centerLeft : Alignment.center,
-          child:data.isEmpty
+          child:isLoading
             ? CircularProgressIndicator() // Show loading indicator
             :
            SingleChildScrollView(
