@@ -278,6 +278,8 @@ final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(data[i]
                                   }
                                 },
                                 btnOkText: "Delete",
+                                  btnOkColor: Colors.red,
+                                btnCancelColor: Colors.green,
                                 buttonsTextStyle: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -289,7 +291,7 @@ final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(data[i]
                               ).show();
                             },
                             btnOkOnPress: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => EditProfessorForm(
@@ -324,7 +326,7 @@ final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(data[i]
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryColor,
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => AddProfessorForm()),
           );

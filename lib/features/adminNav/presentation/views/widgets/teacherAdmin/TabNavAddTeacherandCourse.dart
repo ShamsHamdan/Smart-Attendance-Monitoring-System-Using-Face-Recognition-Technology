@@ -1,5 +1,6 @@
 import 'package:first_version/constants.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_added_courses.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_departments.dart';
 //import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_courses_inSemester.dart';
 
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list_of_teacheres_Admin.dart';
@@ -37,6 +38,7 @@ class _AddTeacherandCourseInAdminTabNavState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // automaticallyImplyLeading: false,
         iconTheme: const IconThemeData(color: Colors.black),
         centerTitle: true,
         backgroundColor: Colors.grey[100],
@@ -73,13 +75,13 @@ class _AddTeacherandCourseInAdminTabNavState
           indicator: const BoxDecoration(),
         ),
       ),
-      body: TabBarView(
+      body:TabBarView(
         controller: _tabController,
         children:  <Widget>[
           ListofAddedCourses(),
           ListOfTeacherPageInAdmin(),
         ],
-      ),
+      )
     );
   }
 }

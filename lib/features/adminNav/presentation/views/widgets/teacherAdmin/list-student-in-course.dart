@@ -167,8 +167,21 @@ for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
                                             desc:
                                                 'Student deleted successfully.',
                                             descTextStyle:
-                                                TextStyle(fontSize: 17))
-                                        .show();
+                                                TextStyle(fontSize: 17) ,
+                                                 btnOkText: "Ok",
+        buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        btnOkOnPress: () {},
+      ).show()
+      .then((value) {
+         Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ListofAddedStudentForCourse(categoryId: widget.categoryId,teacherDocId: widget.teacherDocId,)
+                          ),
+                        ); 
+       
+       });
                                   } catch (error) {
                                     AwesomeDialog(
                                             context: context,
@@ -185,6 +198,8 @@ for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
                                   }
                                 },
                                 btnOkText: "Delete",
+                                btnOkColor: Colors.red,
+                                btnCancelColor: Colors.green,
                                 buttonsTextStyle: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -196,7 +211,7 @@ for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
                               ).show();
                             },
                             btnOkOnPress: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => EditStudentForm(
@@ -233,7 +248,7 @@ for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryColor,
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => AddStudentForm(

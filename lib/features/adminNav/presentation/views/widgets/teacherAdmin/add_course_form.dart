@@ -193,7 +193,11 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context);
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ListofAddedCoursesForTeacher(categoryId: widget.docId,)),
+          );
             },
           ),
         ),

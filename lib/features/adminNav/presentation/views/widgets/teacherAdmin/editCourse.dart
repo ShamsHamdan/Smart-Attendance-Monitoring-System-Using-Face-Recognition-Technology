@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add-student-form.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/listCoursesOfEachTeacher.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -152,11 +153,19 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
         btnOkText: "Ok",
         buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
         btnOkOnPress: () {},
-       ).show();
-      //.then((value) {
-      //   Navigator.pushAndRemoveUntil(
-      //       context, '/listofaddedcourse' as Route<Object?>, (route) => false);
-      // });
+       ).show() .then((value) {
+        Navigator.pushReplacement(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                               ListofAddedCoursesForTeacher(categoryId: widget.docId,
+                           
+                          ),
+                          transitionDuration: Duration.zero,
+                        ),
+                      );
+      });
+     
 
       print("=================================== course updated to teacher");
     }).catchError((error) => print(
@@ -249,7 +258,11 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ListofAddedCoursesForTeacher(categoryId: widget.docId,)),
+          );
             },
           ),
         ),

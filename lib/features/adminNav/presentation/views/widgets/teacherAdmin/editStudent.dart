@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/TabNavAddTeacherandCourse.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list-student-in-course.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -139,8 +140,17 @@ class _EditStudentFormState extends State<EditStudentForm> {
               titleTextStyle:
                   TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               desc: 'Student updated successfully.',
-              descTextStyle: TextStyle(fontSize: 17))
-          .show();
+              descTextStyle: TextStyle(fontSize: 17) ,
+               btnOkText: "Ok",
+        buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        btnOkOnPress: () {},
+       ).show() .then((value) {
+        Navigator.pushReplacement(
+                        context,
+                       MaterialPageRoute(
+                builder: (context) => ListofAddedStudentForCourse (categoryId: widget.courseDocId, teacherDocId: widget.teacherDocId,)),
+                      );
+      });
 
       print("=================================== student updated to teacher");
     }).catchError((error) {
@@ -212,7 +222,11 @@ class _EditStudentFormState extends State<EditStudentForm> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+           Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ListofAddedStudentForCourse (categoryId: widget.courseDocId, teacherDocId: widget.teacherDocId,)),
+          );
           },
         ),
       ),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -130,7 +129,6 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
   @override
   void initState() {
     getData();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -152,7 +150,11 @@ class _AddProfessorFormState extends State<AddProfessorForm> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>AddTeacherandCourseInAdminTabNav(initialIndex: 1,)),
+          );
           },
         ),
       ),

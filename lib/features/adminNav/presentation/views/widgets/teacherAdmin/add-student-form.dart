@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/TabNavAddTeacherandCourse.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list-student-in-course.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -102,8 +103,19 @@ class _AddStudentFormState extends State<AddStudentForm> {
               titleTextStyle:
                   TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               desc: 'Student added successfully.',
-              descTextStyle: TextStyle(fontSize: 17))
-          .show();
+              descTextStyle: TextStyle(fontSize: 17),
+               buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        btnOkText: "Ok",
+        btnOkOnPress: () {},
+      ).show()
+      .then((value) { Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                               ListofAddedStudentForCourse(categoryId: widget.courseDocId,teacherDocId:widget.teacherDocId ,)
+                          ),
+                        ); });
+          
 
       print("=================================== course Added to teacher");
     }).catchError((error) => print(
@@ -153,7 +165,11 @@ class _AddStudentFormState extends State<AddStudentForm> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>ListofAddedStudentForCourse(categoryId:widget.courseDocId, teacherDocId: widget.teacherDocId,)),
+          );
           },
         ),
       ),

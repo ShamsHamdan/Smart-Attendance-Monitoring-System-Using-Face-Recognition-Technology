@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
+import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/TabNavAddTeacherandCourse.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/add_course_form.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/editCourse.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/list-student-in-course.dart';
@@ -34,14 +35,12 @@ class _ListofAddedCoursesForTeacherState
     setState(() {});
   }
 
-  
   Future getDataofTeacherId() async {
     DocumentSnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .doc(widget.categoryId)
-       
         .get();
-     teacherId=querySnapshot['id'];
+    teacherId = querySnapshot['id'];
 
     setState(() {});
   }
@@ -53,8 +52,6 @@ class _ListofAddedCoursesForTeacherState
     // TODO: implement initState
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,248 +83,300 @@ class _ListofAddedCoursesForTeacherState
           children: [
             Expanded(
                 child: data.isEmpty
-            ? Center(child: CircularProgressIndicator()) // Show loading indicator
-            :
-                 ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, i) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ListofAddedStudentForCourse(
-                                        categoryId: data[i].id,
-                                        teacherDocId: widget.categoryId)),
-                          );
-                        },
-                        onLongPress: () {
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.question,
-                            animType: AnimType.rightSlide,
-                            btnCancelOnPress: () {
+                    ? Center(
+                        child:
+                            CircularProgressIndicator()) // Show loading indicator
+                    : ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, i) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ListofAddedStudentForCourse(
+                                            categoryId: data[i].id,
+                                            teacherDocId: widget.categoryId)),
+                              );
+                            },
+                            onLongPress: () {
                               AwesomeDialog(
                                 context: context,
-                                dialogType: DialogType.warning,
+                                dialogType: DialogType.question,
                                 animType: AnimType.rightSlide,
-                                btnCancelOnPress: () {},
-                                btnOkOnPress: () async {
-                                  try {
-                                    // await FirebaseFirestore.instance
-                                    //     .collection('Teachers')
-                                    //     .doc(widget.categoryId)
-                                    //     .collection('courses')
-                                    //     .doc(data[i].id)
-                                        
-                                    //     .delete();
-
-
-  // Get a reference to the teacher document
-  final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(widget.categoryId);
-
-  // Get a reference to the course document
-  final courseRef = teacherRef.collection('courses').doc(data[i].id);
-
-  // Start a batch to perform atomic operations
-  final batch = FirebaseFirestore.instance.batch();
-
-  // Delete the course document
-  batch.delete(courseRef);
-
-  // Get a reference to the students subcollection of the course
-  final studentsRef = courseRef.collection('students');
-
-  // Get a reference to the attendance subcollection of the course
-  final attendanceRef = courseRef.collection('attendance');
-
-  // Check if the course has any students or attendance
-  final studentsQuerySnapshot = await studentsRef.get();
-  final attendanceQuerySnapshot = await attendanceRef.get();
-
-  // If either students or attendance exist, delete them
-  if (studentsQuerySnapshot.docs.isNotEmpty || attendanceQuerySnapshot.docs.isNotEmpty) {
-    // Delete all documents in the students subcollection
-    for (final studentDoc in studentsQuerySnapshot.docs) {
-      batch.delete(studentDoc.reference);
-    }
-
-    // Delete all documents in the attendance subcollection
-    for (final attendanceDoc in attendanceQuerySnapshot.docs) {
-      batch.delete(attendanceDoc.reference);
-    }
-  }
-
-  // Commit the batch operation
-  await batch.commit();
-
-  // Get a reference to the main Courses collection
-  final mainCoursesRef = FirebaseFirestore.instance.collection('Courses');
-
-  // Delete the course documents from the main Courses collection
-  final mainCourseQuerySnapshot = await mainCoursesRef
-      .where('idCourse', isEqualTo: data[i]["idCourse"])
-      .where('TeacherId', isEqualTo: teacherId)
-      .get();
-
-  for (final mainCourseDoc in mainCourseQuerySnapshot.docs) {
-    await mainCourseDoc.reference.delete();
-  }
-
-  // Get a reference to the main Students collection
-  final mainStudentsRef = FirebaseFirestore.instance.collection('Students');
-
-  // Delete the student documents from the main Students collection
-  for (final studentDoc in studentsQuerySnapshot.docs) {
-    final studentId = studentDoc["idStudent"];
-    final mainStudentQuerySnapshot = await mainStudentsRef
-        .where('idStudent', isEqualTo: studentId)
-        .get();
-
-    for (final mainStudentDoc in mainStudentQuerySnapshot.docs) {
-      await mainStudentDoc.reference.delete();
-    }
-  }
-
-
-
-
-//  final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(widget.categoryId);
-
-//   // Get a reference to the course document
-//   final courseRef = teacherRef.collection('courses').doc(data[i].id);
-
-//   // Start a batch to perform atomic operations
-//   final batch = FirebaseFirestore.instance.batch();
-
-//   // Delete the course document
-//   batch.delete(courseRef);
-
-//   // Get a reference to the students subcollection of the course
-//   final studentsRef = courseRef.collection('students');
-
-//   // Get a reference to the attendance subcollection of the course
-//   final attendanceRef = courseRef.collection('attendance');
-
-//   // Check if the course has any students or attendance
-//   final studentsQuerySnapshot = await studentsRef.get();
-//   final attendanceQuerySnapshot = await attendanceRef.get();
-
-//   // If either students or attendance exist, delete them
-//   if (studentsQuerySnapshot.docs.isNotEmpty || attendanceQuerySnapshot.docs.isNotEmpty) {
-//     // Delete all documents in the students subcollection
-//     for (final studentDoc in studentsQuerySnapshot.docs) {
-//       batch.delete(studentDoc.reference);
-//     }
-
-//     // Delete all documents in the attendance subcollection
-//     for (final attendanceDoc in attendanceQuerySnapshot.docs) {
-//       batch.delete(attendanceDoc.reference);
-//     }
-//   }
-
-//   // Commit the batch operation
-//   await batch.commit();
-
-
-
-
-//                                     CollectionReference collectionRef =
-//                                         FirebaseFirestore.instance
-//                                             .collection('Courses');
-
-//                                     // Query the documents based on specific criteria using the 'where' clause
-//                                     QuerySnapshot querySnapshot =
-//                                         await collectionRef
-//                                             .where('idCourse',
-//                                                 isEqualTo:  data[i]['idCourse'])
-//                                             .where("TeacherId",
-//                                                 isEqualTo:teacherId)
-//                                             .get();
-
-//                                     for (QueryDocumentSnapshot docSnapshot
-//                                         in querySnapshot.docs) {
-//                                       await docSnapshot.reference.delete();
-//                                     }
-
-                                    AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.success,
-                                            animType: AnimType.rightSlide,
-                                            title: 'Success',
-                                            titleTextStyle: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 22),
-                                            desc:
-                                                'Course deleted successfully.',
-                                            descTextStyle:
-                                                TextStyle(fontSize: 17))
-                                        .show();
-                                  } catch (error) {
-                                    AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.error,
-                                            animType: AnimType.rightSlide,
-                                            title: 'Failed',
-                                            titleTextStyle: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 22),
-                                            desc: 'Failed to delete course.',
-                                            descTextStyle:
-                                                TextStyle(fontSize: 17))
-                                        .show();
-                                  }
+                                btnCancelOnPress: () {
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.warning,
+                                    animType: AnimType.rightSlide,
+                                    btnCancelOnPress: () {},
+                                    btnOkOnPress: () async {
+                                      try {
+                                        // await FirebaseFirestore.instance
+                                        //     .collection('Teachers')
+                                        //     .doc(widget.categoryId)
+                                        //     .collection('courses')
+                                        //     .doc(data[i].id)
+      
+                                        //     .delete();
+      
+                                        // Get a reference to the teacher document
+                                        final teacherRef = FirebaseFirestore
+                                            .instance
+                                            .collection('Teachers')
+                                            .doc(widget.categoryId);
+      
+                                        // Get a reference to the course document
+                                        final courseRef = teacherRef
+                                            .collection('courses')
+                                            .doc(data[i].id);
+      
+                                        // Start a batch to perform atomic operations
+                                        final batch = FirebaseFirestore
+                                            .instance
+                                            .batch();
+      
+                                        // Delete the course document
+                                        batch.delete(courseRef);
+      
+                                        // Get a reference to the students subcollection of the course
+                                        final studentsRef =
+                                            courseRef.collection('students');
+      
+                                        // Get a reference to the attendance subcollection of the course
+                                        final attendanceRef = courseRef
+                                            .collection('attendance');
+      
+                                        // Check if the course has any students or attendance
+                                        final studentsQuerySnapshot =
+                                            await studentsRef.get();
+                                        final attendanceQuerySnapshot =
+                                            await attendanceRef.get();
+      
+                                        // If either students or attendance exist, delete them
+                                        if (studentsQuerySnapshot
+                                                .docs.isNotEmpty ||
+                                            attendanceQuerySnapshot
+                                                .docs.isNotEmpty) {
+                                          // Delete all documents in the students subcollection
+                                          for (final studentDoc
+                                              in studentsQuerySnapshot.docs) {
+                                            batch
+                                                .delete(studentDoc.reference);
+                                          }
+      
+                                          // Delete all documents in the attendance subcollection
+                                          for (final attendanceDoc
+                                              in attendanceQuerySnapshot
+                                                  .docs) {
+                                            batch.delete(
+                                                attendanceDoc.reference);
+                                          }
+                                        }
+      
+                                        // Commit the batch operation
+                                        await batch.commit();
+      
+                                        // Get a reference to the main Courses collection
+                                        final mainCoursesRef =
+                                            FirebaseFirestore.instance
+                                                .collection('Courses');
+      
+                                        // Delete the course documents from the main Courses collection
+                                        final mainCourseQuerySnapshot =
+                                            await mainCoursesRef
+                                                .where('idCourse',
+                                                    isEqualTo: data[i]
+                                                        ["idCourse"])
+                                                .where('TeacherId',
+                                                    isEqualTo: teacherId)
+                                                .get();
+      
+                                        for (final mainCourseDoc
+                                            in mainCourseQuerySnapshot.docs) {
+                                          await mainCourseDoc.reference
+                                              .delete();
+                                        }
+      
+                                        // Get a reference to the main Students collection
+                                        final mainStudentsRef =
+                                            FirebaseFirestore.instance
+                                                .collection('Students');
+      
+                                        // Delete the student documents from the main Students collection
+                                        for (final studentDoc
+                                            in studentsQuerySnapshot.docs) {
+                                          final studentId =
+                                              studentDoc["idStudent"];
+                                          final mainStudentQuerySnapshot =
+                                              await mainStudentsRef
+                                                  .where('idStudent',
+                                                      isEqualTo: studentId)
+                                                  .get();
+      
+                                          for (final mainStudentDoc
+                                              in mainStudentQuerySnapshot
+                                                  .docs) {
+                                            await mainStudentDoc.reference
+                                                .delete();
+                                          }
+                                        }
+      
+      //  final teacherRef = FirebaseFirestore.instance.collection('Teachers').doc(widget.categoryId);
+      
+      //   // Get a reference to the course document
+      //   final courseRef = teacherRef.collection('courses').doc(data[i].id);
+      
+      //   // Start a batch to perform atomic operations
+      //   final batch = FirebaseFirestore.instance.batch();
+      
+      //   // Delete the course document
+      //   batch.delete(courseRef);
+      
+      //   // Get a reference to the students subcollection of the course
+      //   final studentsRef = courseRef.collection('students');
+      
+      //   // Get a reference to the attendance subcollection of the course
+      //   final attendanceRef = courseRef.collection('attendance');
+      
+      //   // Check if the course has any students or attendance
+      //   final studentsQuerySnapshot = await studentsRef.get();
+      //   final attendanceQuerySnapshot = await attendanceRef.get();
+      
+      //   // If either students or attendance exist, delete them
+      //   if (studentsQuerySnapshot.docs.isNotEmpty || attendanceQuerySnapshot.docs.isNotEmpty) {
+      //     // Delete all documents in the students subcollection
+      //     for (final studentDoc in studentsQuerySnapshot.docs) {
+      //       batch.delete(studentDoc.reference);
+      //     }
+      
+      //     // Delete all documents in the attendance subcollection
+      //     for (final attendanceDoc in attendanceQuerySnapshot.docs) {
+      //       batch.delete(attendanceDoc.reference);
+      //     }
+      //   }
+      
+      //   // Commit the batch operation
+      //   await batch.commit();
+      
+      //                                     CollectionReference collectionRef =
+      //                                         FirebaseFirestore.instance
+      //                                             .collection('Courses');
+      
+      //                                     // Query the documents based on specific criteria using the 'where' clause
+      //                                     QuerySnapshot querySnapshot =
+      //                                         await collectionRef
+      //                                             .where('idCourse',
+      //                                                 isEqualTo:  data[i]['idCourse'])
+      //                                             .where("TeacherId",
+      //                                                 isEqualTo:teacherId)
+      //                                             .get();
+      
+      //                                     for (QueryDocumentSnapshot docSnapshot
+      //                                         in querySnapshot.docs) {
+      //                                       await docSnapshot.reference.delete();
+      //                                     }
+      
+                                        AwesomeDialog(
+                                                context: context,
+                                                dialogType:
+                                                    DialogType.success,
+                                                animType: AnimType.rightSlide,
+                                                title: 'Success',
+                                                titleTextStyle: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                    fontSize: 22),
+                                                desc:
+                                                    'Course deleted successfully.',
+                                                descTextStyle:
+                                                    TextStyle(fontSize: 17),
+                                           buttonsTextStyle: TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                      btnOkText: "Ok",
+                                      btnOkOnPress: () {},
+                                    ).show().then((value) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                             ListofAddedCoursesForTeacher(categoryId: widget.categoryId,)
+                                        ),
+                                      );
+                                    });
+                                      } catch (error) {
+                                        AwesomeDialog(
+                                                context: context,
+                                                dialogType: DialogType.error,
+                                                animType: AnimType.rightSlide,
+                                                title: 'Failed',
+                                                titleTextStyle: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold,
+                                                    fontSize: 22),
+                                                desc:
+                                                    'Failed to delete course.',
+                                                descTextStyle:
+                                                    TextStyle(fontSize: 17))
+                                            .show();
+                                      }
+                                    },
+                                    btnOkText: "Delete",
+                                      btnOkColor: Colors.red,
+                                btnCancelColor: Colors.green,
+                                    buttonsTextStyle: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                    btnCancelText: "Cancel",
+                                    title:
+                                        'Are you sure of deleting process?',
+                                    titleTextStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 22),
+                                  ).show();
                                 },
-                                btnOkText: "Delete",
+                                btnOkOnPress: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditCourseFormPage(
+                                              courseId: data[i].id,
+                                              docId: widget.categoryId,
+                                            )),
+                                  );
+                                },
+                                btnOkText: "Update",
                                 buttonsTextStyle: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
-                                btnCancelText: "Cancel",
-                                title: 'Are you sure of deleting process?',
+                                btnCancelText: "Delete",
+                                title: 'Choose Action',
                                 titleTextStyle: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 22),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22),
                               ).show();
                             },
-                            btnOkOnPress: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditCourseFormPage(
-                                          courseId: data[i].id,
-                                          docId: widget.categoryId,
-                                        )),
-                              );
-                            },
-                            btnOkText: "Update",
-                            buttonsTextStyle: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                            btnCancelText: "Delete",
-                            title: 'Choose Action',
-                            titleTextStyle: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 22),
-                          ).show();
-                        },
-                        child: buildCourseContainer(
-                            data[i]["name"],
-                            data[i]["idCourse"],
-                            Colors.white,
-                            kPrimaryColor,
-                            data[i]["url"],
-                            kPrimaryColor,
-                            context),
-                      );
-                    })),
+                            child: buildCourseContainer(
+                                data[i]["name"],
+                                data[i]["idCourse"],
+                                Colors.white,
+                                kPrimaryColor,
+                                data[i]["url"],
+                                kPrimaryColor,
+                                context),
+                          );
+                        })),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryColor,
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => AddCourseFormPage(

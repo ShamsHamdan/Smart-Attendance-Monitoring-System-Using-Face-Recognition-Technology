@@ -109,10 +109,11 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
                   TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               desc: 'Teacher updated successfully.',
               descTextStyle: TextStyle(fontSize: 17),
-               buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+              buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
         btnOkText: "Ok",
-        btnOkOnPress: () {},)
-          .show() .then((value) { Navigator.pushReplacement(
+        btnOkOnPress: () {},
+      ).show()
+      .then((value) { Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
@@ -121,6 +122,7 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
                             ),
                           ),
                         ); });
+
 
 
       print("=================================== teacher updated");
@@ -170,7 +172,15 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+           Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const AddTeacherandCourseInAdminTabNav(
+                              initialIndex: 1,
+                            ),
+                          ),
+                        );
           },
         ),
       ),
