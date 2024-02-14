@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,27 @@ class TakeAttendanceBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+     final DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
+
+
+
+
+
     return  InkWell(
       onTap: () {
+           databaseReference.child('attendanceTaken').set(true);
+
+        // Show confirmation dialog
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.SUCCES,
+          animType: AnimType.BOTTOMSLIDE,
+          title: 'Attendance Taken',
+          desc: 'Attendance has been marked successfully!',
+          btnOkText: 'OK',
+          btnOkOnPress: () {},
+        )..show();
        // AwesomeDialog(context: context)
       },
       child: Container(

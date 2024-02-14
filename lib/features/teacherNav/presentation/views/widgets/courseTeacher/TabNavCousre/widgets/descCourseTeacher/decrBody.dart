@@ -65,7 +65,7 @@ class _CourseInfoState extends State<CourseInfo> {
               SizedBox(
                 height: 0,
               ),
-              studentStatistics(courseId: widget.courseId,),
+              studentStatistics(key: UniqueKey(),courseId: widget.courseId,),
               SizedBox(
                 height: 20,
               )

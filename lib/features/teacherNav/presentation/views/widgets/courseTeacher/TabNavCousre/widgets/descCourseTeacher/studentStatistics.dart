@@ -1,3 +1,142 @@
+// import 'package:flutter/material.dart';
+// import 'package:percent_indicator/circular_percent_indicator.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+
+// class  studentStatistics extends StatelessWidget {
+//   final String courseId;
+
+//   const  studentStatistics({
+//     Key? key,
+//     required this.courseId,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder<QuerySnapshot>(
+//       stream: FirebaseFirestore.instance
+//           .collection('Teachers')
+//           .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+//           .limit(1)
+//           .snapshots(),
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return CircularProgressIndicator(); // Show a loading indicator while waiting for data
+//         }
+//         if (snapshot.hasError) {
+//           return Text('Error: ${snapshot.error}');
+//         }
+//         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//           return Text('No data found');
+//         }
+
+//         final docId = snapshot.data!.docs.first.id;
+
+//         return StreamBuilder<QuerySnapshot>(
+//           stream: FirebaseFirestore.instance
+//               .collection('Teachers')
+//               .doc(docId)
+//               .collection('courses')
+//               .doc(courseId)
+//               .collection('attendance')
+//               .orderBy('date', descending: true)
+//               .limit(1)
+//               .snapshots(),
+//           builder: (context, attendanceSnapshot) {
+//             if (attendanceSnapshot.connectionState == ConnectionState.waiting) {
+//               return CircularProgressIndicator(); // Show a loading indicator while waiting for data
+//             }
+//             if (attendanceSnapshot.hasError) {
+//               return Text('Error: ${attendanceSnapshot.error}');
+//             }
+//             if (!attendanceSnapshot.hasData || attendanceSnapshot.data!.docs.isEmpty) {
+//               return Text('No attendance data found');
+//             }
+
+//             final data = attendanceSnapshot.data!.docs.first.data()as Map<String, dynamic>?;
+
+//             final num? numofattending = data?['attending']  ?? 0;
+//             final num? numofabsent = data?['absent'] ?? 0;
+//             final num numofstudent = data?['numofstudent'] ?? 1;
+
+//             return Column(
+//               children: [
+//                 SizedBox(height: 30,),
+//                 Align(
+//                   alignment: Alignment.topLeft,
+//                   child: Text(
+//                     "Attendance Ratio",
+//                     style: TextStyle(
+//                       color: Color.fromARGB(255, 0, 0, 0),
+//                       fontSize: 25,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(
+//                   height: 20,
+//                 ),
+//                 Center(
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       CircularPercentIndicator(
+//                         radius: 70,
+//                         lineWidth: 15,
+//                         percent: numofstudent != 0 ? (numofattending! / numofstudent) : 0,
+//                         center: Text(
+//                           "${((numofattending! / numofstudent) * 100).toInt()}%",
+//                           style: TextStyle(
+//                             fontWeight: FontWeight.bold,
+//                             fontSize: 30,
+//                             color: Colors.green,
+//                           ),
+//                         ),
+//                         footer: const Text(
+//                           'Attendance',
+//                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+//                         ),
+//                         circularStrokeCap: CircularStrokeCap.round,
+//                         progressColor: Colors.green,
+//                         animation: true,
+//                         animationDuration: 4000,
+//                       ),
+//                       const SizedBox(
+//                         width: 30,
+//                       ),
+//                       CircularPercentIndicator(
+//                         radius: 70,
+//                         lineWidth: 15,
+//                         percent: numofstudent != 0 ? (numofabsent! / numofstudent) : 0,
+//                         center: Text(
+//                           "${((numofabsent! / numofstudent) * 100).toInt()}%",
+//                           style: TextStyle(
+//                             fontWeight: FontWeight.bold,
+//                             fontSize: 30,
+//                             color: Colors.red,
+//                           ),
+//                         ),
+//                         footer: const Text(
+//                           'Absent',
+//                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+//                         ),
+//                         circularStrokeCap: CircularStrokeCap.round,
+//                         progressColor: Colors.red,
+//                         animation: true,
+//                         animationDuration: 4000,
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             );
+//           },
+//         );
+//       },
+//     );
+//   }
+// }
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
@@ -7,8 +146,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 class studentStatistics extends StatefulWidget {
   final String courseId;
 //  final String teacherId;
-  const studentStatistics(
-      {super.key, required this.courseId});
+  const studentStatistics({super.key, required this.courseId});
 
   @override
   State<studentStatistics> createState() => _studentStatisticsState();
@@ -19,23 +157,23 @@ class _studentStatisticsState extends State<studentStatistics> {
   List<QueryDocumentSnapshot> dataOfAttendance = [];
   num? numofabsent;
   num? numofattending;
-  String?  docId;
+  String? docId;
   String? url;
-   List<QueryDocumentSnapshot> dataOfStudent = [];
+  List<QueryDocumentSnapshot> dataOfStudent = [];
   int? numofstudent;
+  bool _isMounted = false;
 
   //List<QueryDocumentSnapshot> dataOfCourses = [];
   Future getData() async {
-
- QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
 
     data.addAll(querySnapshot.docs);
-     docId = data[0].id;
+    docId = data[0].id;
 
- QuerySnapshot querySnapshotStu = await FirebaseFirestore.instance
+    QuerySnapshot querySnapshotStu = await FirebaseFirestore.instance
         .collection('Teachers')
         .doc(docId)
         .collection('courses')
@@ -45,7 +183,6 @@ class _studentStatisticsState extends State<studentStatistics> {
 
     dataOfStudent.addAll(querySnapshotStu.docs);
     numofstudent = dataOfStudent.length;
-
 
     QuerySnapshot querySnapshotAtt = await FirebaseFirestore.instance
         .collection('Teachers')
@@ -59,26 +196,38 @@ class _studentStatisticsState extends State<studentStatistics> {
         .get();
 
     dataOfAttendance.addAll(querySnapshotAtt.docs);
-    if (dataOfAttendance.isNotEmpty) {
-  numofabsent = dataOfAttendance[0]['absent'] ?? 0;
-  numofattending = dataOfAttendance[0]['attending'] ?? 0;
-} else {
-  numofabsent = 0;
-  numofattending = 0;
-}
-   
-    setState(() {
-      print("$numofabsent$numofattending");
-      // Adminemail = data['email'];
-      // Adminpass = data['password'];
-    });
+    if (_isMounted) {
+      setState(() {
+          if (dataOfAttendance.isNotEmpty) {
+        numofabsent = dataOfAttendance[0]['absent'] ?? 0;
+        numofattending = dataOfAttendance[0]['attending'] ?? 0;
+      } else {
+        numofabsent = 0;
+        numofattending = 0;
+      }
+    print("$numofabsent$numofattending");  });
+    
+    }
+
+    // setState(() {
+    //   print("$numofabsent$numofattending");
+    //   // Adminemail = data['email'];
+    //   // Adminpass = data['password'];
+    // });
   }
 
   @override
   void initState() {
+    _isMounted = true;
     getData();
     // TODO: implement initState
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _isMounted = false;
+    super.dispose();
   }
 
   @override
@@ -87,7 +236,9 @@ class _studentStatisticsState extends State<studentStatistics> {
       //  mainAxisAlignment: MainAxisAlignment.start,
 
       children: [
-        SizedBox(height: 30,),
+        SizedBox(
+          height: 30,
+        ),
         Align(
           alignment: Alignment.topLeft,
           child: Text("Attendance Ratio",
@@ -107,9 +258,15 @@ class _studentStatisticsState extends State<studentStatistics> {
               CircularPercentIndicator(
                 radius: 70,
                 lineWidth: 15,
-            percent: numofstudent != null && numofattending != null && numofstudent != 0 ? (numofattending! / numofstudent!) : 0,// (numofattending!* 100).toInt(),
-                center:  Text(//" ",
-"${(numofattending != null && numofstudent != null && numofstudent != 0 ? ((numofattending! / numofstudent!) * 100).toInt() : 0)}%" ?? '0',
+                percent: numofstudent != null &&
+                        numofattending != null &&
+                        numofstudent != 0
+                    ? (numofattending! / numofstudent!)
+                    : 0, // (numofattending!* 100).toInt(),
+                center: Text(
+                  //" ",
+                  "${(numofattending != null && numofstudent != null && numofstudent != 0 ? ((numofattending! / numofstudent!) * 100).toInt() : 0)}%" ??
+                      '0',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
@@ -130,9 +287,12 @@ class _studentStatisticsState extends State<studentStatistics> {
               CircularPercentIndicator(
                 radius: 70,
                 lineWidth: 15,
-                percent:  numofstudent != null && numofabsent != null ? (numofabsent! / numofstudent!) : 0,
+                percent: numofstudent != null && numofabsent != null
+                    ? (numofabsent! / numofstudent!)
+                    : 0,
                 center: Text(
-            "${(numofabsent != null && numofstudent != null && numofstudent != 0 ? ((numofabsent! / numofstudent!) * 100).toInt() : 0)}%" ?? '0',
+                  "${(numofabsent != null && numofstudent != null && numofstudent != 0 ? ((numofabsent! / numofstudent!) * 100).toInt() : 0)}%" ??
+                      '0',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
