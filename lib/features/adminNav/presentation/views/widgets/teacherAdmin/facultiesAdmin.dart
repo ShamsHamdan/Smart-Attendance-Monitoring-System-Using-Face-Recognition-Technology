@@ -64,8 +64,8 @@ class ListOfFacultiesAdmin extends StatelessWidget {
             },
           ),
           ListOfFaculties(
-            collegeName: 'Faculty of Allied Medical',
-            subTitle: 'Sciences',
+            collegeName: 'Faculty of Allied',
+            subTitle: ' Medical Sciences',
             url: 'assets/images/med.jpg',
             onTap: () {
               Navigator.push(
@@ -77,8 +77,8 @@ class ListOfFacultiesAdmin extends StatelessWidget {
             },
           ),
           ListOfFaculties(
-            collegeName: 'Faculty of Sports Sciences',
-            subTitle: '',
+            collegeName: 'Faculty of Sports',
+            subTitle: 'Sciences',
             url: 'assets/images/Sport.jpg',
             onTap: () {
               Navigator.push(
@@ -235,7 +235,7 @@ class ListOfFaculties extends StatelessWidget {
             // ),
             Positioned(
               top: 100,
-              left: 100,
+              left: 90,
               child: Text(
                 collegeName,
                 style: const TextStyle(
@@ -247,7 +247,7 @@ class ListOfFaculties extends StatelessWidget {
             ),
             Positioned(
               top: 125,
-              left: 100,
+              left: 90,
               child: Text(
                 subTitle,
                 style: const TextStyle(

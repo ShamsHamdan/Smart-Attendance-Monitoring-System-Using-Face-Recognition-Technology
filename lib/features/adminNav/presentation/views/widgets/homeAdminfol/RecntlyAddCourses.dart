@@ -48,7 +48,7 @@ class _RecentlyAddCoursesState extends State<RecentlyAddCourses> {
               width: 20,
             ),
             Text(
-              "Recently added courses",
+              "Recently Added Courses",
               style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
                 fontSize: 22,

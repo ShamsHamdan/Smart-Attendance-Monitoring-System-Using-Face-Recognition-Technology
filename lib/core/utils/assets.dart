@@ -10,4 +10,6 @@ class AssetsData {
   static const takeattendancebtn = 'assets/images/takeAtteBtn_round-webcam.png';
   static const imageAddCourseDef = 'assets/images/camAddcourse.jpg';
   static const teacherDef = 'assets/images/teacherdef.png';
+  static const logoadminfinal = 'assets/images/logoforadminreg (2).png';
+  static const logofordep = 'assets/images/logofordep.png';
 }

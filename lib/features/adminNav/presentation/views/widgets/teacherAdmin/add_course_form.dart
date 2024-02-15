@@ -275,7 +275,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -300,7 +300,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -326,7 +326,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -352,7 +352,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -377,7 +377,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -402,7 +402,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -427,7 +427,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -452,7 +452,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
@@ -482,7 +482,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                             vertical: 13, horizontal: 7),
                         hintText: 'Faculty',
                         //  hintStyle: TextStyle(fontSize: 18),
-                        fillColor: Colors.grey[250],
+                        fillColor: Colors.grey[200],
                         filled: true,
                         errorBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),

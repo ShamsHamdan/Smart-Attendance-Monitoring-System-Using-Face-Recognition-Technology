@@ -45,7 +45,7 @@ class SettingsTeacherBody extends StatelessWidget {
                       // ),
                       Center(
                           child: Column(children: [
-                        SizedBox(height: 20),
+                        SizedBox(height: 12),
                        PicTeacherSettening(),
                       ])),
                     ],
@@ -76,10 +76,10 @@ class SettingsTeacherBody extends StatelessWidget {
                 ]),
               ),
             const  SizedBox(
-                height: 20,
+                height: 10,
               ),
               SizedBox(
-                height: 430,
+                height: 410,
                 width: 450,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +90,7 @@ class SettingsTeacherBody extends StatelessWidget {
                     Expanded(
                     child: Container(
                     // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Adjust padding
-                      color: Colors.grey[100],
+                      color: const Color.fromRGBO(245, 245, 245, 1),
                     child: ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) {
@@ -155,8 +155,8 @@ class SettingsTeacherBody extends StatelessWidget {
                     child:
                   Container(
                     width: MediaQuery.of(context).size.width * .95,
-                    height: 60,
-                    margin:const EdgeInsets.only(bottom: 55),
+                    height: 55,
+                    margin:const EdgeInsets.only(bottom: 50),
                     decoration: BoxDecoration(
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(20)),

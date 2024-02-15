@@ -290,7 +290,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
                       child: Row(
                         children: [
                           SizedBox(
-                            width: 60,
+                            width: 40,
                           ),
                           Column(
                             children: [

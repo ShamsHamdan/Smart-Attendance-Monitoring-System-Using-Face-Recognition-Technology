@@ -43,7 +43,7 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          'List of added Courses',
+          'List of Added Courses',
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),

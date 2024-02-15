@@ -141,7 +141,7 @@ class _HomeAdminHeaderState extends State<HomeAdminHeader> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 60,
+                    width: 40,
                   ),
                   Column(
                     children: [

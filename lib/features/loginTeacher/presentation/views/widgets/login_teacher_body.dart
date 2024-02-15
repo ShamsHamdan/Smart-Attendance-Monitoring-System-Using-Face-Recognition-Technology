@@ -45,7 +45,7 @@ class _LoginTeacherBodyState extends State<LoginTeacherBody> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(bottom: 2),
-                child: Image.asset(AssetsData.logowhitesmall),
+                child: Image.asset(AssetsData.logoadminfinal),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40),
@@ -61,7 +61,7 @@ class _LoginTeacherBodyState extends State<LoginTeacherBody> {
                 ),
               ),
               Container(
-                height: 480,
+                height: 445,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,

@@ -29,7 +29,7 @@ class BodySettningsAdmin extends StatelessWidget {
                         bottomLeft: Radius.circular(30))),
               ),
               Positioned(
-                top: 40,
+                top: 45,
                 left: 20,
                 right: 20,
                 child: Container(
@@ -81,7 +81,7 @@ class BodySettningsAdmin extends StatelessWidget {
                 left: MediaQuery.of(context).size.width * 0.4,
                 // right: 130,
                 // left: 130,
-                top: 0,
+                top: 10,
               child: PicAdminSettening(),
               // CircleAvatar(
     //   backgroundImage:AssetImage(AssetsData.profilepic),
@@ -188,7 +188,7 @@ class BodySettningsAdmin extends StatelessWidget {
                   child: Container(
                     width: MediaQuery.of(context).size.width * .95,
                     height: 60,
-                    margin: EdgeInsets.only(bottom: 85),
+                    margin: EdgeInsets.only(bottom: 52),
                     decoration: BoxDecoration(
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(10)),

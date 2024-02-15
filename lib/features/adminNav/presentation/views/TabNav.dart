@@ -1,4 +1,5 @@
 
+import 'package:first_version/constants.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/homeAdminfol/homeAdmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/settingsAdmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/facultiesAdmin.dart';
@@ -61,7 +62,7 @@ class _TabNavigationState extends State<TabNavigation>
             )
           ],
           indicator: const BoxDecoration(),
-          labelColor: Colors.blue, 
+          labelColor:kPrimaryColor, 
           unselectedLabelColor: Colors.grey,
         ),
       ),

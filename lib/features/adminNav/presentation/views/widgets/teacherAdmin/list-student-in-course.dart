@@ -107,7 +107,7 @@ class _ListofAddedStudentForCourseState
         ),
         backgroundColor: kPrimaryColor,
         title: Text(
-          'Student',
+          'Students',
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),

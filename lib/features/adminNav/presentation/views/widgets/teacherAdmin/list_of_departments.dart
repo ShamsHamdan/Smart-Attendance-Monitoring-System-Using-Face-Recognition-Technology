@@ -1,5 +1,3 @@
-
-
 import 'package:first_version/constants.dart';
 import 'package:first_version/core/utils/assets.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/teacherAdmin/TabNavAddTeacherandCourse.dart';
@@ -11,6 +9,7 @@ class ListOfDepartments extends StatefulWidget {
   @override
   State<ListOfDepartments> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<ListOfDepartments> {
   List<String> facultyList = [
     'Computer Systems Engineering Department',
@@ -39,18 +38,17 @@ class _HomeScreenState extends State<ListOfDepartments> {
             decoration: BoxDecoration(
               color: kPrimaryColor,
               borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(50),
-                bottomLeft: Radius.circular(50)
-              ),
+                  bottomRight: Radius.circular(50),
+                  bottomLeft: Radius.circular(50)),
             ),
             child: Column(
               children: [
                 const SizedBox(height: 50),
-                 ListTile(
+                ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   title: Row(
                     children: [
-                        IconButton(
+                      IconButton(
                         icon: Icon(
                           Icons.arrow_back,
                           size: 25,
@@ -60,15 +58,20 @@ class _HomeScreenState extends State<ListOfDepartments> {
                           Navigator.pop(context);
                         },
                       ),
-                      SizedBox(width: 20,),
+                      SizedBox(
+                        width: 20,
+                      ),
                       Text(
                         'List of Departments',
-                        style: TextStyle(color: Colors.white, fontSize: 22,fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   trailing: CircleAvatar(
-                    radius: 30,
+                    radius: 37,
                     backgroundImage: AssetImage(AssetsData.logoforadminhome),
                   ),
                 ),
@@ -85,15 +88,18 @@ class _HomeScreenState extends State<ListOfDepartments> {
                       hintText: 'Search of department',
                       hintStyle: const TextStyle(color: Colors.white),
                       prefixIcon: const Icon(Icons.search, color: Colors.white),
-                     
-                     focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: const Color.fromRGBO(245, 245, 245, .8)), // Set the border color to white
-        borderRadius: BorderRadius.circular(20),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: const Color.fromRGBO(245, 245, 245, .8)), // Set the border color to white
-        borderRadius: BorderRadius.circular(20),
-      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromRGBO(245, 245, 245,
+                                .8)), // Set the border color to white
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromRGBO(245, 245, 245,
+                                .8)), // Set the border color to white
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                   ),
                 ),
@@ -106,7 +112,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
               child: SingleChildScrollView(
                 child: Container(
                   //color: Colors.grey[100],
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal:23),
                   decoration: const BoxDecoration(
                     color: Color.fromRGBO(245, 245, 245, 1),
                     borderRadius: BorderRadius.only(
@@ -117,8 +123,8 @@ class _HomeScreenState extends State<ListOfDepartments> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 2,
-                    crossAxisSpacing: 31,
-                    mainAxisSpacing: 30,
+                    crossAxisSpacing: 30,
+                    mainAxisSpacing: 40,
                     children: filteredList
                         .map((faculty) => GestureDetector(
                               onTap: () {
@@ -130,7 +136,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
                                       initialIndex: 0,
                                     ),
                                   ),
-                                ); 
+                                );
                                 // Navigator.pushNamed(
                                 //   context,
                                 //   "/addNavInAdmin"
@@ -158,7 +164,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
       BuildContext context, String title, String imagePath, Color background) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -172,12 +178,12 @@ class _HomeScreenState extends State<ListOfDepartments> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: 5,),
           SizedBox(
             width: double.infinity,
             height: 60,
             child: Container(
-              
-             // color: background,
+              // color: background,
               child: Image.asset(
                 imagePath,
                 width: 60,
@@ -187,7 +193,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
           ),
           const SizedBox(height: 12),
           SizedBox(
-            height: 69,
+            height: 80,
             child: Container(
               child: Text(
                 title,
@@ -201,6 +207,7 @@ class _HomeScreenState extends State<ListOfDepartments> {
     );
   }
 }
+
 
 
 

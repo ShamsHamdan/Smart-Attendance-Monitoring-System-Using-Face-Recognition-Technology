@@ -29,7 +29,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(AssetsData.logowhite),
+          Image.asset(AssetsData.logoadminfinal),
           const Text("Attendance System",
               style: TextStyle(
                 fontSize: 32.0,

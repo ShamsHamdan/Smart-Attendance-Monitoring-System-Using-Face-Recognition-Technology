@@ -43,8 +43,8 @@ class _AddTeacherandCourseInAdminTabNavState
         centerTitle: true,
         backgroundColor: Colors.grey[100],
         title: const Text(
-          'Computer systems Engineering',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          'Computer Systems Engineering',
+          style: TextStyle(fontSize: 20,color: Colors.black, fontWeight: FontWeight.bold),
         ),
         bottom: TabBar(
           controller: _tabController,

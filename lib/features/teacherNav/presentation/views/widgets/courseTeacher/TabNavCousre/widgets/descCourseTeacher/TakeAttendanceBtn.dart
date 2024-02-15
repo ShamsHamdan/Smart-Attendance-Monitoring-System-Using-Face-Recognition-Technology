@@ -18,9 +18,7 @@ class TakeAttendanceBtn extends StatelessWidget {
 
     return  InkWell(
       onTap: () {
-           databaseReference.child('attendanceTaken').set(true);
-
-        // Show confirmation dialog
+        databaseReference.child('attendanceTaken').set(1);
         AwesomeDialog(
           context: context,
           dialogType: DialogType.SUCCES,

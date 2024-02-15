@@ -94,7 +94,7 @@ class _CourseInTeacherTabNavState extends State<CourseInTeacherTabNav>
                 style: TextStyle(
                     color: 1 == _selectedIndex ? kPrimaryColor : Colors.grey,
                     fontWeight: FontWeight.bold,
-                    fontSize: 18),
+                    fontSize: 17),
               )),
               Tab(
                   child: Text(

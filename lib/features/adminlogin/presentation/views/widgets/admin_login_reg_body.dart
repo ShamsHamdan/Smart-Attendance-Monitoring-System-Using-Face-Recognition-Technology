@@ -55,61 +55,56 @@ class _adminLoginRegstrationBodyState extends State<adminLoginRegstrationBody>
        ),
         body: SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-      
-          child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start, 
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: Image.asset(AssetsData.logowhitesmall),
-                    
-                    
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+            
+        child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start, 
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Image.asset(AssetsData.logoadminfinal),
+                  
+                  
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: _buildMenuBar(context),
+            ),
+            Expanded(
+              flex: 2,
+              child: PageView(
+                controller: _pageController,
+                physics: const ClampingScrollPhysics(),
+                onPageChanged: (int i) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  if (i == 0) {
+                    setState(() {
+                      right = Colors.white;
+                      left = Colors.black;
+                    });
+                  } else if (i == 1) {
+                    setState(() {
+                      right = Colors.black;
+                      left = Colors.white;
+                    });
+                  }
+                },
+                children: <Widget>[
+                  ConstrainedBox(
+                    constraints: const BoxConstraints.expand(),
+                    child:  SignIn(),
+                  ),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints.expand(),
+                    child:  SignUp(),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: _buildMenuBar(context),
-              ),
-              Expanded(
-                flex: 2,
-                child: PageView(
-                  controller: _pageController,
-                  physics: const ClampingScrollPhysics(),
-                  onPageChanged: (int i) {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    if (i == 0) {
-                      setState(() {
-                        right = Colors.white;
-                        left = Colors.black;
-                      });
-                    } else if (i == 1) {
-                      setState(() {
-                        right = Colors.black;
-                        left = Colors.white;
-                      });
-                    }
-                  },
-                  children: <Widget>[
-                    ConstrainedBox(
-                      constraints: const BoxConstraints.expand(),
-                      child:  SignIn(),
-                    ),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints.expand(),
-                      child:  SignUp(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     ));

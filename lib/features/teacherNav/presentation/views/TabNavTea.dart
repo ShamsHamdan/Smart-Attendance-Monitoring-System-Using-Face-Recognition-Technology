@@ -52,14 +52,15 @@ class _TabNavigationTeacherState extends State<TabNavigationTeacher>
         heroTag: null, // Add this line to remove the tag
         elevation: 0.0, // Add this line to remove the shadow
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0), // Adjust the border radius
+          borderRadius: BorderRadius.circular(25.0), // Adjust the border radius
         ),
         // Adjust the size using size and padding
         mini: false,
         child: const Icon(Icons.camera_alt),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
+      bottomNavigationBar: Container(
+        color: Colors.grey[100],
+        height: 50,
         child: TabBar(
           controller: _tabController,
           tabs: const <Widget>[
@@ -70,7 +71,8 @@ class _TabNavigationTeacherState extends State<TabNavigationTeacher>
           ],
           indicator: const BoxDecoration(),
           labelColor: kPrimaryColor,
-          unselectedLabelColor: Colors.grey,
+          
+          unselectedLabelColor: const Color.fromRGBO(158, 158, 158, 1),
         ),
       ),
     );

@@ -249,7 +249,7 @@ class _RecentlyAddTeachersState extends State<RecentlyAddTeachers> {
               width: 20,
             ),
             Text(
-              "Recently added teacher",
+              "Recently Added Teachers",
               style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
                 fontSize: 22,

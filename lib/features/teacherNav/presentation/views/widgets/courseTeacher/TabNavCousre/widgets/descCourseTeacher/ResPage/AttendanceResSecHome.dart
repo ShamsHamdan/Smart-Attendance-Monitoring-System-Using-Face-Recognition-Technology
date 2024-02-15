@@ -63,7 +63,7 @@ class _ResAttState extends State<ResAtt> {
                   }
                 : null, // Disable the button if there's no new data
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 140),
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 125),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),

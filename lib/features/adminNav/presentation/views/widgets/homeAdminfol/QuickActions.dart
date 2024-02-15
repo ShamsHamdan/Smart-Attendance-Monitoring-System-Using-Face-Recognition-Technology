@@ -122,7 +122,7 @@ class QuickActions extends StatelessWidget {
              // (AdminChart context) => context.scrollToChart();
               Scrollable.ensureVisible(
                 context,
-                duration: Duration(seconds: 2),
+                duration: Duration(seconds: 1),
                 curve: Curves.easeInOut,
                 alignment: -1,
               );
