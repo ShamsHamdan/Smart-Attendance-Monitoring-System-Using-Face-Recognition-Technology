@@ -48,9 +48,7 @@ class _HomeAdminHeaderState extends State<HomeAdminHeader> {
     numberOfStudents = dataNumberStudents.length;
     // Map<String, dynamic>? data = data1.data() as Map<String, dynamic>?;
     setState(() {
-      // print("${data[0]['name']}");
-      // Adminemail = data['email'];
-      // Adminpass = data['password'];
+     
     });
   }
 
