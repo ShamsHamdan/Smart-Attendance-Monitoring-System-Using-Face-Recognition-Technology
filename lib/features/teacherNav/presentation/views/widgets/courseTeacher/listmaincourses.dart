@@ -24,7 +24,9 @@ class _ListCoursestestState extends State<ListCoursestest> {
   String? docId;
 
   Future getData() async {
-    setState(() { isLoading = true;});
+    setState(() {
+      isLoading = true;
+    });
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')
         .where("idFire", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -41,7 +43,9 @@ class _ListCoursestestState extends State<ListCoursestest> {
 
     dataOfCourses.addAll(querySnapshott.docs);
 
-    setState(() { isLoading = false;});
+    setState(() {
+      isLoading = false;
+    });
 
 //  QuerySnapshot querySnapshotStu = await FirebaseFirestore.instance
 //         .collection('Teachers')
@@ -124,38 +128,38 @@ class _ListCoursestestState extends State<ListCoursestest> {
             ),
           ),
           Expanded(
-            child:
-             isLoading
-            ? Center(child: CircularProgressIndicator()) // Show loading indicator
-            :
-             ListView.separated(
-              shrinkWrap: true,
-              itemCount: dataOfCourses.length,
-              itemBuilder: (context, i) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CourseInTeacherTabNav(
-                              courseId: dataOfCourses[i].id)),
-                    );
-                  },
-                  child: courseCont(
-                    dataOfCourses[i]["name"],
-                    dataOfCourses[i]["idCourse"],
-                    dataOfCourses[i]["url"],
-                    dataOfCourses[i]["section"],
-                    dataOfCourses[i].id,
+            child: isLoading
+                ? Center(
+                    child:
+                        CircularProgressIndicator()) // Show loading indicator
+                : ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: dataOfCourses.length,
+                    itemBuilder: (context, i) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CourseInTeacherTabNav(
+                                    courseId: dataOfCourses[i].id)),
+                          );
+                        },
+                        child: courseCont(
+                          dataOfCourses[i]["name"],
+                          dataOfCourses[i]["idCourse"],
+                          dataOfCourses[i]["url"],
+                          dataOfCourses[i]["section"],
+                          dataOfCourses[i].id,
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: 20,
+                      );
+                    },
                   ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: 20,
-                );
-              },
-            ),
           )
         ]),
       ),
@@ -164,125 +168,126 @@ class _ListCoursestestState extends State<ListCoursestest> {
 
   Widget courseCont(
       String name, String id, String url, String sec, String courseId) {
-     return StreamBuilder<QuerySnapshot>(
-    stream: FirebaseFirestore.instance
-        .collection('Teachers')
-        .doc(docId)
-        .collection('courses')
-        .doc(courseId)
-        .collection('attendance')
-        .orderBy('date', descending: true)
-        .limit(1)
-        .snapshots(),
-    builder: (context, snapshot) {
-      if (snapshot.hasError) {
-        return Text('Error: ${snapshot.error}');
-      }
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('Teachers')
+          .doc(docId)
+          .collection('courses')
+          .doc(courseId)
+          .collection('attendance')
+          .orderBy('date', descending: true)
+          .limit(1)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
 
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator();
-      }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
 
-      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-        return Container(
-          width: 380,
-          margin: const EdgeInsets.only(bottom: 15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.white,
-                offset: Offset(0, 0),
-                blurRadius: 5,
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Material(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    width: double.infinity,
-                    height: 130, // Set the desired height
-                    child: url != null && url.isNotEmpty
-                        ? Image.network(
-                            Uri.parse(url).toString(),
-                            fit: BoxFit.cover,
-                          )
-                        : Image.asset(AssetsData.imageAddCourseDef),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 110,
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: Stack(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "$name section$sec",
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 5),
-                              ),
-                              Text(
-                                'EIT',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                id,
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Positioned(
-                            right: 0,
-                            top: 4,
-                            child:  CircularPercentIndicator(
-                              radius: 24.0,
-                              lineWidth: 5.0,
-                              percent:0, // (numofattending!* 100).toInt(),
-                              center: Text(
-                                //" ",
-                                "0",
-                                style: TextStyle(
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Container(
+            width: 380,
+            margin: const EdgeInsets.only(bottom: 15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(0, 0),
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Material(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      width: double.infinity,
+                      height: 130, // Set the desired height
+                      child: url != null && url.isNotEmpty
+                          ? Image.network(
+                              Uri.parse(url).toString(),
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(AssetsData.imageAddCourseDef),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 110,
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        child: Stack(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "$name section$sec",
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.green),
-                              ),
-                              progressColor: Colors.green,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5),
+                                ),
+                                Text(
+                                  'EIT',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  id,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            Positioned(
+                              right: 0,
+                              top: 4,
+                              child: CircularPercentIndicator(
+                                radius: 24.0,
+                                lineWidth: 5.0,
+                                percent: 0, // (numofattending!* 100).toInt(),
+                                center: Text(
+                                  //" ",
+                                  "0",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.green),
+                                ),
+                                progressColor: Colors.green,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      }
+          );
+        }
 
-        final attendanceData = snapshot.data!.docs.first.data() as Map<String, dynamic>;
+        final attendanceData =
+            snapshot.data!.docs.first.data() as Map<String, dynamic>;
         final numofattending = attendanceData['attending'] as int;
-        numofstudent = attendanceData['allNumber'] ;
+        numofstudent = attendanceData['allNumber'];
         print('$numofattending');
 
         return Container(
@@ -386,203 +391,4 @@ class _ListCoursestestState extends State<ListCoursestest> {
       },
     );
   }
-
-//   Widget courseCont(String name, String id, String url, String sec) {
-//     double attendancePercentage = .75;
-//     bool isLowAttendance = attendancePercentage <= 0.5;
-//     bool showSearchField = false;
-
-//     return Container(
-//         width: 380,
-//         margin: const EdgeInsets.only(bottom: 15),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(10),
-//           boxShadow: [
-//             BoxShadow(
-//               color: Colors.white,
-//               offset: Offset(0, 0),
-//               blurRadius: 5,
-//             ),
-//           ],
-//         ),
-//         child: ClipRRect(
-//             borderRadius: BorderRadius.circular(10),
-//             child: Material(
-//                 child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: <Widget>[
-//                   SizedBox(
-//                     width: double.infinity,
-//                     height: 130, // Set the desired height
-//                     child: url != null && url!.isNotEmpty
-//                         ? Image.network(
-//                             Uri.parse(url!).toString(),
-//                             fit: BoxFit.cover,
-//                           )
-//                         : Image.asset(AssetsData.imageAddCourseDef),
-//                   ),
-//                   SizedBox(
-//                     width: double.infinity,
-//                     height: 110,
-//                     child: Container(
-//                       padding: EdgeInsets.all(15),
-//                       child: Stack(
-//                         children: [
-//                           Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: <Widget>[
-//                               Text(
-//                                 "$name section$sec",
-//                                 style: TextStyle(
-//                                   fontSize: 19,
-//                                   color: Colors.black,
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                               ),
-//                               Padding(
-//                                 padding: EdgeInsets.only(top: 5),
-//                               ),
-//                               Text(
-//                                 'EIT',
-//                                 style: TextStyle(
-//                                     fontSize: 17,
-//                                     color: Colors.black,
-//                                     fontWeight: FontWeight.bold),
-//                               ),
-//                               Text(
-//                                 id,
-//                                 style: TextStyle(
-//                                   fontSize: 17,
-//                                   color: Colors.grey,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                           Positioned(
-//                             right: 0,
-//                             top: 0,
-//                             child: CircularPercentIndicator(
-//                 radius: 30,
-//                 lineWidth: 15,
-//             percent: numofstudent != null && numofattending != null && numofstudent != 0 ? (numofattending! / numofstudent!) : 0,// (numofattending!* 100).toInt(),
-//                 center:  Text(//" ",
-// "${(numofattending != null && numofstudent != null && numofstudent != 0 ? ((numofattending! / numofstudent!) * 100).toInt() : 0)}%" ?? '0',
-//                   style: TextStyle(
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 30,
-//                       color: Colors.green),
-//                 ),
-//                 footer: const Text(
-//                   'Attendance',
-//                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-//                 ),
-//                 circularStrokeCap: CircularStrokeCap.round,
-//                 progressColor: Colors.green,
-//                 animation: true,
-//                 animationDuration: 4000,
-//               ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ),
-//                 ]))));
-//   }
 }
-
-
-
-
-
-  // Container(
-  //                   width: 380,
-  //                   margin: const EdgeInsets.only(bottom: 15),
-  //                   decoration: BoxDecoration(
-  //                     borderRadius: BorderRadius.circular(10),
-  //                     boxShadow: [
-  //                       BoxShadow(
-  //                         color: Colors.white,
-  //                         offset: Offset(0, 0),
-  //                         blurRadius: 5,
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   child: ClipRRect(
-  //                       borderRadius: BorderRadius.circular(10),
-  //                       child: Material(
-  //                           child: Column(
-  //                               crossAxisAlignment: CrossAxisAlignment.start,
-  //                               children: <Widget>[
-  //                             SizedBox(
-  //                               width: double.infinity,
-  //                               height: 130, // Set the desired height
-  //                               child: Image.asset(
-  //                                 AssetsData.webcourse,
-  //                                 fit: BoxFit.cover,
-  //                                 //  width: double.infinity,
-  //                               ),
-  //                             ),
-  //                             SizedBox(
-  //                               width: double.infinity,
-  //                               height: 110,
-  //                               child: Container(
-  //                                 padding: EdgeInsets.all(15),
-  //                                 child: Stack(
-  //                                   children: [
-  //                                     const Column(
-  //                                       crossAxisAlignment:
-  //                                           CrossAxisAlignment.start,
-  //                                       children: <Widget>[
-  //                                         Text(
-  //                                           "INTERNSHIP Section1",
-  //                                           style: TextStyle(
-  //                                             fontSize: 19,
-  //                                             color: Colors.black,
-  //                                             fontWeight: FontWeight.bold,
-  //                                           ),
-  //                                         ),
-  //                                         Padding(
-  //                                           padding: EdgeInsets.only(top: 5),
-  //                                         ),
-  //                                         Text(
-  //                                           'EIT',
-  //                                           style: TextStyle(
-  //                                               fontSize: 17,
-  //                                               color: Colors.black,
-  //                                               fontWeight: FontWeight.bold),
-  //                                         ),
-  //                                         Text(
-  //                                           '230214990',
-  //                                           style: TextStyle(
-  //                                             fontSize: 17,
-  //                                             color: Colors.grey,
-  //                                           ),
-  //                                         ),
-  //                                       ],
-  //                                     ),
-  //                                     Positioned(
-  //                                       right: 0,
-  //                                       top: 0,
-  //                                       child: CircularPercentIndicator(
-  //                                         radius: 24.0,
-  //                                         lineWidth: 5.0,
-  //                                         percent:
-  //                                             0.75, // Change this to your actual percentage
-  //                                         center: Text(
-  //                                           "${(attendancePercentage * 100).toInt()}%",
-  //                                           style: TextStyle(
-  //                                             color: isLowAttendance
-  //                                                 ? Colors.red
-  //                                                 : Colors.green,
-  //                                           ),
-  //                                         ), // Change this to your actual text
-  //                                         progressColor: isLowAttendance
-  //                                             ? Colors.red
-  //                                             : Colors.green,
-  //                                       ),
-  //                                     ),
-  //                                   ],
-  //                                 ),
-  //                               ),
-  //                             ),
-  //                           ])))),

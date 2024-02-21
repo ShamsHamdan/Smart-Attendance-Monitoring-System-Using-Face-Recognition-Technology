@@ -16,7 +16,7 @@ class getStartedBody extends StatelessWidget {
             child: Image.asset(AssetsData.cam),
           ),
         ),
-        Align(
+       const Align(
           alignment: Alignment(-.8, -.5),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -64,7 +64,7 @@ class getStartedBody extends StatelessWidget {
                       BorderRadius.circular(10), // Set the border radius
                 ), // Border color and width
               ),
-              child: Text('Continue as an admin',
+              child:const Text('Continue as an admin',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold
@@ -78,14 +78,14 @@ class getStartedBody extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: kPrimaryColor, // Background color
                 onPrimary: Colors.white, // Text color
-                side: BorderSide(color: kPrimaryColor, width: 2),
+                side:const BorderSide(color: kPrimaryColor, width: 2),
                 minimumSize: Size(250, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.circular(10), // Set the border radius
                 ), // Border color and width
               ),
-              child: Text('Continue as a teacher',
+              child:const Text('Continue as a teacher',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold

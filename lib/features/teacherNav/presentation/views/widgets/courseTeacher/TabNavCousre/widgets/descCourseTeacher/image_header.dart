@@ -20,7 +20,7 @@ class _ImageHeaderState extends State<ImageHeader> {
     Size size = MediaQuery.of(context).size;
     return imagePath != null && imagePath!.isNotEmpty
         ? Image.network(
-            Uri.parse(imagePath!).toString(), height: size.height * 0.25,
+            Uri.parse(imagePath!).toString(), height: size.height * 0.28,
             width: double.infinity,
             // it cover the 25% of total height
             fit: BoxFit.fill,

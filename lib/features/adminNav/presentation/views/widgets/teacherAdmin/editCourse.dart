@@ -44,14 +44,14 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
   final TextEditingController _room = TextEditingController();
   final TextEditingController _teacherName = TextEditingController();
   final TextEditingController _sec = TextEditingController();
-  String _selectedFaculty = 'Faculty of Engineering and Information Technology';
-  String _selectedSpecialty = 'Computer systems engineering Department';
+  String _selectedFaculty = 'Faculty of Engineering';
+  String _selectedSpecialty = 'Computer Systems Engineering Department';
 
   List<String> faculties = [
-    'Faculty of Engineering and Information Technology',
+    'Faculty of Engineering',
     'Faculty of Arts',
     'Faculty of Law',
-    'Faculty of Administrative and Financial Sciences',
+    'Faculty of Information Technology',
     'Faculty of Allied Medical Sciences',
     'Faculty of Nursing',
     'Faculty of Sports Sciences',
@@ -60,13 +60,11 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
   ];
 
   List<String> specialties = [
-    'Computer systems engineering Department',
+    'Computer Systems Engineering Department',
     'Architecture Engineering Department',
     'Electrical Engineering Department',
     'Civil Engineering Department',
-    'Computer Science Department',
-    'Multimedia Technology Department',
-    'Geographic Information Systems (GIS) Department',
+ 
   ];
 
   List<QueryDocumentSnapshot> data = [];
@@ -539,7 +537,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                         child: Text(
                           faculty,
                           style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       );
                     }).toList(),
@@ -548,7 +546,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 5),
+                            vertical: 15, horizontal: 22),
                         labelText: 'Faculty',
                         labelStyle: TextStyle(
                             fontSize: 18,
@@ -572,7 +570,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                         child: Text(
                           specialty,
                           style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       );
                     }).toList(),
@@ -581,7 +579,7 @@ class _EditCourseFormPageState extends State<EditCourseFormPage> {
                     },
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 5),
+                            vertical: 15, horizontal: 22),
                         labelText: 'Specialty',
                         labelStyle: TextStyle(
                             fontSize: 18,

@@ -65,8 +65,8 @@ class _ListofAddedCoursesState extends State<ListofAddedCourses> {
                        String faculty = "";
                 String depInDai = "";
                      
-                if (data[i]["faculty"] == "Faculty of Engineering and Information Technology") {
-                  faculty = "EIT";
+                if (data[i]["faculty"] == "Faculty of Engineering") {
+                  faculty = "ENG";
                   print("$faculty");
                 } else {
                   faculty = data[i]["faculty"];

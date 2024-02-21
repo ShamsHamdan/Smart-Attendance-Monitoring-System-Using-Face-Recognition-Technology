@@ -32,9 +32,9 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
 
   final TextEditingController _idController = TextEditingController();
 
-  String _selectedFaculty = 'Faculty of Engineering and Information Technology';
+  String _selectedFaculty = 'Faculty of Engineering';
 
-  String _selectedSpecialty = 'Computer systems engineering Department';
+  String _selectedSpecialty = 'Computer Systems Engineering Department';
 
   String? Adminemail;
   String? Adminpass;
@@ -43,11 +43,10 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
   int NumOfTeacher = 0;
 
   final List<String> faculties = [
-    'Faculty of Engineering and Information Technology',
+    'Faculty of Engineering',
     'Faculty of Arts',
     'Faculty of Law',
-    'Faculty of Administrative and Financial Sciences',
-    'Faculty of Allied Medical Sciences',
+    'Faculty of Information Technology',
     'Faculty of Nursing',
     'Faculty of Sports Sciences',
     'Faculty of Medicine',
@@ -55,13 +54,11 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
   ];
 
   final List<String> specialties = [
-    'Computer systems engineering Department',
+    'Computer Systems Engineering Department',
     'Architecture Engineering Department',
     'Electrical Engineering Department',
     'Civil Engineering Department',
-    'Computer Science Department',
-    'Multimedia Technology Department',
-    'Geographic Information Systems (GIS) Department',
+ 
   ];
 
   String? oldname;
@@ -356,7 +353,7 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
                           child: Text(
                             faculty,
                             style: const TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         );
                       }).toList(),
@@ -364,8 +361,8 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
                         _selectedFaculty = value!;
                       },
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 17, horizontal: 5),
+                          contentPadding:   EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 22),
                           labelText: 'Faculty',
                           labelStyle: TextStyle(
                               fontSize: 18,
@@ -398,8 +395,8 @@ class _EditProfessorFormState extends State<EditProfessorForm> {
                         _selectedSpecialty = value!;
                       },
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 17, horizontal: 5),
+                          contentPadding:  EdgeInsets.symmetric(
+                            vertical: 13, horizontal: 22),
                           labelText: 'Specialty',
                           labelStyle: TextStyle(
                               fontSize: 18,

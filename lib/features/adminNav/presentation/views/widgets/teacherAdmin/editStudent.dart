@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,9 +36,9 @@ class _EditStudentFormState extends State<EditStudentForm> {
 
   final TextEditingController _courseController = TextEditingController();
 
-  String _selectedFaculty = 'Faculty of Engineering and Information Technology';
+  String _selectedFaculty = 'Faculty of Engineering';
 
-  String _selectedSpecialty = 'Computer systems engineering Department';
+  String _selectedSpecialty = 'Computer Systems Engineering Department';
 
   String? Adminemail;
   String? Adminpass;
@@ -48,11 +47,11 @@ class _EditStudentFormState extends State<EditStudentForm> {
   int NumOfTeacher = 0;
 
   final List<String> faculties = [
-    'Faculty of Engineering and Information Technology',
+    'Faculty of Engineering',
     'Faculty of Arts',
     'Faculty of Law',
-    'Faculty of Administrative and Financial Sciences',
-    'Faculty of Allied Medical Sciences',
+    'Faculty of Information Technology',
+
     'Faculty of Nursing',
     'Faculty of Sports Sciences',
     'Faculty of Medicine',
@@ -60,13 +59,11 @@ class _EditStudentFormState extends State<EditStudentForm> {
   ];
 
   final List<String> specialties = [
-    'Computer systems engineering Department',
+    'Computer Systems Engineering Department',
     'Architecture Engineering Department',
     'Electrical Engineering Department',
     'Civil Engineering Department',
-    'Computer Science Department',
-    'Multimedia Technology Department',
-    'Geographic Information Systems (GIS) Department',
+  
   ];
 
   String? oldname;
@@ -378,7 +375,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
                           child: Text(
                             faculty,
                             style: const TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         );
                       }).toList(),
@@ -387,7 +384,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
                       },
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 5),
+                              vertical: 15, horizontal: 22),
                           labelText: 'Faculty',
                           labelStyle: const TextStyle(
                               fontSize: 18,
@@ -421,7 +418,7 @@ class _EditStudentFormState extends State<EditStudentForm> {
                       },
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 5),
+                              vertical: 15, horizontal: 22),
                           labelText: 'Specialty',
                           labelStyle: const TextStyle(
                               fontSize: 18,

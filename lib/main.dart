@@ -3,9 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_version/features/Splash/presentation/views/SplashView.dart';
 import 'package:first_version/features/adminNav/presentation/views/TabNav.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/add_course_form_page.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/list_of_courses_page.dart';
-import 'package:first_version/features/adminNav/presentation/views/widgets/courseAdmin/list_of_specialties_courses.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/ChangePasswordAdmin.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/Terms%20_and_Conditions.dart';
 import 'package:first_version/features/adminNav/presentation/views/widgets/settingsAdmin/editProfileadmin.dart';
@@ -82,8 +79,7 @@ class _smartAttendanceState extends State<smartAttendance> {
         "/Teachers": (context) => ListOfTeacherPageInAdmin(),
         // '/addProfessor': (context) => AddProfessorForm(),
         //  '/listOfSpecialties': (context) => ListOfSpecialtiesTeacher(),
-        '/listOfCourses': (context) => ListOfCoursesPage(),
-        '/addCourseForm': (context) => const AddCourseFormPage(),
+        
         '/recnAddCoursesInAdmin': (context) => ListofAddedCourses(),
         '/addNavInAdmin': (context) => AddTeacherandCourseInAdminTabNav(initialIndex: 0,),
       },

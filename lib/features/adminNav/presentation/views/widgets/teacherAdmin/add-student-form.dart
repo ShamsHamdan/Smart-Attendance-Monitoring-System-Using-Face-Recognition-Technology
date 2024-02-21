@@ -33,9 +33,9 @@ class _AddStudentFormState extends State<AddStudentForm> {
 
   final TextEditingController _courseController = TextEditingController();
 
-  String _selectedFaculty = 'Faculty of Engineering and Information Technology';
+  String _selectedFaculty = 'Faculty of Engineering';
 
-  String _selectedSpecialty = 'Computer systems engineering Department';
+  String _selectedSpecialty = 'Computer Systems Engineering Department';
 
   String? Adminemail;
   String? Adminpass;
@@ -45,10 +45,10 @@ class _AddStudentFormState extends State<AddStudentForm> {
   String? courseId;
 
   final List<String> faculties = [
-    'Faculty of Engineering and Information Technology',
+    'Faculty of Engineering',
     'Faculty of Arts',
     'Faculty of Law',
-    'Faculty of Administrative and Financial Sciences',
+    'Faculty of Information Technology',
     'Faculty of Allied Medical Sciences',
     'Faculty of Nursing',
     'Faculty of Sports Sciences',
@@ -57,7 +57,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
   ];
 
   final List<String> specialties = [
-    'Computer systems engineering Department',
+    'Computer Systems Engineering Department',
     'Architecture Engineering Department',
     'Electrical Engineering Department',
     'Civil Engineering Department',
@@ -96,26 +96,26 @@ class _AddStudentFormState extends State<AddStudentForm> {
       "department": _selectedSpecialty,
     }).then((value) {
       AwesomeDialog(
-              context: context,
-              dialogType: DialogType.success,
-              animType: AnimType.rightSlide,
-              title: 'Success',
-              titleTextStyle:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              desc: 'Student added successfully.',
-              descTextStyle: TextStyle(fontSize: 17),
-               buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.rightSlide,
+        title: 'Success',
+        titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        desc: 'Student added successfully.',
+        descTextStyle: TextStyle(fontSize: 17),
+        buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
         btnOkText: "Ok",
         btnOkOnPress: () {},
-      ).show()
-      .then((value) { Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                               ListofAddedStudentForCourse(categoryId: widget.courseDocId,teacherDocId:widget.teacherDocId ,)
-                          ),
-                        ); });
-          
+      ).show().then((value) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ListofAddedStudentForCourse(
+                    categoryId: widget.courseDocId,
+                    teacherDocId: widget.teacherDocId,
+                  )),
+        );
+      });
 
       print("=================================== course Added to teacher");
     }).catchError((error) => print(
@@ -166,10 +166,13 @@ class _AddStudentFormState extends State<AddStudentForm> {
           ),
           onPressed: () {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>ListofAddedStudentForCourse(categoryId:widget.courseDocId, teacherDocId: widget.teacherDocId,)),
-          );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ListofAddedStudentForCourse(
+                        categoryId: widget.courseDocId,
+                        teacherDocId: widget.teacherDocId,
+                      )),
+            );
           },
         ),
       ),
@@ -290,7 +293,8 @@ class _AddStudentFormState extends State<AddStudentForm> {
                       },
                       controller: _courseController,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 20),
                           labelText: 'Course Id',
                           labelStyle: const TextStyle(
                               fontSize: 18,
@@ -314,7 +318,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
                           child: Text(
                             faculty,
                             style: const TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         );
                       }).toList(),
@@ -322,7 +326,8 @@ class _AddStudentFormState extends State<AddStudentForm> {
                         _selectedFaculty = value!;
                       },
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(left: 10),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 13, horizontal: 22),
                           hintText: 'Faculty',
                           //  hintStyle: TextStyle(fontSize: 18),
                           fillColor: Colors.grey[200],
@@ -351,7 +356,8 @@ class _AddStudentFormState extends State<AddStudentForm> {
                         _selectedSpecialty = value!;
                       },
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(left: 8),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 13, horizontal: 5),
                           hintText: 'Specialty',
                           fillColor: Colors.grey[200],
                           filled: true,
@@ -376,7 +382,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
                         } else {
                           print("========err");
                         }
-                    
+
                         // Navigator.pushNamed(context, "/homeadmin");
                       },
                       style: ButtonStyle(

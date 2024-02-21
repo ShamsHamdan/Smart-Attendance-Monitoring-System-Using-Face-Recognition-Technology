@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_version/constants.dart';
-import 'package:first_version/features/teacherNav/presentation/views/widgets/courseTeacher/TabNavCousre/widgets/descCourseTeacher/ResPage/Res_Body_Header.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -323,12 +323,12 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                               Text(
                                 "All",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                    fontSize: 19, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
                           SizedBox(
-                            width: 55,
+                            width: 48,
                           ),
                           Column(
                             children: [
@@ -357,12 +357,12 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                               Text(
                                 "Attendess",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                    fontSize: 19, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
                           SizedBox(
-                            width: 40,
+                            width: 33,
                           ),
                           Column(
                             children: [
@@ -399,7 +399,7 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
                               Text(
                                 "Absentees",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                    fontSize: 19, fontWeight: FontWeight.bold),
                               )
                             ],
                           )

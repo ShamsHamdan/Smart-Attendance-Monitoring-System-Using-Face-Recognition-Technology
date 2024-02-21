@@ -81,6 +81,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
           .doc(courseId)
           .collection('attendance')
           .orderBy('date', descending: true)
+          .orderBy(FieldPath.documentId, descending: true)
           .limit(1)
           .get();
 
@@ -245,7 +246,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
                                 height: 5,
                               ),
                               Text(
-                                'EIT',
+                                'ENG',
                                 style: TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
@@ -298,7 +299,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
                                 height: 17,
                               ),
                               SizedBox(
-                                width: 3,
+                                width: 5,
                               ),
                               Text(
                                 "$numofstudentfromcourse" ?? '0',
@@ -337,7 +338,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
                                 height: 17,
                               ),
                               SizedBox(
-                                width: 20,
+                                width: 23,
                               ),
                               Text(
                                 "$numofattending" ?? '0',
@@ -376,7 +377,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
                                 height: 17,
                               ),
                               SizedBox(
-                                width: 3,
+                                width: 2,
                               ),
                               Text(
                                 "$numofabsent",
@@ -384,7 +385,7 @@ class _HomeTeacherHeaderState extends State<HomeTeacherHeader> {
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 2,
                               ),
                               Row(
                                 children: [

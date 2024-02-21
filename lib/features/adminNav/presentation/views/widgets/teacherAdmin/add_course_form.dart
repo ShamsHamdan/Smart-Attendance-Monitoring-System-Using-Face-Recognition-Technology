@@ -42,17 +42,17 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
   final TextEditingController _room = TextEditingController();
   final TextEditingController _teacherName = TextEditingController();
   final TextEditingController _sec = TextEditingController();
-  String _selectedFaculty = 'Faculty of Engineering and Information Technology';
-  String _selectedSpecialty = 'Computer systems engineering Department';
+  String _selectedFaculty = 'Faculty of Engineering';
+  String _selectedSpecialty = 'Computer Systems Engineering Department';
 
   String? teacherId;
   String? nameTeacher;
 
   List<String> faculties = [
-    'Faculty of Engineering and Information Technology',
+    'Faculty of Engineering',
     'Faculty of Arts',
     'Faculty of Law',
-    'Faculty of Administrative and Financial Sciences',
+    'Faculty of Information Technology',
     'Faculty of Allied Medical Sciences',
     'Faculty of Nursing',
     'Faculty of Sports Sciences',
@@ -61,13 +61,10 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
   ];
 
   List<String> specialties = [
-    'Computer systems engineering Department',
+    'Computer Systems Engineering Department',
     'Architecture Engineering Department',
     'Electrical Engineering Department',
     'Civil Engineering Department',
-    'Computer Science Department',
-    'Multimedia Technology Department',
-    'Geographic Information Systems (GIS) Department',
   ];
 
   Future getData() async {
@@ -123,18 +120,17 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
         btnOkText: "Ok",
         buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
         btnOkOnPress: () {},
-      ).show()
-      .then((value) {
+      ).show().then((value) {
         Navigator.pushReplacement(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                               ListofAddedCoursesForTeacher(categoryId: widget.docId,
-                           
-                          ),
-                          transitionDuration: Duration.zero,
-                        ),
-                      );
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) =>
+                ListofAddedCoursesForTeacher(
+              categoryId: widget.docId,
+            ),
+            transitionDuration: Duration.zero,
+          ),
+        );
       });
 
       print("=================================== course Added to teacher");
@@ -193,11 +189,13 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
               color: Colors.white,
             ),
             onPressed: () {
-            Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ListofAddedCoursesForTeacher(categoryId: widget.docId,)),
-          );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ListofAddedCoursesForTeacher(
+                          categoryId: widget.docId,
+                        )),
+              );
             },
           ),
         ),
@@ -470,7 +468,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                         child: Text(
                           faculty,
                           style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       );
                     }).toList(),
@@ -479,7 +477,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
-                            vertical: 13, horizontal: 7),
+                            vertical: 13, horizontal: 20),
                         hintText: 'Faculty',
                         //  hintStyle: TextStyle(fontSize: 18),
                         fillColor: Colors.grey[200],
@@ -493,6 +491,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                   ),
                   const SizedBox(height: 25),
                   DropdownButtonFormField<String>(
+                 // padding: EdgeInsets.only(right: 10),
                     value: _selectedSpecialty,
                     items: specialties.map((String specialty) {
                       return DropdownMenuItem<String>(
@@ -500,7 +499,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                         child: Text(
                           specialty,
                           style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       );
                     }).toList(),
@@ -509,7 +508,7 @@ class _AddCourseFormPageState extends State<AddCourseFormPage> {
                     },
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
-                            vertical: 13, horizontal: 7),
+                            vertical: 13, horizontal: 20),
                         hintText: 'Specialty',
                         fillColor: Colors.grey[200],
                         filled: true,
