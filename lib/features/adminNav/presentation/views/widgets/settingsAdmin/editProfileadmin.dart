@@ -92,24 +92,12 @@ class _EditProfileadminState extends State<EditProfileadmin>
                  buttonsTextStyle: TextStyle(fontSize: 20,color: Colors.white),
                 btnOkText: "Ok",
               btnOkOnPress: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) =>
-                  //         const TabNavigation(selectedIndex: 2),
-                  //   ),
-                  // );
+                 
 
               },
                 )
             .show()
-            //  Navigator.pushReplacement(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               const TabNavigation(selectedIndex: 2),
-            //         ),
-            //       );
+           
 
             .then((value) {
            Navigator.pushReplacement(

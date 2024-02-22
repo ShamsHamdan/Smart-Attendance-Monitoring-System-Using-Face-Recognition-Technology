@@ -3,7 +3,7 @@ import 'package:first_version/features/teacherNav/presentation/views/widgets/cou
 import 'package:flutter/material.dart';
 
 class CourseTeacher extends StatelessWidget {
-  // const CourseTeacher({super.key});
+  
 const CourseTeacher({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

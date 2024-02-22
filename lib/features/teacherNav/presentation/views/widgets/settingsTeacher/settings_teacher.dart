@@ -18,16 +18,7 @@ class SettingsTeacher extends StatelessWidget {
               fontWeight: FontWeight.bold, fontSize: 24, color: Color.fromARGB(255, 255, 255, 255)),
         ),
         centerTitle: true, // Empty title
-        // leading: IconButton(
-        //   icon: Icon(
-        //     Icons.arrow_back,
-        //     size: 25,
-        //     color: const Color.fromARGB(255, 255, 255, 255),
-        //   ),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
+       
         
         
       ),

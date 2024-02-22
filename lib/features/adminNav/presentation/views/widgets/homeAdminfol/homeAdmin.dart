@@ -17,8 +17,7 @@ class _HomeAdminState extends State<HomeAdmin> {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
         body: SingleChildScrollView(
-          child:
-           BodyHomeAdmin(),
+          child:BodyHomeAdmin(),
         ),  
         );
   }

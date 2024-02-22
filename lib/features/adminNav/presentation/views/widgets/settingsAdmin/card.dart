@@ -32,6 +32,8 @@ Widget cards(BuildContext context, int index) {
             data[index].label,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
+
+          
           trailing: data[index].trailing,
         ),
       ),

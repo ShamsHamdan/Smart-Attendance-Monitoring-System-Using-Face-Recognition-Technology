@@ -20,7 +20,7 @@ class StudentNumber extends StatelessWidget {
           Text("Students",style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
-
+//
           ),),
           studentNumTag(context, number: number),
         ],
@@ -28,13 +28,6 @@ class StudentNumber extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
 
 
 

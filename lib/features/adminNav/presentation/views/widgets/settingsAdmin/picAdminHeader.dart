@@ -40,10 +40,7 @@ class _PicAdminSetteningState extends State<PicAdminSettening> {
       // });
     }
   }
-  // DocumentSnapshot data1 = querySnapshot.docs[0];
-  // setState(() {
-  //   url = data1['url'];
-  // });
+  
 
   @override
   void initState() {

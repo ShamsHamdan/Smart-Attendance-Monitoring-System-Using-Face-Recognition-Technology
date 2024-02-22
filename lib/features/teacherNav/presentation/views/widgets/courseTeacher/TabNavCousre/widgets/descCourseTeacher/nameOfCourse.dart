@@ -18,7 +18,7 @@ class _NameOfCourseState extends State<NameOfCourse> {
   String? name;
   String? id;
   String? sec;
-  //List<QueryDocumentSnapshot> dataOfCourses = [];
+
   Future getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Teachers')

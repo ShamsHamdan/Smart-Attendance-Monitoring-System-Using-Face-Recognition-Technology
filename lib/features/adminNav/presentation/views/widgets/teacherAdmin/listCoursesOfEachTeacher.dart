@@ -502,12 +502,7 @@ class _ListofAddedCoursesForTeacherState
               : AssetImage(AssetsData.imageAddCourseDef)
                   as ImageProvider<Object>,
         ),
-        // onTap: () {
-        //   print('onTap Pressed');
-        // },
-        // onLongPress: () {
-        //   print('onLong Pressed!');
-        // },
+      
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

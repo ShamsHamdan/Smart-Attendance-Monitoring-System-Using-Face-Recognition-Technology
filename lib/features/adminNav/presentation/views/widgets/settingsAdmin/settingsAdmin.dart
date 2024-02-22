@@ -21,7 +21,7 @@ class SettingsAdmin extends StatelessWidget {
                 fontSize: 25,
                 color: Colors.white)),
         centerTitle: true,
-      //  leading: Icon(Icons.home),
+     
       automaticallyImplyLeading: false,
         actions: [
           Padding(

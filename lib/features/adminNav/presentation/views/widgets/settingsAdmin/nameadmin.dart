@@ -30,8 +30,7 @@ String ? name;
   }
   @override
   Widget build(BuildContext context) {
-    return Text(
-                          "${name}",
+    return Text( "${name}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 22,

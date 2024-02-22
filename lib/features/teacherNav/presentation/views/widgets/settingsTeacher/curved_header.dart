@@ -13,7 +13,7 @@ class CurvedCounterClipper extends CustomClipper<Path> {
     );
     path.lineTo(size.width, 0);
     path.close();
-    return path;
+    return path;//h
   }
 
   @override

@@ -19,22 +19,6 @@ class Data {
 }
 
 List<Data> data = [
-  // Data(
-  //     label: "Language Setup",
-  //     trailing: Switch(
-  //      thumbColor:const MaterialStatePropertyAll(kPrimaryColor),
-  //       activeTrackColor:Color.fromARGB(255, 226, 221, 221),
-  //       inactiveTrackColor: Color.fromARGB(255, 157, 159, 158),
-  //       onChanged: (e) {
-
-  //       },
-  //       value: true,
-  //     ),
-  //     iconBgColor: Color.fromRGBO(186, 255, 136, 1),
-  //     icon: Icons.g_translate,
-  //   iconColor: Color.fromRGBO(100, 212, 20, 1)
-  // ),
-
   Data(
       label: "Edit Profile",
       trailing: Icon(Icons.arrow_forward_ios, size: 15,),
